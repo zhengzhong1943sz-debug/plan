@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13周周期化训练计划（优化版）</title>
+<style>
+
+:root{
+  --bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;--text:#e1e4eb;--muted:#8b8fa3;
+  --accent:#5b9bd5;--hypertrophy:#4caf91;--strength:#f0a050;--power:#e0556a;
+  --deload:#7b8c9e;--tag-bg:#252836;--muscle-pri:#e0556a;--muscle-sec:#8b8fa3;
+  --main-gold:#f0a050;--transition:#a78bfa;--role-badge:#3a3f52
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:20px;max-width:1200px;margin:0 auto}
+h1{font-size:1.8rem;text-align:center;margin:20px 0 6px;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-size:1.2rem;margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border)}
+h3{font-size:1rem;margin:16px 0 8px;color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:8px 0}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.74rem;font-weight:600}
+.badge-hyper{background:var(--hypertrophy);color:#000}.badge-strength{background:var(--strength);color:#000}
+.badge-power{background:var(--power);color:#fff}.badge-deload{background:var(--deload);color:#fff}
+.badge-transition{background:var(--transition);color:#fff}
+.badge-main{background:var(--main-gold);color:#000;font-size:.68rem;padding:1px 5px;border-radius:6px;margin-left:4px}
+.badge-role{background:var(--role-badge);color:#a0a8c0;font-size:.65rem;padding:1px 6px;border-radius:4px;margin-left:6px;text-transform:uppercase;letter-spacing:.5px}
+.badge-role.compound{border-left:2px solid var(--main-gold)}.badge-role.variation{border-left:2px solid var(--hypertrophy)}
+.badge-role.specialty{border-left:2px solid var(--power)}.badge-role.test{border-left:2px solid var(--strength)}
+table{width:100%;border-collapse:collapse;font-size:.84rem;margin:6px 0}
+th,td{padding:5px 7px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--tag-bg);color:var(--muted);font-weight:600;font-size:.76rem}
+.btn{padding:7px 16px;border-radius:8px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;color:#fff;background:var(--accent)}
+.btn:hover{opacity:.85}
+.btn-sm{padding:4px 10px;font-size:.74rem}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{background:var(--tag-bg)}
+.btn-round{padding:5px 12px;border-radius:16px;border:1px solid var(--border);background:var(--tag-bg);color:var(--text);cursor:pointer;font-size:.8rem;font-weight:600}
+.btn-round.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.tab-nav{display:flex;gap:4px;margin:14px 0 0;border-bottom:2px solid var(--border);flex-wrap:wrap}
+.tab-nav button{padding:9px 18px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:.88rem;font-weight:600;border-bottom:3px solid transparent;margin-bottom:-2px}
+.tab-nav button:hover{color:var(--text)}
+.tab-nav button.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.week-picker{display:flex;gap:3px;flex-wrap:wrap}
+.week-picker button{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--tag-bg);color:var(--text);cursor:pointer;font-size:.76rem;font-weight:600}
+.week-picker button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.week-goal{background:linear-gradient(135deg,#1a2a1d,#1e2230);border:1px solid var(--hypertrophy);border-radius:10px;padding:12px 16px;margin:8px 0;font-size:.82rem}
+.cluster-label{font-size:.78rem;color:var(--muted);letter-spacing:1px;margin:12px 0 3px;padding:2px 8px;border-left:3px solid var(--accent)}
+.cluster-label.chest{border-color:var(--power)}.cluster-label.back{border-color:var(--accent)}
+.cluster-label.shoulder{border-color:var(--strength)}.cluster-label.ant{border-color:var(--hypertrophy)}
+.cluster-label.post{border-color:var(--deload)}.cluster-label.glutes{border-color:#a78bfa}
+.cluster-label.arms{border-color:var(--hypertrophy)}.cluster-label.rear{border-color:var(--muted)}
+.cluster-label.calves{border-color:#555}.cluster-label.core{border-color:var(--accent)}
+.cluster-label.power{border-color:var(--transition)}.cluster-label.specialty{border-color:var(--power)}
+.ex-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin:3px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:relative}
+.ex-card.main-lift{border-left:3px solid var(--main-gold)}
+.ex-card.super-a{border-left:2px dashed var(--hypertrophy);margin-bottom:0;border-radius:8px 8px 0 0}
+.ex-card.super-b{border-left:2px dashed var(--hypertrophy);margin-top:0;border-radius:0 0 8px 8px}
+.ex-num{min-width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.ex-info{flex:1;min-width:140px}
+.ex-name{font-weight:600;color:#fff;font-size:.9rem}
+.ex-meta{font-size:.78rem;color:var(--muted)}
+.ex-muscles{font-size:.72rem;color:var(--muted)}
+.ex-last{font-size:.74rem;color:var(--strength);min-width:95px}
+.ex-sug{font-size:.74rem;min-width:115px}
+.ex-inp{display:flex;gap:2px;align-items:center;flex-shrink:0}
+.ex-inp input{width:46px;padding:4px 3px;border-radius:6px;border:1px solid var(--border);background:var(--tag-bg);color:#fff;font-size:.8rem;text-align:center}
+.ex-inp label{font-size:.66rem;color:var(--muted)}
+.alt-btn{cursor:pointer;font-size:.66rem;color:var(--accent);background:var(--tag-bg);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
+.alt-menu{display:none;position:absolute;top:100%;right:0;background:var(--card);border:1px solid var(--accent);border-radius:8px;padding:5px;z-index:50;min-width:170px;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.alt-menu.show{display:block}
+.alt-menu div{padding:5px 8px;cursor:pointer;font-size:.74rem;border-radius:4px;color:var(--text)}
+.alt-menu div:hover{background:var(--tag-bg)}
+.alt-menu div.mismatch{color:var(--muted);font-style:italic;border-left:2px solid var(--power);padding-left:6px}
+.alt-menu div.mismatch:hover{background:var(--card);cursor:not-allowed;opacity:.6}
+.warmup-box{background:var(--card);border:1px solid #2a3a2a;border-radius:10px;padding:10px 14px;margin:8px 0}
+.warmup-box h4{color:var(--hypertrophy);margin:0 0 4px;font-size:.86rem}
+.stretch-box{background:var(--card);border:1px solid #3a2a2a;border-radius:10px;padding:10px 14px;margin:8px 0}
+.stretch-box h4{color:var(--strength);margin:0 0 4px;font-size:.86rem}
+.wu-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;font-size:.76rem;color:var(--muted)}
+@media(max-width:600px){.wu-list{grid-template-columns:1fr}}
+#chartCanvas{width:100%;height:380px;background:var(--card);border-radius:10px;border:1px solid var(--border)}
+.chart-ctrl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.chart-ctrl select{padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--tag-bg);color:var(--text);font-size:.8rem}
+.muscle-filter{display:flex;gap:4px;flex-wrap:wrap;margin:4px 0}
+.muscle-filter button{padding:2px 8px;border-radius:8px;border:1px solid var(--border);background:var(--tag-bg);color:var(--muted);cursor:pointer;font-size:.7rem}
+.muscle-filter button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.toast{position:fixed;top:20px;right:20px;padding:8px 16px;border-radius:8px;color:#fff;font-weight:600;z-index:999;animation:fadeIO 2.4s forwards;pointer-events:none;font-size:.82rem}
+.toast-ok{background:var(--hypertrophy)}.toast-err{background:var(--power)}.toast-info{background:var(--accent)}
+@keyframes fadeIO{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0}}
+/* NEW: RPE Slider */
+.rpe-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.rpe-wrap label{font-size:.66rem;color:var(--muted);white-space:nowrap}
+.rpe-wrap input[type=range]{width:80px;height:4px;background:var(--tag-bg);border-radius:2px;outline:none}
+.rpe-wrap input[type=range]::-webkit-slider-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;-webkit-appearance:none}
+.rpe-val{font-size:.72rem;font-weight:600;color:var(--accent);min-width:16px}
+.rpe-target{font-size:.68rem;color:var(--muted);background:var(--tag-bg);padding:1px 5px;border-radius:4px}
+/* NEW: Speed Rating */
+.speed-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.speed-wrap label{font-size:.66rem;color:var(--muted);white-space:nowrap}
+.speed-stars{display:flex;gap:2px}
+.speed-star{width:18px;height:18px;border-radius:50%;border:1px solid var(--border);background:var(--tag-bg);cursor:pointer;font-size:.65rem;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.speed-star.active{background:var(--power);color:#fff;border-color:var(--power)}
+.speed-star.filled{background:var(--hypertrophy);color:#fff;border-color:var(--hypertrophy)}
+/* NEW: Role Labels */
+.role-bar{font-size:.72rem;color:var(--muted);margin:4px 0 8px;padding:4px 10px;background:var(--tag-bg);border-radius:6px;border-left:3px solid var(--accent)}
+.role-bar.compound{border-color:var(--main-gold)}.role-bar.variation{border-color:var(--hypertrophy)}
+.role-bar.specialty{border-color:var(--power)}.role-bar.transition{border-color:var(--transition)}
+.role-bar.recovery{border-color:var(--deload)}.role-bar.test{border-color:var(--strength)}
+/* NEW: Track Selector */
+.track-picker{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;padding:8px;background:var(--tag-bg);border-radius:8px}
+.track-picker button{padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;font-size:.8rem;font-weight:600}
+.track-picker button.active{background:var(--power);color:#fff;border-color:var(--power)}
+.track-picker button:hover:not(.active){background:var(--tag-bg);color:var(--text)}
+/* NEW: 1RM Input Section */
+.orm-section{background:var(--tag-bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:.8rem}
+.orm-section h4{color:var(--strength);margin:0 0 6px;font-size:.86rem}
+.orm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.orm-grid input{width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:#fff;font-size:.82rem;text-align:center}
+.orm-grid label{font-size:.72rem;color:var(--muted);display:block;margin-bottom:2px}
+@media(max-width:600px){.orm-grid{grid-template-columns:1fr}}
+/* NEW: Round 2 Analysis */
+.r2-section{background:linear-gradient(135deg,#1a2a1d,#1e2230);border:1px solid var(--hypertrophy);border-radius:10px;padding:12px 16px;margin:8px 0;font-size:.82rem}
+.r2-section h4{color:var(--hypertrophy);margin:0 0 6px}
+.r2-rec{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0}
+.r2-rec span{display:inline-block;padding:2px 8px;border-radius:6px;background:var(--tag-bg);font-size:.72rem}
+.r2-rec .rec-swap{color:var(--power);border-left:2px solid var(--power)}
+.r2-rec .rec-keep{color:var(--hypertrophy);border-left:2px solid var(--hypertrophy)}
+.r2-rec .rec-vol{color:var(--strength);border-left:2px solid var(--strength)}
+
+</style>
+</head>
+<body>
+
+<h1>13周周期化训练计划</h1>
+<p style="text-align:center;color:var(--muted);margin-bottom:8px;font-size:.88rem;font-style:italic;">肌肥大 → 最大力量 → 速度-力量过渡 → 爆发力 & 运动表现 &nbsp;|&nbsp; 跑步 · 网球 · 游泳 · 登山</p>
+
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0;justify-content:center;align-items:center;">
+  <span style="font-size:.76rem;color:var(--muted);">轮次:</span>
+  <button class="btn-round active" id="btnR1" onclick="goRound(1)">Round 1</button>
+  <button class="btn-round" id="btnR2" onclick="goRound(2)">Round 2</button>
+  <span style="margin:0 4px;color:var(--border);">|</span>
+  <button class="btn btn-sm btn-ghost" onclick="exportData()">导出</button>
+  <button class="btn btn-sm btn-ghost" onclick="document.getElementById('imp').click()">导入</button>
+  <input type="file" id="imp" accept=".json" style="display:none" onchange="importData(event)">
+</div>
+
+<nav class="tab-nav" id="tabNav">
+  <button class="active" data-tab="tabTrain">今日训练</button>
+  <button data-tab="tabHist">训练历史</button>
+  <button data-tab="tabProg">我的进步</button>
+  <button data-tab="tabHealth">营养恢复</button>
+  <button data-tab="tabPlan">完整计划</button>
+  <button data-tab="tabR2">Round 2 规划</button>
+</nav>
+
+<div class="tab-panel active" id="tabTrain">
+  <div id="weekGoal"></div>
+  <div class="card" style="border:2px solid var(--accent);">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+      <h2 style="margin:0;border:none;padding:0;font-size:1rem;">选择训练内容</h2>
+      <div style="display:flex;align-items:center;gap:3px;"><span style="font-size:.74rem;color:var(--muted);">训练周</span><div class="week-picker" id="weekPicker"></div></div>
+    </div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;margin:8px 0;" id="sessPicker"></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:4px 0;">
+      <label style="font-size:.76rem;color:var(--muted);">日期</label><input type="date" id="trainDate" style="padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--tag-bg);color:var(--text);font-size:.82rem;">
+    </div>
+    <!-- 1RM Input for Block 2 -->
+    <div id="ormSection" class="orm-section" style="display:none;">
+      <h4>1RM 数据（用于百分比轨道计算）</h4>
+      <div class="orm-grid">
+        <div><label>卧推 1RM (kg)</label><input type="number" id="ormBench" placeholder="0" onchange="saveORM()"></div>
+        <div><label>深蹲 1RM (kg)</label><input type="number" id="ormSquat" placeholder="0" onchange="saveORM()"></div>
+        <div><label>硬拉 1RM (kg)</label><input type="number" id="ormDeadlift" placeholder="0" onchange="saveORM()"></div>
+        <div><label>推举 1RM (kg)</label><input type="number" id="ormPress" placeholder="0" onchange="saveORM()"></div>
+        <div><label>划船 1RM (kg)</label><input type="number" id="ormRow" placeholder="0" onchange="saveORM()"></div>
+      </div>
+      <p style="font-size:.72rem;color:var(--muted);margin-top:4px;">留空则使用 RPE 校准轨道（推荐至少估算一次1RM以获更精准建议）</p>
+    </div>
+    <!-- Sport Track Selector for Block 3 A2 -->
+    <div id="trackPicker" class="track-picker" style="display:none;">
+      <span style="font-size:.76rem;color:var(--muted);align-self:center;">专项轨道:</span>
+      <button data-track="tennis" onclick="setTrack('tennis')">网球</button>
+      <button data-track="swimming" onclick="setTrack('swimming')">游泳</button>
+      <button data-track="running" onclick="setTrack('running')">跑步</button>
+      <button data-track="mountain" onclick="setTrack('mountain')">登山</button>
+    </div>
+    <!-- Role Label -->
+    <div id="roleBar" class="role-bar"></div>
+    <div id="wuSection"></div>
+    <div id="exList"></div>
+    <div id="stSection"></div>
+    <div id="actions" style="margin-top:10px;text-align:right;"></div>
+  </div>
+</div>
+
+<div class="tab-panel" id="tabHist">
+  <h2>训练历史</h2>
+  <div id="histContent"><p style="color:var(--muted);text-align:center;padding:40px;">还没有训练记录</p></div>
+</div>
+
+<div class="tab-panel" id="tabProg">
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:240px;">
+      <h2>追踪设置</h2>
+      <div class="card" style="max-height:320px;overflow-y:auto;">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:6px;">默认追踪所有主项动作(isMain)，也可自选增减。</p>
+        <div class="muscle-filter" id="mFilter"></div>
+        <div id="cfgList"></div>
+        <button class="btn btn-sm" onclick="applyTrack()" style="margin-top:6px;">应用</button>
+      </div>
+    </div>
+    <div style="flex:2;min-width:380px;">
+      <h2>进步曲线 <span style="font-size:.72rem;color:var(--muted);font-weight:400;">实线:肌肥大>=7reps &nbsp;虚线:力量<=6reps</span></h2>
+      <div class="chart-ctrl">
+        <label style="font-size:.78rem;color:var(--muted);">Y轴</label>
+        <select id="chartM" onchange="drawChart()"><option value="e1rm">估算1RM</option><option value="weight">训练重量</option></select>
+        <button class="btn btn-sm btn-ghost" onclick="drawChart()">刷新</button>
+      </div>
+      <div><canvas id="chartCanvas"></canvas></div>
+      <p style="font-size:.7rem;color:var(--muted);margin-top:4px;">横轴=训练次数，圆点标注日期。Block 3 爆发力期速度评分>=4且RPE达标才允许曲线上升。</p>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" id="tabHealth">
+  <h2>营养 · 恢复 · 安全</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div class="card"><h4 style="color:var(--hypertrophy);">分阶段营养</h4><table>
+      <tr><th>阶段</th><th>热量</th><th>蛋白质</th><th>碳水</th></tr>
+      <tr><td><span class="badge badge-hyper">Block 1</span></td><td>盈余+300~500</td><td>1.6~2.0g/kg</td><td>训练前后</td></tr>
+      <tr><td><span class="badge badge-strength">Block 2</span></td><td>维持/微盈余</td><td>>=2.0g/kg</td><td>维持</td></tr>
+      <tr><td><span class="badge badge-transition">Transition</span></td><td>维持</td><td>1.8~2.0g/kg</td><td>训前1-2h低GI</td></tr>
+      <tr><td><span class="badge badge-power">Block 3</span></td><td>维持/微赤字</td><td>1.6~2.0g/kg</td><td>训前1-2h低GI</td></tr>
+    </table></div>
+    <div class="card"><h4 style="color:var(--strength);">恢复管理</h4><table>
+      <tr><th>指标</th><th>标准</th><th>行动</th></tr><tr><td>睡眠</td><td>>=7h</td><td>不足->降载10~15%</td></tr>
+      <tr><td>心率</td><td>不高基准10bpm</td><td>超标->减载日</td></tr>
+      <tr><td>过渡周</td><td>主动减载</td><td>关注速度而非重量</td></tr>
+    </table></div>
+    <div class="card"><h4 style="color:var(--power);">伤病警戒</h4><table>
+      <tr><th>信号</th><th>应对</th></tr><tr><td>关节疼痛</td><td>停练</td></tr><tr><td>速度下降>20%</td><td>即刻停止</td></tr>
+      <tr><td>连续2天RPE>9</td><td>插入恢复日</td></tr>
+    </table></div>
+    <div class="card"><h4 style="color:var(--accent);">周期结构</h4><p style="font-size:.8rem;color:var(--muted);">
+      13周周期: Block 1(肌肥大 W1-4) -> Block 2(力量 W5-8) -> T9(过渡) -> Block 3(爆发力 W10-12) -> W13(测试)<br><br>
+      完成13周后切到Round 2。系统基于Round 1数据自动推荐动作替换(薄弱项优先)和容量递进(主项+1~2组)。
+    </p></div>
+  </div>
+</div>
+
+<div class="tab-panel" id="tabPlan">
+  <div id="planRef"></div>
+</div>
+
+<div class="tab-panel" id="tabR2">
+  <h2>Round 2 智能规划</h2>
+  <div class="r2-section">
+    <h4>基于 Round 1 数据的自动分析</h4>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">系统分析您的训练记录，识别进步瓶颈并生成 Round 2 的个性化调整建议。</p>
+    <button class="btn btn-sm" onclick="analyzeRound1()" style="margin-bottom:10px;">运行分析</button>
+    <div id="r2Analysis"></div>
+  </div>
+  <div class="card" style="margin-top:12px;">
+    <h4>Round 2 调整规则</h4>
+    <table>
+      <tr><th>调整类型</th><th>触发条件</th><th>具体动作</th></tr>
+      <tr><td>动作替换</td><td>e1RM进步<5%的动作</td><td>优先替换为同集群变体</td></tr>
+      <tr><td>容量递进</td><td>e1RM进步>=10%的主项</td><td>组数+1~2组</td></tr>
+      <tr><td>薄弱强化</td><td>上下肢比例失衡</td><td>增加薄弱侧频率</td></tr>
+      <tr><td>保留</td><td>e1RM进步5~10%的动作</td><td>维持现有方案</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+var BLOCKS=[{"id":"block1","title":"\u7b2c1~4\u5468\uff1a\u808c\u80a5\u5927\u79ef\u7d2f\u671f","badge":"badge-hyper","label":"Block 1","target":"\u589e\u52a0\u808c\u8089\u6a2a\u622a\u9762\u79ef\uff0c\u5efa\u7acb\u52a8\u4f5c\u6a21\u5f0f\uff0c\u63d0\u9ad8\u5de5\u4f5c\u5bb9\u91cf\u8010\u53d7\u3002","vars":"8~12 RM | \u95f4\u6b4760~90s | \u76ee\u6807RPE 7~8.5","sport":"\u51cf\u5c11\u9ad8\u5f3a\u5ea6\u95f4\u6b47\u8dd1\uff0cZone 2\u6162\u8dd1\u4e3a\u4e3b\u3002","prog":"W1\u9002\u5e94\u2192W2\u589e\u5bb9(+1\u7ec4)\u2192W3\u52a0\u91cd\u7f29\u6b21\u2192W4\u5fae\u578b\u5378\u8f7d(\u7ec4\u6570\u964d\u81f33\u7ec4)\u3002\u5b8c\u6210\u76ee\u6807\u4e0a\u9650\u540e\u52a0\u91cd2.5~5kg\u3002","sessions":{"A1":{"nm":"\u80f8\u00b7\u80cc\u00b7\u4e8c\u5934\u00b7\u4e09\u5934\uff08\u5468\u4e00\uff09\u00b7\u590d\u5408\u4e3b\u9879\u65e5","sn":"\u4e0a\u80a2A","wt":"upper","role":"compound","cs":[{"n":"\u80f8\u90e8","css":"chest","mc":"\u80f8","ex":[["\u6760\u94c3\u5e73\u677f\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",1,"\u5367\u63a8",null,{"W1":"4\u00d710","W2":"5\u00d710","W3":"4\u00d78","W4":"3\u00d78"},"90s","\u89e6\u80f8\u505c\u987f0.5s\uff0c\u7206\u53d1\u63a8\u8d77 | \u76ee\u6807RPE W1=7, W2=8, W3=8.5, W4=7",0,0,null,[["\u54d1\u94c3\u5e73\u677f\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"],["\u5668\u68b0\u63a8\u80f8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"]]],["\u4e0a\u659c\u54d1\u94c3\u5367\u63a8","\u80f8\u5927\u808c(\u4e0a\u80f8)","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",0,null,null,{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u51f3\u89d230~45\u00b0\uff0c\u4e0a\u80f8\u4e3b\u5bfc | \u76ee\u6807RPE W1=7, W2=8, W3=8.5, W4=7",0,0,null,[["\u4e0a\u659c\u6760\u94c3\u5367\u63a8","\u80f8\u5927\u808c(\u4e0a\u80f8)","\u80b1\u4e09\u5934\u808c"],["\u4e0a\u659c\u5668\u68b0\u63a8\u80f8","\u80f8\u5927\u808c(\u4e0a\u80f8)","\u80b1\u4e09\u5934\u808c"]]]]},{"n":"\u80cc\u90e8","css":"back","mc":"\u80cc","ex":[["\u6760\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u83f1\u5f62\u808c",1,"\u5212\u8239",null,{"W1":"4\u00d710","W2":"5\u00d710","W3":"4\u00d78","W4":"3\u00d78"},"90s","\u8eaf\u5e72\u5e73\u884c\u5730\u9762 | \u76ee\u6807RPE W1=7.5, W2=8.5, W3=8.5, W4=7",0,0,null,[["\u5355\u81c2\u54d1\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"],["T\u6746\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u9ad8\u4f4d\u4e0b\u62c9\uff08\u5bbd\u63e1\uff09","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,"\u6e38\u6cf3",{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u62c9\u81f3\u9501\u9aa8\uff0c\u63a7\u5236\u79bb\u5fc33s | \u76ee\u6807RPE W1=7, W2=8, W3=8.5, W4=7",0,0,null,[["\u8d1f\u91cd\u5f15\u4f53\u5411\u4e0a","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"],["\u5bf9\u63e1\u4e0b\u62c9","\u80cc\u9614\u808c(\u4e0b\u90e8)","\u80b1\u4e8c\u5934\u808c"]]]]},{"n":"\u624b\u81c2\uff08\u8d85\u7ea7\u7ec4\uff09","css":"arms","mc":"\u81c2","ex":[["\u54d1\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c",0,null,null,{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"60s","\u8d85\u7ea7\u7ec45a+5b | \u76ee\u6807RPE 8",1,0,5,[["\u6760\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c"],["\u7267\u5e08\u51f3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c(\u4e0b\u90e8)","\u80b1\u808c"]]],["\u7ef3\u7d22\u4e09\u5934\u4e0b\u538b","\u80b1\u4e09\u5934\u808c","\u8098\u808c",0,null,null,{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d712","W4":"3\u00d712"},"60s","\u8098\u9501\u5b9a\u5728\u4f53\u4fa7 | \u76ee\u6807RPE 8",0,1,5,[["\u53cc\u6760\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c","\u80f8\u5927\u808c(\u4e0b\u90e8)"],["\u7a84\u8ddd\u5367\u63a8","\u80b1\u4e09\u5934\u808c","\u80f8\u5927\u808c(\u5185\u4fa7)"]]]]},{"n":"\u540e\u675f/\u80a9\u8896","css":"rear","mc":"\u80a9","ex":[["\u9762\u62c9\uff08Face Pull\uff09","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896\u808c\u7fa4",0,null,"\u6e38\u6cf3",{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d715","W4":"3\u00d715"},"60s","\u80a9\u8896\u5065\u5eb7\uff0c\u5916\u65cb+\u540e\u6536 | \u76ee\u6807RPE 8",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"],["\u4fef\u8eab\u54d1\u94c3\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]}]},"B1":{"nm":"\u80a9\u00b7\u817f(\u524d\u94fe)\u00b7\u81c0\uff08\u5468\u4e8c\uff09\u00b7\u590d\u5408\u4e3b\u9879\u65e5","sn":"\u4e0b\u80a2B1","wt":"lower","role":"compound","cs":[{"n":"\u80a9\u90e8\uff08\u4e2d\u540e\u675f\uff09","css":"shoulder","mc":"\u80a9","ex":[["\u7ad9\u59ff\u6760\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c\u3001\u6838\u5fc3",1,"\u63a8\u4e3e",null,{"W1":"4\u00d710","W2":"5\u00d710","W3":"4\u00d78","W4":"3\u00d78"},"90s","\u6838\u5fc3\u6536\u7d27\u4e0d\u540e\u4ef0 | \u76ee\u6807RPE W1=7.5, W2=8.5, W3=8.5, W4=7",0,0,null,[["\u5750\u59ff\u54d1\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c"],["\u963f\u8bfa\u5fb7\u63a8\u4e3e","\u4e09\u89d2\u808c(\u5168\u675f)","\u80b1\u4e09\u5934\u808c"]]],["\u54d1\u94c3\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8",0,null,null,{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d712","W4":"3\u00d712"},"60s","\u8f7b\u91cd\u91cf\uff0c\u63a7\u5236\u79bb\u5fc32s | \u76ee\u6807RPE 8",0,0,null,[["\u7ef3\u7d22\u4fa7\u5e73\u4e3e(\u5355\u81c2)","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8"],["\u5668\u68b0\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f",""]]],["\u9762\u62c9\uff08Face Pull\uff09","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896\u808c\u7fa4",0,null,"\u6e38\u6cf3",{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d715","W4":"3\u00d715"},"60s","\u540e\u675f+\u80a9\u8896 | \u76ee\u6807RPE 8",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"],["\u4fef\u8eab\u54d1\u94c3\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]},{"n":"\u817f\u524d\u94fe","css":"ant","mc":"\u817f","ex":[["\u6760\u94c3\u6df1\u8e72\uff08\u9ad8\u6760\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u6838\u5fc3",1,"\u6df1\u8e72","\u767b\u5c71",{"W1":"4\u00d710","W2":"5\u00d710","W3":"4\u00d78","W4":"3\u00d78"},"90s","\u5168\u5e45\u5ea6\uff0c\u5e95\u90e8\u4e0d\u53cd\u5f39 | \u76ee\u6807RPE W1=7.5, W2=8.5, W3=8.5, W4=7",0,0,null,[["\u524d\u8e72","\u80a1\u56db\u5934\u808c","\u6838\u5fc3\u3001\u4e0a\u80cc"],["\u9ad8\u811a\u676f\u6df1\u8e72","\u80a1\u56db\u5934\u808c","\u6838\u5fc3"]]]]},{"n":"\u81c0","css":"glutes","mc":"\u81c0","ex":[["\u6760\u94c3\u81c0\u63a8","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,"\u7f51\u7403",{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u9876\u5cf0\u6536\u7f291s | \u76ee\u6807RPE 8",0,0,null,[["\u5355\u817f\u81c0\u6865","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"],["\u7ef3\u7d22\u9acb\u94f0\u94fe","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]},{"n":"\u5c0f\u817f","css":"calves","mc":"\u5c0f\u817f","ex":[["\u7ad9\u59ff\u63d0\u8e35","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c",0,null,"\u8dd1\u6b65",{"W1":"3\u00d720","W2":"4\u00d720","W3":"3\u00d720","W4":"3\u00d720"},"45s","\u5e95\u90e8\u62c9\u4f38+\u9876\u5cf0\u505c\u987f | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u63d0\u8e35","\u6bd4\u76ee\u9c7c\u808c","\u8153\u80a0\u808c"]]],["\u80eb\u9aa8\u524d\u808c\u63d0\u62c9","\u80eb\u9aa8\u524d\u808c","",0,null,"\u8dd1\u6b65",{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d715","W4":"3\u00d715"},"45s","\u9884\u9632\u80eb\u9aa8\u9aa8\u819c\u708e | \u76ee\u6807RPE 7",0,0,null,[["\u5f39\u529b\u5e26\u8e1d\u80cc\u5c48","\u80eb\u9aa8\u524d\u808c",""]]]]}]},"A2":{"nm":"\u80f8\u00b7\u80cc\u00b7\u4e8c\u5934\u00b7\u4e09\u5934 \u53d8\u4f53\uff08\u5468\u56db\uff09\u00b7\u53d8\u4f53\u8865\u5145\u65e5","sn":"\u4e0a\u80a2A2","wt":"upper","role":"variation","cs":[{"n":"\u80f8\u90e8","css":"chest","mc":"\u80f8","ex":[["\u54d1\u94c3\u5e73\u677f\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",0,null,null,{"W1":"3\u00d712","W2":"4\u00d710","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u66f4\u5927ROM\uff0c\u5e95\u90e8\u62c9\u4f38 | \u76ee\u6807RPE 8",0,0,null,[["\u6760\u94c3\u5e73\u677f\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"],["\u5668\u68b0\u63a8\u80f8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"]]],["\u5750\u59ff\u7ef3\u7d22\u5939\u80f8","\u80f8\u5927\u808c(\u5185\u4fa7)","\u4e09\u89d2\u808c\u524d\u675f",0,null,null,{"W1":"3\u00d715","W2":"4\u00d712","W3":"3\u00d712","W4":"3\u00d712"},"60s","\u6301\u7eed\u5f20\u529b\uff0c\u9876\u5cf0\u6324\u538b | \u76ee\u6807RPE 8.5",0,0,null,[["\u8774\u8776\u673a\u5939\u80f8","\u80f8\u5927\u808c(\u5185\u4fa7)","\u4e09\u89d2\u808c\u524d\u675f"],["\u54d1\u94c3\u98de\u9e1f","\u80f8\u5927\u808c(\u6574\u4f53)","\u4e09\u89d2\u808c\u524d\u675f"]]]]},{"n":"\u80cc\u90e8","css":"back","mc":"\u80cc","ex":[["\u5355\u81c2\u54d1\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u83f1\u5f62\u808c",0,null,null,{"W1":"3\u00d712","W2":"4\u00d710","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u9876\u5cf0\u505c\u987f1s | \u76ee\u6807RPE 8",0,0,null,[["\u6760\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"],["\u5750\u59ff\u7ef3\u7d22\u5212\u8239","\u80cc\u9614\u808c(\u4e2d\u90e8)","\u80b1\u4e8c\u5934\u808c"]]],["\u5750\u59ff\u7ef3\u7d22\u5212\u8239","\u80cc\u9614\u808c(\u4e2d\u90e8)","\u80b1\u4e8c\u5934\u808c\u3001\u83f1\u5f62\u808c",0,null,"\u6e38\u6cf3",{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u5bbd\u63e1\u628a\uff0c\u62c9\u5411\u4e0a\u8179 | \u76ee\u6807RPE 8",0,0,null,[["\u9ad8\u4f4d\u4e0b\u62c9(\u7a84\u63e1)","\u80cc\u9614\u808c(\u4e0b\u90e8)","\u80b1\u4e8c\u5934\u808c"]]]]},{"n":"\u624b\u81c2\uff08\u8d85\u7ea7\u7ec4\uff09","css":"arms","mc":"\u81c2","ex":[["\u9524\u5f0f\u5f2f\u4e3e","\u80b1\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u80b1\u6861\u808c",0,null,null,{"W1":"3\u00d712","W2":"4\u00d710","W3":"3\u00d710","W4":"3\u00d710"},"60s","\u638c\u5fc3\u76f8\u5bf9 | \u76ee\u6807RPE 8",1,0,5,[["\u54d1\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c"],["\u53cd\u63e1\u5f2f\u4e3e","\u80b1\u6861\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u8fc7\u5934\u7ef3\u7d22\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c(\u957f\u5934)","\u8098\u808c",0,null,null,{"W1":"3\u00d715","W2":"4\u00d712","W3":"3\u00d712","W4":"3\u00d712"},"60s","\u957f\u5934\u91cd\u70b9 | \u76ee\u6807RPE 8.5",0,1,5,[["\u4ef0\u5367\u6760\u94c3\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c(\u957f\u5934)",""],["\u5355\u81c2\u54d1\u94c3\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c",""]]]]},{"n":"\u540e\u675f/\u83f1\u5f62\u808c","css":"rear","mc":"\u80a9","ex":[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c",0,null,null,{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d715","W4":"3\u00d715"},"60s","\u6539\u5584\u5706\u80a9 | \u76ee\u6807RPE 7.5",0,0,null,[["\u9762\u62c9","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896"],["\u4fef\u8eab\u54d1\u94c3\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]}]},"B2":{"nm":"\u80a9\u00b7\u817f(\u540e\u94fe)\u00b7\u81c0 \u53d8\u4f53\uff08\u5468\u4e94\uff09\u00b7\u53d8\u4f53\u8865\u5145\u65e5","sn":"\u4e0b\u80a2B2","wt":"lower","role":"variation","cs":[{"n":"\u80a9\u90e8\uff08\u4e2d\u540e\u675f\uff09","css":"shoulder","mc":"\u80a9","ex":[["\u5750\u59ff\u54d1\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c",0,null,null,{"W1":"3\u00d712","W2":"4\u00d710","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u80cc\u90e8\u8d34\u51f3 | \u76ee\u6807RPE 8",0,0,null,[["\u7ad9\u59ff\u6760\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c"],["\u963f\u8bfa\u5fb7\u63a8\u4e3e","\u4e09\u89d2\u808c(\u5168\u675f)","\u80b1\u4e09\u5934\u808c"]]],["\u7ef3\u7d22\u4fa7\u5e73\u4e3e\uff08\u5355\u81c2\uff09","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8",0,null,null,{"W1":"3\u00d715","W2":"4\u00d712","W3":"3\u00d712","W4":"3\u00d712"},"60s","\u5168\u7a0b\u5f20\u529b | \u76ee\u6807RPE 8.5",0,0,null,[["\u54d1\u94c3\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8"],["\u5668\u68b0\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f",""]]],["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c",0,null,null,{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d715","W4":"3\u00d715"},"60s","\u540e\u675f+\u83f1\u5f62\u808c | \u76ee\u6807RPE 7.5",0,0,null,[["\u9762\u62c9","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896"],["\u4fef\u8eab\u54d1\u94c3\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]},{"n":"\u817f\u540e\u94fe","css":"post","mc":"\u817f","ex":[["\u7f57\u9a6c\u5c3c\u4e9a\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c\u3001\u7ad6\u810a\u808c",1,"\u786c\u62c9","\u8dd1\u6b65",{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u62c9\u4f38\u611f\u4f18\u5148\u4e8e\u91cd\u91cf | \u76ee\u6807RPE W1=7, W2=8, W3=8.5, W4=7",0,0,null,[["\u4f20\u7edf\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"],["\u76f8\u6251\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"]]],["\u817f\u5f2f\u4e3e\uff08\u4fef\u5367\uff09","\u8158\u7ef3\u808c","",0,null,"\u8dd1\u6b65",{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"60s","\u63a7\u5236\u79bb\u5fc33s | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u817f\u5f2f\u4e3e","\u8158\u7ef3\u808c",""],["\u5317\u6b27\u817f\u5f2f\u4e3e","\u8158\u7ef3\u808c","\u6838\u5fc3"]]]]},{"n":"\u81c0","css":"glutes","mc":"\u81c0","ex":[["\u5355\u817f\u81c0\u6865","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,"\u7f51\u7403",{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d712","W4":"3\u00d712"},"45s","\u9aa8\u76c6\u4e0d\u65cb\u8f6c | \u76ee\u6807RPE 8",0,0,null,[["\u6760\u94c3\u81c0\u63a8","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"],["\u7ef3\u7d22\u9acb\u94f0\u94fe","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]},{"n":"\u5c0f\u817f","css":"calves","mc":"\u5c0f\u817f","ex":[["\u5750\u59ff\u63d0\u8e35","\u6bd4\u76ee\u9c7c\u808c","\u8153\u80a0\u808c",0,null,null,{"W1":"3\u00d720","W2":"4\u00d720","W3":"3\u00d720","W4":"3\u00d720"},"45s","\u6301\u7eed\u5f20\u529b | \u76ee\u6807RPE 8",0,0,null,[["\u7ad9\u59ff\u63d0\u8e35","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c"]]]]},{"n":"\u817f\u524d\u94fe\uff08\u8865\u5145\uff09","css":"ant","mc":"\u817f","ex":[["\u54d1\u94c3\u7bad\u6b65\u8e72\uff08\u884c\u8d70\u5f0f\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u8158\u7ef3\u808c",0,null,"\u767b\u5c71",{"W1":"3\u00d712","W2":"4\u00d710","W3":"3\u00d710","W4":"3\u00d710"},"75s","\u540e\u819d\u63a5\u8fd1\u5730\u9762 | \u76ee\u6807RPE 8",0,0,null,[["\u4fdd\u52a0\u5229\u4e9a\u5206\u817f\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"],["\u767b\u9636","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]]]}]},"CORE":{"nm":"\u6838\u5fc3\u65e5\uff08\u5468\u516d\uff09\u2014 \u8010\u529b\u578b","sn":"\u6838\u5fc3","wt":"general","role":"core","cs":[{"n":"\u6297\u4f38\u5c55","css":"core","mc":"\u6838\u5fc3","ex":[["\u6b7b\u866b\u5f0f","\u8179\u6a2a\u808c","\u8179\u76f4\u808c",0,null,null,{"W1":"3\u00d710","W2":"4\u00d712","W3":"3\u00d712","W4":"3\u00d710"},"45s","\u8170\u8d34\u5730\uff0c\u5bf9\u4fa7\u624b\u811a\u4f38\u5c55 | \u76ee\u6807RPE 7",0,0,null,[["\u5e73\u677f\u652f\u6491","\u8179\u6a2a\u808c","\u8179\u76f4\u808c"],["\u5065\u8179\u8f6e(\u8dea\u59ff)","\u8179\u76f4\u808c","\u8179\u6a2a\u808c"]]]]},{"n":"\u6297\u4fa7\u5c48","css":"core","mc":"\u6838\u5fc3","ex":[["\u519c\u592b\u884c\u8d70","\u8179\u659c\u808c","\u524d\u81c2\u3001\u659c\u65b9\u808c",0,null,"\u767b\u5c71",{"W1":"3\u00d740m","W2":"4\u00d740m","W3":"3\u00d740m","W4":"3\u00d740m"},"60s","\u91cd\u91cf=\u81ea\u91cd50% | \u76ee\u6807RPE 7.5",0,0,null,[["\u5355\u4fa7\u519c\u592b\u884c\u8d70","\u8179\u659c\u808c","\u524d\u81c2"],["\u54e5\u672c\u54c8\u6839\u4fa7\u6865","\u8179\u659c\u808c","\u5185\u6536\u808c"]]]]},{"n":"\u6297\u65cb\u8f6c","css":"core","mc":"\u6838\u5fc3","ex":[["Pallof\u65cb\u8f6c\u6297\u63a8","\u8179\u659c\u808c","\u8179\u6a2a\u808c",0,null,"\u7f51\u7403",{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"60s","\u6297\u65cb\u8f6c\u6838\u5fc3 | \u76ee\u6807RPE 7",0,0,null,[["\u5f39\u529b\u5e26\u6297\u65cb\u8f6c\u63a8\u538b","\u8179\u659c\u808c","\u8179\u6a2a\u808c"],["\u7ef3\u7d22\u4f10\u6728\u5f0f(\u9ad8\u2192\u4f4e)","\u8179\u659c\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u7a33\u5b9a\u6027","css":"core","mc":"\u6838\u5fc3","ex":[["\u5c71\u7f8a\u633a\u8eab","\u7ad6\u810a\u808c","\u81c0\u5927\u808c",0,null,null,{"W1":"3\u00d715","W2":"4\u00d715","W3":"3\u00d715","W4":"3\u00d712"},"60s","\u4e0b\u80cc+\u81c0 | \u76ee\u6807RPE 7",0,0,null,[["\u9e1f\u72d7\u5f0f","\u7ad6\u810a\u808c","\u8179\u6a2a\u808c"],["\u718a\u722c","\u6838\u5fc3(\u5168)","\u80a9\u3001\u9acb"]]]]},{"n":"\u989d\u5916","css":"core","mc":"\u6838\u5fc3","ex":[["\u60ac\u5782\u63d0\u819d","\u8179\u76f4\u808c(\u4e0b\u90e8)","\u9acb\u5c48\u808c",0,null,null,{"W1":"3\u00d712","W2":"4\u00d712","W3":"3\u00d710","W4":"3\u00d710"},"60s","\u63a7\u5236\u6446\u52a8 | \u76ee\u6807RPE 7.5",0,0,null,[["\u5377\u8179","\u8179\u76f4\u808c",""],["V\u5b57\u4e3e\u817f","\u8179\u76f4\u808c","\u9acb\u5c48\u808c"]]]]}]}}},{"id":"block2","title":"\u7b2c5~8\u5468\uff1a\u6700\u5927\u529b\u91cf\u5f3a\u5316\u671f","badge":"badge-strength","label":"Block 2","target":"\u5c06\u808c\u8089\u91cf\u8f6c\u5316\u4e3a\u795e\u7ecf\u52df\u96c6\u6548\u7387\uff0c\u663e\u8457\u63d0\u5347\u4e09\u5927\u9879\u53ca\u63a8\u4e3e\u91cd\u91cf\u3002","vars":"\u4e3b\u98793~6 RM | \u95f4\u6b472~3min | \u76ee\u6807RPE 8~9.5","sport":"\u51cf\u5c11\u8dd1\u6b65\u91cc\u7a0b\uff0c\u529b\u91cf\u65e5\u4e0d\u5b89\u6392\u9ad8\u5f3a\u5ea6\u8fd0\u52a8\u3002","prog":"\u53cc\u8f68\u6e10\u8fdb\uff1a\u67091RM\u7528\u767e\u5206\u6bd4(W5@82%\u2192W6@84%\u2192W7@88%\u2192W8\u6d4b\u8bd5)\uff1b\u65e01RM\u7528RPE\u6821\u51c6(RPE\u22648\u52a05kg, RPE\u22659\u52a02.5kg)\u3002W6-W7\u5f15\u5165\u58f6\u94c3\u6446\u8361\u9884\u70ed\u7206\u53d1\u529b\u6a21\u5f0f\u3002","sessions":{"A1":{"nm":"\u80f8\u00b7\u80cc\u00b7\u4e8c\u5934\u00b7\u4e09\u5934\uff08\u5468\u4e00\uff09\u00b7\u529b\u91cf\u7248\u00b7\u590d\u5408\u4e3b\u9879\u65e5","sn":"\u4e0a\u80a2A","wt":"upper","role":"compound","cs":[{"n":"\u80f8\u90e8","css":"chest","mc":"\u80f8","ex":[["\u6760\u94c3\u5e73\u677f\u5367\u63a8\uff08\u4e3b\u9879\uff09","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",1,"\u5367\u63a8",null,{"W5":"4\u00d75@82%","W6":"4\u00d75@84%","W7":"5\u00d73@88%","W8":"\u6d4b3RM"},"2.5min","\u8d77\u6865+\u817f\u9a71\u52a8 | \u76ee\u6807RPE W5=8, W6=8.5, W7=9",0,0,null,[["\u54d1\u94c3\u5e73\u677f\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"]]],["\u8d1f\u91cd\u53cc\u6760\u81c2\u5c48\u4f38","\u80f8\u5927\u808c(\u4e0b\u90e8)","\u80b1\u4e09\u5934\u808c",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"4\u00d76","W8":"3\u00d76"},"2min","\u52a0\u91cd\u7247/\u6302\u94c3\u58f6 | \u76ee\u6807RPE 8.5",0,0,null,[["\u7a84\u8ddd\u5367\u63a8","\u80b1\u4e09\u5934\u808c","\u80f8\u5927\u808c(\u5185\u4fa7)"]]]]},{"n":"\u80cc\u90e8","css":"back","mc":"\u80cc","ex":[["\u6760\u94c3\u5212\u8239\uff08\u4e3b\u9879\uff09","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u83f1\u5f62\u808c",1,"\u5212\u8239",null,{"W5":"4\u00d75@82%","W6":"4\u00d75@84%","W7":"5\u00d73@88%","W8":"4\u00d73"},"2.5min","\u5927\u91cd\u91cf\u4e25\u683c\u5212 | \u76ee\u6807RPE W5=8, W6=8.5, W7=9",0,0,null,[["Pendlay\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u8d1f\u91cd\u5f15\u4f53\u5411\u4e0a","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u524d\u81c2",0,null,"\u6e38\u6cf3",{"W5":"3\u00d76","W6":"3\u00d76","W7":"4\u00d75","W8":"3\u00d75"},"2min","\u52a0\u91cd5~15kg | \u76ee\u6807RPE 8.5",0,0,null,[["\u9ad8\u4f4d\u4e0b\u62c9(\u5927\u91cd\u91cf)","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]]]},{"n":"\u624b\u81c2\uff08\u8d85\u7ea7\u7ec4\uff09","css":"arms","mc":"\u81c2","ex":[["\u6760\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"60s","\u4e25\u683c\u5f2f\u4e3e | \u76ee\u6807RPE 8.5",1,0,5,[["\u54d1\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c"]]],["\u7a84\u8ddd\u5367\u63a8","\u80b1\u4e09\u5934\u808c","\u80f8\u5927\u808c(\u5185\u4fa7)",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"60s","\u63e1\u8ddd\u80a9\u5bbd | \u76ee\u6807RPE 8.5",0,1,5,[["\u7ef3\u7d22\u4e09\u5934\u4e0b\u538b","\u80b1\u4e09\u5934\u808c","\u8098\u808c"]]]]},{"n":"\u540e\u675f/\u80a9\u8896","css":"rear","mc":"\u80a9","ex":[["\u9762\u62c9","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896\u808c\u7fa4",0,null,null,{"W5":"3\u00d712","W6":"3\u00d712","W7":"3\u00d712","W8":"3\u00d712"},"60s","\u7ef4\u6301\u80a9\u8896\u5065\u5eb7 | \u76ee\u6807RPE 7.5",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]}]},"B1":{"nm":"\u80a9\u00b7\u817f(\u524d\u94fe)\u00b7\u81c0\uff08\u5468\u4e8c\uff09\u00b7\u529b\u91cf\u7248\u00b7\u590d\u5408\u4e3b\u9879\u65e5","sn":"\u4e0b\u80a2B1","wt":"lower","role":"compound","cs":[{"n":"\u80a9\u90e8\uff08\u4e2d\u540e\u675f\uff09","css":"shoulder","mc":"\u80a9","ex":[["\u7ad9\u59ff\u6760\u94c3\u63a8\u4e3e\uff08\u4e3b\u9879\uff09","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c\u3001\u6838\u5fc3",1,"\u63a8\u4e3e",null,{"W5":"4\u00d75@82%","W6":"4\u00d75@84%","W7":"5\u00d73@88%","W8":"\u6d4b3RM"},"2.5min","\u4e25\u683c\u63a8 | \u76ee\u6807RPE W5=8, W6=8, W7=9",0,0,null,[["\u5750\u59ff\u54d1\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c"]]],["\u5927\u91cd\u91cf\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"90s","\u53ef\u8f7b\u5fae\u501f\u529b | \u76ee\u6807RPE 9",0,0,null,[["\u54d1\u94c3\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8"]]],["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"90s","\u540e\u675f\u529b\u91cf\u7248 | \u76ee\u6807RPE 8",0,0,null,[["\u9762\u62c9","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896"]]]]},{"n":"\u817f\u524d\u94fe","css":"ant","mc":"\u817f","ex":[["\u6760\u94c3\u6df1\u8e72\uff08\u4e3b\u9879\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u6838\u5fc3",1,"\u6df1\u8e72",null,{"W5":"4\u00d75@82%","W6":"4\u00d75@84%","W7":"5\u00d73@88%","W8":"\u6d4b3RM"},"3min","\u5168\u5e45\u5ea6\uff0c\u79bb\u5fc32s | \u76ee\u6807RPE W5=8, W6=8.5, W7=9",0,0,null,[["\u524d\u8e72","\u80a1\u56db\u5934\u808c","\u6838\u5fc3"],["\u54c8\u514b\u6df1\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]],["\u4fdd\u52a0\u5229\u4e9a\u5206\u817f\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,"\u7f51\u7403",{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"2min","\u540e\u811a\u62ac\u9ad8 | \u76ee\u6807RPE 8.5",0,0,null,[["\u767b\u9636","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u81c0","css":"glutes","mc":"\u81c0","ex":[["\u6760\u94c3\u81c0\u63a8\uff08\u5927\u91cd\u91cf\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"4\u00d76","W8":"3\u00d76"},"2min","RPE 8~9",0,0,null,[["\u5355\u817f\u81c0\u6865(\u8d1f\u91cd)","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]},{"n":"\u5c0f\u817f","css":"calves","mc":"\u5c0f\u817f","ex":[["\u5750\u59ff\u63d0\u8e35","\u6bd4\u76ee\u9c7c\u808c","\u8153\u80a0\u808c",0,null,null,{"W5":"3\u00d712","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"60s","\u52a0\u91cd\uff0c\u6162\u79bb\u5fc3 | \u76ee\u6807RPE 8",0,0,null,[["\u7ad9\u59ff\u63d0\u8e35","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c"]]]]},{"n":"\u7206\u53d1\u529b\u524d\u7f6e","css":"power","mc":"\u7206\u53d1","ex":[["\u58f6\u94c3\u6446\u8361","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u6838\u5fc3",0,null,null,{"W5":"-","W6":"3\u00d715","W7":"3\u00d712","W8":"-"},"60s","\u9acb\u90e8\u7206\u53d1\u4f38\u9acb\u6a21\u5f0f\u5b66\u4e60\uff0c\u4e3aBlock 3\u9884\u9002\u5e94 | \u76ee\u6807RPE 7",0,0,null,[["\u54d1\u94c3\u6446\u8361","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]}]},"A2":{"nm":"\u80f8\u00b7\u80cc\u00b7\u4e8c\u5934\u00b7\u4e09\u5934 \u53d8\u4f53\uff08\u5468\u56db\uff09\u00b7\u529b\u91cf\u7248\u00b7\u53d8\u4f53\u8865\u5145\u65e5","sn":"\u4e0a\u80a2A2","wt":"upper","role":"variation","cs":[{"n":"\u80f8\u90e8","css":"chest","mc":"\u80f8","ex":[["\u6682\u505c\u5367\u63a8\uff08\u5e95\u90e82s\uff09","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c",0,null,null,{"W5":"4\u00d76","W6":"4\u00d76","W7":"4\u00d75","W8":"3\u00d75"},"2min","\u6d88\u9664\u7275\u5f20\u53cd\u5c04 | \u76ee\u6807RPE 8.5",0,0,null,[["\u54d1\u94c3\u5e73\u677f\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"]]],["\u4e0a\u659c\u6760\u94c3\u5367\u63a8","\u80f8\u5927\u808c(\u4e0a\u80f8)","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"90s","\u8865\u5145\u4e0a\u80f8\u529b\u91cf | \u76ee\u6807RPE 8.5",0,0,null,[["\u4e0a\u659c\u54d1\u94c3\u5367\u63a8","\u80f8\u5927\u808c(\u4e0a\u80f8)","\u80b1\u4e09\u5934\u808c"]]]]},{"n":"\u80cc\u90e8","css":"back","mc":"\u80cc","ex":[["Pendlay\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u83f1\u5f62\u808c",0,null,null,{"W5":"4\u00d76","W6":"4\u00d76","W7":"4\u00d75","W8":"3\u00d75"},"2min","\u6bcfrep\u4ece\u5730\u9762\u542f\u52a8 | \u76ee\u6807RPE 8.5",0,0,null,[["\u6760\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u80f8\u90e8\u652f\u6491\u5212\u8239","\u80cc\u9614\u808c","\u83f1\u5f62\u808c",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"90s","\u7eaf\u80cc\u90e8\u53d1\u529b | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u7ef3\u7d22\u5212\u8239","\u80cc\u9614\u808c(\u4e2d\u90e8)","\u80b1\u4e8c\u5934\u808c"]]]]},{"n":"\u624b\u81c2\uff08\u8d85\u7ea7\u7ec4\uff09","css":"arms","mc":"\u81c2","ex":[["\u96c6\u4e2d\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"60s","\u8098\u9760\u5927\u817f\u5185\u4fa7 | \u76ee\u6807RPE 8.5",1,0,5,[["\u54d1\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c"]]],["\u4ef0\u5367\u6760\u94c3\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c(\u957f\u5934)","",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"60s","\u8098\u6307\u5411\u5929\u82b1\u677f | \u76ee\u6807RPE 8.5",0,1,5,[["\u7ef3\u7d22\u4e09\u5934\u4e0b\u538b","\u80b1\u4e09\u5934\u808c","\u8098\u808c"]]]]},{"n":"\u540e\u675f","css":"rear","mc":"\u80a9","ex":[["\u5f39\u529b\u5e26\u80a9\u80db\u62c9\u5f00","\u83f1\u5f62\u808c","\u4e09\u89d2\u808c\u540e\u675f",0,null,null,{"W5":"3\u00d715","W6":"3\u00d715","W7":"3\u00d715","W8":"3\u00d715"},"45s","\u6539\u5584\u5706\u80a9 | \u76ee\u6807RPE 7",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]}]},"B2":{"nm":"\u80a9\u00b7\u817f(\u540e\u94fe)\u00b7\u81c0 \u53d8\u4f53\uff08\u5468\u4e94\uff09\u00b7\u529b\u91cf\u7248\u00b7\u53d8\u4f53\u8865\u5145\u65e5","sn":"\u4e0b\u80a2B2","wt":"lower","role":"variation","cs":[{"n":"\u80a9\u90e8\uff08\u4e2d\u540e\u675f\uff09","css":"shoulder","mc":"\u80a9","ex":[["\u501f\u529b\u63a8\u4e3e\uff08Push Press\uff09","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c\u3001\u6838\u5fc3",0,null,null,{"W5":"4\u00d75","W6":"4\u00d75","W7":"4\u00d73","W8":"3\u00d73"},"2min","\u5c48\u819d\u542f\u52a8 | \u76ee\u6807RPE 8.5",0,0,null,[["\u7ad9\u59ff\u6760\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c"]]],["\u7ef3\u7d22\u4fa7\u5e73\u4e3e\uff08\u5927\u91cd\u91cf\uff09","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"90s","\u5fae\u91cf\u501f\u529b | \u76ee\u6807RPE 8.5",0,0,null,[["\u54d1\u94c3\u4fa7\u5e73\u4e3e","\u4e09\u89d2\u808c\u4e2d\u675f","\u659c\u65b9\u808c\u4e0a\u90e8"]]],["\u9762\u62c9\uff08Face Pull\uff09","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896\u808c\u7fa4",0,null,null,{"W5":"3\u00d712","W6":"3\u00d712","W7":"3\u00d712","W8":"3\u00d712"},"60s","\u80a9\u8896\u4fdd\u517b | \u76ee\u6807RPE 7.5",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]},{"n":"\u817f\u540e\u94fe","css":"post","mc":"\u817f","ex":[["\u4f20\u7edf\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c\u3001\u7ad6\u810a\u808c",1,"\u786c\u62c9","\u767b\u5c71",{"W5":"4\u00d75@82%","W6":"4\u00d75@84%","W7":"4\u00d73@88%","W8":"4\u00d72@90%"},"3min","\u6bcf\u7ec4\u75591rep | \u76ee\u6807RPE W5=8, W6=8.5, W7=9",0,0,null,[["\u76f8\u6251\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"],["\u7f57\u9a6c\u5c3c\u4e9a\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"]]],["\u7ef3\u7d22\u9acb\u94f0\u94fe","\u8158\u7ef3\u808c","\u81c0\u5927\u808c",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"75s","\u786c\u62c9\u8f85\u52a9 | \u76ee\u6807RPE 8",0,0,null,[["\u817f\u5f2f\u4e3e\uff08\u4fef\u5367\uff09","\u8158\u7ef3\u808c",""]]]]},{"n":"\u81c0","css":"glutes","mc":"\u81c0","ex":[["\u5355\u817f\u81c0\u6865\uff08\u8d1f\u91cd\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"75s","\u52a0\u91cd\u54d1\u94c3 | \u76ee\u6807RPE 8.5",0,0,null,[["\u6760\u94c3\u81c0\u63a8","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]},{"n":"\u5c0f\u817f","css":"calves","mc":"\u5c0f\u817f","ex":[["\u5355\u817f\u63d0\u8e35","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c",0,null,"\u8dd1\u6b65",{"W5":"3\u00d712","W6":"3\u00d712","W7":"3\u00d710","W8":"3\u00d710"},"45s","\u624b\u6301\u54d1\u94c3\u52a0\u91cd | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u63d0\u8e35","\u6bd4\u76ee\u9c7c\u808c","\u8153\u80a0\u808c"]]]]},{"n":"\u817f\u524d\u94fe\uff08\u8865\u5145\uff09","css":"ant","mc":"\u817f","ex":[["\u767b\u9636\uff08Weighted Step-Up\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u6838\u5fc3",0,null,"\u767b\u5c71",{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"90s","\u7bb1\u9ad8=\u819d\u9ad8 | \u76ee\u6807RPE 8.5",0,0,null,[["\u4fdd\u52a0\u5229\u4e9a\u5206\u817f\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u7206\u53d1\u529b\u524d\u7f6e","css":"power","mc":"\u7206\u53d1","ex":[["\u58f6\u94c3\u6446\u8361","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u6838\u5fc3",0,null,null,{"W5":"-","W6":"3\u00d715","W7":"3\u00d712","W8":"-"},"60s","\u9acb\u90e8\u7206\u53d1\u4f38\u9acb\u6a21\u5f0f\u5b66\u4e60 | \u76ee\u6807RPE 7",0,0,null,[["\u54d1\u94c3\u6446\u8361","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]}]},"CORE":{"nm":"\u6838\u5fc3\u65e5\uff08\u5468\u516d\uff09\u2014 \u529b\u91cf\u578b","sn":"\u6838\u5fc3","wt":"general","role":"core","cs":[{"n":"\u6297\u4f38\u5c55","css":"core","mc":"\u6838\u5fc3","ex":[["\u8d1f\u91cd\u6b7b\u866b","\u8179\u6a2a\u808c","\u8179\u76f4\u808c",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"60s","\u5bf9\u4fa7\u624b\u811a\u5404\u6301\u54d1\u94c32~5kg | \u76ee\u6807RPE 7.5",0,0,null,[["\u5065\u8179\u8f6e","\u8179\u76f4\u808c","\u8179\u6a2a\u808c"]]]]},{"n":"\u6297\u4fa7\u5c48","css":"core","mc":"\u6838\u5fc3","ex":[["\u5355\u4fa7\u519c\u592b\u884c\u8d70","\u8179\u659c\u808c","\u524d\u81c2\u3001\u659c\u65b9\u808c",0,null,"\u767b\u5c71",{"W5":"3\u00d730m","W6":"3\u00d730m","W7":"3\u00d730m","W8":"3\u00d730m"},"60s","\u4ec5\u4e00\u4fa7\u6301\u91cd | \u76ee\u6807RPE 7.5",0,0,null,[["\u54e5\u672c\u54c8\u6839\u4fa7\u6865","\u8179\u659c\u808c","\u5185\u6536\u808c"]]]]},{"n":"\u6297\u65cb\u8f6c","css":"core","mc":"\u6838\u5fc3","ex":[["Pallof\u65cb\u8f6c\u6297\u63a8+\u6b65\u6001","\u8179\u659c\u808c","\u8179\u6a2a\u808c",0,null,"\u7f51\u7403",{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"60s","\u63a8+\u4fa7\u5411\u884c\u8d703\u6b65 | \u76ee\u6807RPE 7.5",0,0,null,[["\u5f39\u529b\u5e26\u6297\u65cb\u8f6c\u63a8\u538b","\u8179\u659c\u808c","\u8179\u6a2a\u808c"]]]]},{"n":"\u7a33\u5b9a\u6027","css":"core","mc":"\u6838\u5fc3","ex":[["\u8d1f\u91cd\u5c71\u7f8a\u633a\u8eab","\u7ad6\u810a\u808c","\u81c0\u5927\u808c",0,null,null,{"W5":"3\u00d710","W6":"3\u00d710","W7":"3\u00d78","W8":"3\u00d78"},"75s","\u80f8\u524d\u62b1\u6760\u94c3\u724710~20kg | \u76ee\u6807RPE 8",0,0,null,[["\u9e1f\u72d7\u5f0f(\u8d1f\u91cd)","\u7ad6\u810a\u808c","\u8179\u6a2a\u808c"]]]]},{"n":"\u989d\u5916","css":"core","mc":"\u6838\u5fc3","ex":[["\u60ac\u5782\u76f4\u817f\u4e3e\u817f","\u8179\u76f4\u808c(\u4e0b\u90e8)","\u9acb\u5c48\u808c",0,null,null,{"W5":"3\u00d78","W6":"3\u00d78","W7":"3\u00d76","W8":"3\u00d76"},"90s","\u817f\u4f38\u76f4 | \u76ee\u6807RPE 8",0,0,null,[["\u60ac\u5782\u63d0\u819d","\u8179\u76f4\u808c(\u4e0b\u90e8)","\u9acb\u5c48\u808c"]]]]}]}}},{"id":"transition","title":"\u7b2c9\u5468\uff1a\u8fc7\u6e21\u5468\uff08\u901f\u5ea6-\u529b\u91cf\u9002\u5e94\uff09","badge":"badge-deload","label":"Transition","target":"\u6d88\u9664Block 2\u7d2f\u79ef\u75b2\u52b3\uff0c\u9884\u9002\u5e94\u7206\u53d1\u529b\u8bad\u7ec3\u6a21\u5f0f\uff0c\u5b66\u4e60Block 3\u52a8\u4f5c\u6280\u672f\u3002","vars":"\u4e3b\u987960-65%\u901f\u5ea6\u8bad\u7ec3 | \u7206\u53d1\u52a8\u4f5c\u7a7a\u6746/\u8f7b\u8d1f\u8377\u5b66\u4e60 | RPE 6-7","sport":"\u4ec5\u8f7b\u677e\u6280\u672f\u8bad\u7ec3\uff0c\u4e0d\u505a\u9ad8\u5f3a\u5ea6\u4e13\u9879\u3002","prog":"\u4e0d\u4e3a\u52a0\u91cd\uff0c\u53ea\u4e3a\u901f\u5ea6\u3002\u4e3b\u9879\u5173\u6ce8\u5411\u5fc3\u901f\u5ea6\u800c\u975e\u91cd\u91cf\u3002\u58f6\u94c3\u6446\u8361\u5f3a\u5316\u7206\u53d1\u4f38\u9acb\u3002","sessions":{"A1":{"nm":"\u80f8\u00b7\u80cc\uff08\u5468\u4e00\uff09\u00b7\u901f\u5ea6\u9002\u5e94","sn":"\u901f\u5ea6A","wt":"upper","role":"transition","cs":[{"n":"\u80f8\u90e8\u901f\u5ea6","css":"chest","mc":"\u80f8","ex":[["\u901f\u5ea6\u5367\u63a8","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c",0,null,null,{"T9":"6\u00d73@60%"},"90s","\u5411\u5fc3\u5c3d\u53ef\u80fd\u5feb\uff0c\u4e0d\u8ffd\u6c42\u529b\u7aed | \u76ee\u6807RPE 6\uff0c\u8bb0\u5f55\u4e3b\u89c2\u901f\u5ea6",0,0,null,[["\u54d1\u94c3\u5367\u63a8(\u8f7b\u901f)","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c"]]],["\u4fef\u5367\u6491\uff08\u7206\u53d1\uff09","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c",0,null,null,{"T9":"4\u00d75"},"60s","\u624b\u63a8\u79bb\u5730 | \u76ee\u6807RPE 7",0,0,null,[["\u8dea\u59ff\u7206\u53d1\u4fef\u5367\u6491","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c"]]]]},{"n":"\u80cc\u90e8\u901f\u5ea6","css":"back","mc":"\u80cc","ex":[["\u901f\u5ea6\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"T9":"5\u00d73@60%"},"90s","\u4ece\u5730\u9762\u7206\u53d1\u62c9 | \u76ee\u6807RPE 6\uff0c\u8bb0\u5f55\u4e3b\u89c2\u901f\u5ea6",0,0,null,[["\u54d1\u94c3\u5212\u8239(\u8f7b\u901f)","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u5f39\u529b\u5e26\u52a9\u529b\u5f15\u4f53\uff08\u5feb\u901f\uff09","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"T9":"4\u00d75"},"60s","\u5411\u5fc3\u66b4\u529b\u62c9 | \u76ee\u6807RPE 7",0,0,null,[["\u9ad8\u4f4d\u4e0b\u62c9(\u8f7b\u901f)","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]]]},{"n":"\u624b\u81c2\u7ef4\u6301","css":"arms","mc":"\u81c2","ex":[["\u54d1\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c",0,null,null,{"T9":"2\u00d710"},"60s","\u7ef4\u6301\u6027\u8f7b\u8bad\u7ec3 | \u76ee\u6807RPE 6",0,0,null,[["\u7ef3\u7d22\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c"]]],["\u7ef3\u7d22\u4e09\u5934\u4e0b\u538b","\u80b1\u4e09\u5934\u808c","\u8098\u808c",0,null,null,{"T9":"2\u00d712"},"60s","\u7ef4\u6301\u6027\u8f7b\u8bad\u7ec3 | \u76ee\u6807RPE 6",0,0,null,[["\u8f7b\u91cd\u91cf\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c","\u80f8\u5927\u808c"]]]]}]},"B1":{"nm":"\u80a9\u00b7\u817f\uff08\u5468\u4e8c\uff09\u00b7\u901f\u5ea6\u9002\u5e94","sn":"\u901f\u5ea6B","wt":"lower","role":"transition","cs":[{"n":"\u5168\u8eab\u901f\u5ea6","css":"shoulder","mc":"\u80a9","ex":[["\u901f\u5ea6\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c",0,null,null,{"T9":"5\u00d73@65%"},"90s","\u5411\u5fc3\u7206\u53d1\u63a8 | \u76ee\u6807RPE 6\uff0c\u8bb0\u5f55\u4e3b\u89c2\u901f\u5ea6",0,0,null,[["\u54d1\u94c3\u63a8\u4e3e(\u8f7b\u901f)","\u4e09\u89d2\u808c","\u80b1\u4e09\u5934\u808c"]]],["\u58f6\u94c3\u6446\u8361","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u6838\u5fc3",0,null,null,{"T9":"4\u00d715"},"60s","Block 3\u6838\u5fc3\u6280\u672f\u9884\u4e60\uff0c\u9acb\u90e8\u7206\u53d1\u94f0\u94fe | \u76ee\u6807RPE 7",0,0,null,[["\u54d1\u94c3\u6446\u8361","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]},{"n":"\u817f\u90e8\u901f\u5ea6","css":"ant","mc":"\u817f","ex":[["\u901f\u5ea6\u6df1\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,null,{"T9":"5\u00d73@60%"},"90s","\u5411\u5fc3\u5c3d\u53ef\u80fd\u5feb | \u76ee\u6807RPE 6\uff0c\u8bb0\u5f55\u4e3b\u89c2\u901f\u5ea6",0,0,null,[["\u9ad8\u811a\u676f\u6df1\u8e72(\u8f7b\u901f)","\u80a1\u56db\u5934\u808c","\u6838\u5fc3"]]],["\u8df3\u8e72\uff08\u7a7a\u6746/\u5f92\u624b\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,null,{"T9":"4\u00d73"},"90s","\u843d\u5730\u7f13\u51b2\u7ec3\u4e60 | \u76ee\u6807RPE 7",0,0,null,[["\u8df3\u7bb1(\u4f4e\u7bb1)","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u6280\u672f\u5b66\u4e60","css":"glutes","mc":"\u81c0","ex":[["\u58f6\u94c3\u9ad8\u7ffb\uff08\u8f7b\u91cf\u6280\u672f\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u659c\u65b9\u808c",0,null,null,{"T9":"3\u00d75(\u8f7b)"},"60s","Block 3\u52a8\u4f5c\u9884\u4e60\uff0c\u4e0d\u8ffd\u6c42\u91cd\u91cf | \u76ee\u6807RPE 6",0,0,null,[["\u54d1\u94c3\u9ad8\u7ffb","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]}]},"A2":{"nm":"\u4e0a\u80a2\u6d41\u52a8\uff08\u5468\u56db\uff09\u00b7\u6280\u672f\u590d\u4e60","sn":"\u6d41\u52a8A","wt":"upper","role":"transition","cs":[{"n":"\u52a8\u6001\u6d41\u52a8","css":"chest","mc":"\u80f8","ex":[["\u836f\u7403\u80f8\u524d\u63a8\u63b7\uff08\u8f7b\u91cf\u5b66\u4e60\uff09","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c",0,null,null,{"T9":"3\u00d75(\u8f7b\u7403)"},"60s","Block 3\u52a8\u4f5c\u9884\u4e60 | \u76ee\u6807RPE 6",0,0,null,[["\u8f7b\u91cd\u91cf\u7ef3\u7d22\u5939\u80f8","\u80f8\u5927\u808c","\u4e09\u89d2\u808c\u524d\u675f"]]]]},{"n":"\u80a9\u90e8\u7ef4\u62a4","css":"shoulder","mc":"\u80a9","ex":[["\u9762\u62c9+\u5f39\u529b\u5e26\u6269\u80f8","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c",0,null,null,{"T9":"2\u00d715+2\u00d715"},"45s","\u80a9\u8896\u7ef4\u62a4 | \u76ee\u6807RPE 6",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]},{"n":"\u6062\u590d","css":"back","mc":"\u80cc","ex":[["\u8f7b\u91cf\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"T9":"2\u00d710@50%"},"60s","\u8840\u6d41\u4fc3\u8fdb | \u76ee\u6807RPE 5",0,0,null,[["\u8f7b\u91cf\u4e0b\u62c9","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]]]}]},"B2":{"nm":"\u4e0b\u80a2\u6d41\u52a8\uff08\u5468\u4e94\uff09\u00b7\u6280\u672f\u590d\u4e60","sn":"\u6d41\u52a8B","wt":"lower","role":"transition","cs":[{"n":"\u4e0b\u80a2\u6280\u672f","css":"ant","mc":"\u817f","ex":[["\u5f92\u624b\u7bad\u6b65\u8e72+\u65cb\u8f6c","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,null,{"T9":"2\u00d78"},"60s","\u52a8\u6001\u67d4\u97e7 | \u76ee\u6807RPE 5",0,0,null,[["\u4fa7\u5411\u7bad\u6b65\u8e72","\u5185\u6536\u808c","\u81c0\u4e2d\u808c"]]]]},{"n":"\u7206\u53d1\u6280\u672f","css":"glutes","mc":"\u81c0","ex":[["\u58f6\u94c3\u6446\u8361\uff08\u6280\u672f\u7cbe\u70bc\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,null,{"T9":"3\u00d710(\u4e2d\u7b49)"},"60s","\u52a8\u4f5c\u6a21\u5f0f\u6253\u78e8 | \u76ee\u6807RPE 6",0,0,null,[["\u7f57\u9a6c\u5c3c\u4e9a\u786c\u62c9(\u8f7b\u901f)","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u5c0f\u817f/\u811a\u8e1d","css":"calves","mc":"\u5c0f\u817f","ex":[["\u63d0\u8e35+\u811a\u8e1d\u7ed5\u73af","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c",0,null,null,{"T9":"2\u00d715+\u6bcf\u65b9\u5411\u00d710"},"30s","\u811a\u8e1d\u521a\u6027 | \u76ee\u6807RPE 5",0,0,null,[["\u5355\u817f\u5e73\u8861","\u5c0f\u817f","\u811a\u8e1d"]]]]}]},"CORE":{"nm":"\u6838\u5fc3\u65e5\uff08\u5468\u516d\uff09\u2014 \u6d41\u52a8\u6062\u590d","sn":"\u6838\u5fc3","wt":"general","role":"core","cs":[{"n":"\u52a8\u6001\u6838\u5fc3","css":"core","mc":"\u6838\u5fc3","ex":[["\u6b7b\u9e1f\u5f0f\uff08\u6162\u901f\u63a7\u5236\uff09","\u8179\u6a2a\u808c","\u8179\u76f4\u808c",0,null,null,{"T9":"2\u00d78"},"45s","\u8170\u8d34\u5730 | \u76ee\u6807RPE 6",0,0,null,[["\u5e73\u677f\u652f\u6491","\u8179\u6a2a\u808c","\u8179\u76f4\u808c"]]]]},{"n":"\u65cb\u8f6c\u9884\u4e60","css":"core","mc":"\u6838\u5fc3","ex":[["\u836f\u7403\u65cb\u8f6c\u4fa7\u629b\uff08\u8f7b\u91cf\u5b66\u4e60\uff09","\u8179\u659c\u808c","\u81c0\u5927\u808c",0,null,null,{"T9":"2\u00d75(\u8f7b\u7403)"},"60s","Block 3\u65cb\u8f6c\u52a8\u4f5c\u9884\u4e60 | \u76ee\u6807RPE 6",0,0,null,[["\u7ef3\u7d22\u4f10\u6728\u5f0f(\u8f7b\u91cf)","\u8179\u659c\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u6062\u590d","css":"core","mc":"\u6838\u5fc3","ex":[["\u745c\u4f3d\u732b\u725b\u5f0f\u2192\u4e0b\u72ac\u5f0f","\u5168\u8eab","",0,null,null,{"T9":"10min"},"-","\u6d41\u52a8\u6062\u590d | \u76ee\u6807RPE 4",0,0,null,[["\u6ce1\u6cab\u8f74\u5168\u8eab","\u5168\u8eab",""]]]]}]}}},{"id":"block3","title":"\u7b2c10~12\u5468\uff1a\u7206\u53d1\u529b\u51b2\u523a\u671f","badge":"badge-power","label":"Block 3","target":"\u5c06\u529b\u91cf\u8f6c\u5316\u4e3a\u53d1\u529b\u7387(RFD)\u548c\u8fd0\u52a8\u4e13\u9879\u80fd\u529b\u3002","vars":"\u7206\u53d12~5 reps | \u95f4\u6b472~3min | \u901f\u5ea6\u4e0b\u964d\u5373\u505c | \u529b\u91cf\u7ef4\u63013\u00d73@80%","sport":"\u7f51\u7403\u589e\u52a0\u6bd4\u8d5b\uff0c\u6e38\u6cf3\u77ed\u51b2\uff0c\u8dd1\u6b65strides\u00d76\u3002","prog":"\u52a0\u91cd\u524d\u63d0\u662f\u4e3b\u89c2\u901f\u5ea6\u22654\u5206\u4e14RPE\u2264\u76ee\u6807\u3002\u6bcf\u5468\u7206\u53d1\u7c7b+2.5%\u4ec5\u5f53\u901f\u5ea6\u8fbe\u6807\u3002\u5f3a\u5236\u8bb0\u5f55\u6bcf\u7ec4\u901f\u5ea6\u548cRPE\u3002","sessions":{"A1":{"nm":"\u80f8\u00b7\u80cc\uff08\u5468\u4e00\uff09\u00b7\u7206\u53d1\u7248\u00b7\u590d\u5408\u7206\u53d1\u65e5","sn":"\u4e0a\u80a2\u7206\u53d1","wt":"upper","role":"compound","cs":[{"n":"\u80f8\u90e8\u7206\u53d1","css":"chest","mc":"\u80f8","ex":[["\u7206\u53d1\u5f0f\u5367\u63a8\uff08Speed Bench\uff09","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",1,"\u5367\u63a8",null,{"W10":"6\u00d73@50%","W11":"6\u00d73@55%","W12":"6\u00d73@55%"},"2min","\u5411\u5fc3\u5168\u529b\u7206\u53d1 | \u76ee\u6807RPE 7\uff0c\u5f3a\u5236\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u836f\u7403\u80f8\u524d\u63a8\u63b7","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c"]]],["\u836f\u7403\u80f8\u524d\u63a8\u63b7","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c\u3001\u6838\u5fc3",0,null,"\u7f51\u7403",{"W10":"4\u00d75","W11":"4\u00d75","W12":"4\u00d75"},"90s","6~10kg\u7403\u5168\u529b\u63a8\u8fdc | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u51fb\u638c\u4fef\u5367\u6491","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c"]]]]},{"n":"\u80cc\u90e8\u7206\u53d1","css":"back","mc":"\u80cc","ex":[["\u7206\u53d1\u5f0f\u6760\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c\u3001\u83f1\u5f62\u808c",0,null,null,{"W10":"5\u00d73@55%","W11":"5\u00d73@60%","W12":"5\u00d73@60%"},"2min","\u4ece\u5730\u9762\u7206\u53d1\u62c9 | \u76ee\u6807RPE 7\uff0c\u5f3a\u5236\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u5f39\u529b\u5e26\u52a9\u529b\u5f15\u4f53(\u7206\u53d1)","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u5f39\u529b\u5e26\u52a9\u529b\u5f15\u4f53\u5411\u4e0a\uff08\u7206\u53d1\uff09","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"W10":"4\u00d75","W11":"4\u00d75","W12":"4\u00d75"},"90s","\u5411\u5fc3\u66b4\u529b\u62c9 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u8d1f\u91cd\u5f15\u4f53\u5411\u4e0a","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]]]},{"n":"\u624b\u81c2\uff08\u7ef4\u6301\uff09","css":"arms","mc":"\u81c2","ex":[["\u6760\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c",0,null,null,{"W10":"3\u00d78","W11":"3\u00d76","W12":"3\u00d76"},"60s","\u7ef4\u6301\u6027 | \u76ee\u6807RPE 8",0,0,null,[["\u54d1\u94c3\u5f2f\u4e3e","\u80b1\u4e8c\u5934\u808c","\u80b1\u808c"]]],["\u53cc\u6760\u81c2\u5c48\u4f38","\u80b1\u4e09\u5934\u808c","\u80f8\u5927\u808c(\u4e0b\u90e8)",0,null,null,{"W10":"3\u00d78","W11":"3\u00d76","W12":"3\u00d76"},"75s","\u7ef4\u6301\u6027 | \u76ee\u6807RPE 8",0,0,null,[["\u7ef3\u7d22\u4e09\u5934\u4e0b\u538b","\u80b1\u4e09\u5934\u808c","\u8098\u808c"]]]]}]},"B1":{"nm":"\u80a9\u00b7\u817f\uff08\u5468\u4e8c\uff09\u00b7\u7206\u53d1\u7248\u00b7\u590d\u5408\u7206\u53d1\u65e5","sn":"\u4e0b\u80a2\u7206\u53d1","wt":"lower","role":"compound","cs":[{"n":"\u5168\u8eab\u7206\u53d1","css":"shoulder","mc":"\u80a9","ex":[["\u501f\u529b\u63a8\u4e3e\uff08Push Press\uff09","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c\u3001\u6838\u5fc3",1,"\u63a8\u4e3e","\u6e38\u6cf3",{"W10":"5\u00d73@75%","W11":"5\u00d73@80%","W12":"5\u00d73@80%"},"2min","\u5c48\u819d\u9a71\u52a8\u2192\u9501\u5b9a | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u7ad9\u59ff\u6760\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c"]]],["\u58f6\u94c3\u6446\u8361\uff08\u7206\u53d1\u5f0f\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u6838\u5fc3",0,null,null,{"W10":"4\u00d710(\u7206\u53d1)","W11":"4\u00d710(\u7206\u53d1)","W12":"4\u00d710(\u7206\u53d1)"},"90s","\u9acb\u90e8\u7206\u53d1\u94f0\u94fe\uff0c\u66ff\u4ee3\u9ad8\u7ffb | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u58f6\u94c3\u9ad8\u7ffb","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u659c\u65b9\u808c"]]]]},{"n":"\u817f\u524d\u94fe\u7206\u53d1","css":"ant","mc":"\u817f","ex":[["\u8df3\u8e72\uff08Jump Squat\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",1,"\u6df1\u8e72","\u7f51\u7403\u00b7\u767b\u5c71",{"W10":"5\u00d73@30%","W11":"5\u00d73@35%","W12":"5\u00d73@35%"},"2min","\u843d\u5730\u7f13\u51b2 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u8df3\u7bb1","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]],["\u529b\u91cf\u7ef4\u6301\uff1a\u6df1\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u6838\u5fc3",0,null,null,{"W10":"3\u00d73@80%","W11":"3\u00d73@80%","W12":"3\u00d73@80%"},"2min","\u4e0d\u51b2\u6781\u9650\uff0c\u7ef4\u6301\u529b\u91cf | \u76ee\u6807RPE 8",0,0,null,[["\u524d\u8e72","\u80a1\u56db\u5934\u808c","\u6838\u5fc3"]]]]},{"n":"\u81c0\u7206\u53d1","css":"glutes","mc":"\u81c0","ex":[["\u58f6\u94c3\u6446\u8361\uff08\u5927\u91cd\u91cf\u7206\u53d1\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,null,{"W10":"3\u00d710(\u91cd)","W11":"3\u00d710(\u91cd)","W12":"3\u00d710(\u91cd)"},"90s","\u5411\u5fc3\u66b4\u529b\u63a8 | \u76ee\u6807RPE 8.5\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u6760\u94c3\u81c0\u63a8\uff08\u7206\u53d1\u5411\u5fc3\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]]]}]},"A2":{"nm":"\u8fd0\u52a8\u4e13\u9879\u8bad\u7ec3\uff08\u5468\u56db\uff09\u00b7\u4e13\u9879\u7206\u53d1\u65e5","sn":"\u4e13\u9879\u8bad\u7ec3","wt":"upper","role":"specialty","multiTrack":true,"tracks":{"tennis":{"name":"\u7f51\u7403\u4e13\u9879","css":"chest","mc":"\u4e13\u9879","ex":[["\u7ef3\u7d22\u4f10\u6728\u5f0f\uff08\u9ad8\u2192\u4f4e\uff09","\u8179\u659c\u808c","\u81c0\u5927\u808c\u3001\u80cc\u9614\u808c",0,null,"\u7f51\u7403",{"W10":"4\u00d78","W11":"4\u00d78","W12":"4\u00d78"},"90s","\u6a21\u62df\u6b63\u624b/\u53cd\u624b | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u836f\u7403\u65cb\u8f6c\u4fa7\u629b","\u8179\u659c\u808c","\u81c0\u5927\u808c"]]],["\u836f\u7403\u65cb\u8f6c\u4fa7\u629b\uff08\u5bf9\u5899\uff09","\u8179\u659c\u808c","\u81c0\u5927\u808c\u3001\u80cc\u9614\u808c",0,null,"\u7f51\u7403",{"W10":"4\u00d76","W11":"4\u00d76","W12":"4\u00d76"},"90s","\u540e\u811a\u8e6c\u5730\u2192\u9acb\u8f6c\u2192\u629b\u7403 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u65cb\u8f6c\u836f\u7403\u4e0b\u7838","\u8179\u659c\u808c","\u80cc\u9614\u808c"]]],["\u4fa7\u5411\u7bad\u6b65\u8e72","\u5185\u6536\u808c","\u81c0\u4e2d\u808c\u3001\u80a1\u56db\u5934\u808c",0,null,"\u7f51\u7403",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"75s","\u989d\u72b6\u9762\u79fb\u52a8 | \u76ee\u6807RPE 8",0,0,null,[["\u54e5\u672c\u54c8\u6839\u4fa7\u6865","\u5185\u6536\u808c","\u8179\u659c\u808c"]]],["\u5355\u81c2\u7ef3\u7d22\u5212\u8239\uff08\u65cb\u8f6c\u5f0f\uff09","\u80cc\u9614\u808c","\u8179\u659c\u808c",0,null,"\u7f51\u7403",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"75s","\u8eaf\u5e72\u5fae\u65cb | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u7ef3\u7d22\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]]]},"swimming":{"name":"\u6e38\u6cf3\u4e13\u9879","css":"back","mc":"\u4e13\u9879","ex":[["\u5f39\u529b\u5e26\u6269\u80f8+\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c",0,null,"\u6e38\u6cf3",{"W10":"3\u00d715","W11":"3\u00d715","W12":"3\u00d715"},"60s","\u9884\u9632\u6e38\u6cf3\u80a9 | \u76ee\u6807RPE 7",0,0,null,[["\u9762\u62c9","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c\u3001\u80a9\u8896"]]],["\u5355\u81c2\u7ef3\u7d22\u5212\u8239\uff08\u65cb\u8f6c\u5f0f\uff09","\u80cc\u9614\u808c","\u8179\u659c\u808c",0,null,"\u6e38\u6cf3",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"75s","\u8eaf\u5e72\u5fae\u65cb | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u7ef3\u7d22\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u60ac\u5782\u63d0\u819d\uff08\u7206\u53d1\uff09","\u8179\u76f4\u808c(\u4e0b\u90e8)","\u9acb\u5c48\u808c",0,null,"\u6e38\u6cf3",{"W10":"3\u00d710","W11":"3\u00d710","W12":"3\u00d78"},"60s","\u8eaf\u5e72\u7a33\u5b9a+\u9acb\u9a71\u52a8 | \u76ee\u6807RPE 8",0,0,null,[["V\u5b57\u4e3e\u817f","\u8179\u76f4\u808c","\u9acb\u5c48\u808c"]]],["\u836f\u7403\u4e0b\u7838\uff08\u6c34\u4e2d\u6a21\u62df\uff09","\u8179\u76f4\u808c","\u80cc\u9614\u808c",0,null,"\u6e38\u6cf3",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d76"},"90s","\u5165\u6c34\u7206\u53d1\u529b | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u836f\u7403\u80f8\u524d\u63a8\u63b7","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c"]]]]},"running":{"name":"\u8dd1\u6b65\u4e13\u9879","css":"ant","mc":"\u4e13\u9879","ex":[["\u4fdd\u52a0\u5229\u4e9a\u5206\u817f\u8e72\uff08\u7206\u53d1\u5411\u5fc3\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,"\u8dd1\u6b65",{"W10":"3\u00d75","W11":"3\u00d75","W12":"3\u00d75"},"90s","\u5355\u817f\u8e6c\u5730\u7206\u53d1\u529b | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u5355\u817f\u8df3\u7bb1","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]],["\u5355\u817f\u8df3\u7bb1","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,"\u8dd1\u6b65",{"W10":"3\u00d73","W11":"3\u00d73","W12":"3\u00d73"},"90s","\u4f4e\u7bb130~45cm | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u8df3\u6df1","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u5c0f\u817f"]]],["\u7206\u53d1\u5f0f\u63d0\u8e35","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c",0,null,"\u8dd1\u6b65",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"45s","\u5411\u5fc3\u7206\u53d1 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u8df3\u7ef3\u53cc\u6447","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c"]]],["\u4fa7\u5411\u7bad\u6b65\u8e72","\u5185\u6536\u808c","\u81c0\u4e2d\u808c\u3001\u80a1\u56db\u5934\u808c",0,null,"\u8dd1\u6b65",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"75s","\u989d\u72b6\u9762\u7a33\u5b9a | \u76ee\u6807RPE 8",0,0,null,[["\u54e5\u672c\u54c8\u6839\u4fa7\u6865","\u5185\u6536\u808c","\u8179\u659c\u808c"]]]]},"mountain":{"name":"\u767b\u5c71\u4e13\u9879","css":"post","mc":"\u4e13\u9879","ex":[["\u516d\u89d2\u6760\u786c\u62c9\uff08\u7206\u53d1\u5f0f\uff09","\u8158\u7ef3\u808c","\u81c0\u5927\u808c\u3001\u80a1\u56db\u5934\u808c",0,null,"\u767b\u5c71",{"W10":"4\u00d75@65%","W11":"4\u00d75@70%","W12":"4\u00d75@70%"},"2min","\u6a21\u62df\u4e0a\u5761\u8e6c\u5730 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u4f20\u7edf\u786c\u62c9(\u7206\u53d1)","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"]]],["\u96ea\u6a47\u63a8\uff08Sled Push\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u6838\u5fc3",0,null,"\u767b\u5c71",{"W10":"5\u00d720m","W11":"5\u00d720m","W12":"5\u00d720m"},"2min","\u4f4e\u8eab\u4f4d\u5168\u529b\u63a8 | \u76ee\u6807RPE 9",0,0,null,[["\u963b\u529b\u8dd1","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]],["\u767b\u9636\uff08\u7206\u53d1\u5411\u5fc3\uff09","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,"\u767b\u5c71",{"W10":"3\u00d76","W11":"3\u00d76","W12":"3\u00d76"},"90s","\u7bb1\u9ad8=\u819d\u9ad8\uff0c\u5411\u5fc3\u66b4\u529b\u8d77 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u4fdd\u52a0\u5229\u4e9a\u5206\u817f\u8e72(\u7206\u53d1)","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]],["\u519c\u592b\u884c\u8d70\uff08\u4e0a\u5761\u6a21\u62df\uff09","\u8179\u659c\u808c","\u524d\u81c2\u3001\u659c\u65b9\u808c",0,null,"\u767b\u5c71",{"W10":"3\u00d740m(\u91cd)","W11":"3\u00d740m(\u91cd)","W12":"3\u00d740m(\u91cd)"},"75s","\u6a21\u62df\u8d1f\u91cd\u6500\u767b | \u76ee\u6807RPE 8",0,0,null,[["\u5355\u4fa7\u519c\u592b\u884c\u8d70","\u8179\u659c\u808c","\u524d\u81c2"]]]]}},"baseline":[{"n":"\u529b\u91cf\u7ef4\u6301\uff08\u5e95\u7ebf\uff09","css":"chest","mc":"\u7ef4\u6301","ex":[["\u529b\u91cf\u7ef4\u6301\uff1a\u6760\u94c3\u5367\u63a8","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c",0,null,null,{"W10":"3\u00d73@80%","W11":"3\u00d73@80%","W12":"3\u00d73@80%"},"2min","\u4fdd\u6301\u80f8\u808c\u529b\u91cf | \u76ee\u6807RPE 8",0,0,null,[["\u54d1\u94c3\u5367\u63a8(80%)","\u80f8\u5927\u808c","\u80b1\u4e09\u5934\u808c"]]],["\u529b\u91cf\u7ef4\u6301\uff1a\u6760\u94c3\u5212\u8239","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"W10":"3\u00d73@80%","W11":"3\u00d73@80%","W12":"3\u00d73@80%"},"2min","\u4fdd\u6301\u62c9\u7684\u529b\u91cf | \u76ee\u6807RPE 8",0,0,null,[["\u54d1\u94c3\u5212\u8239(80%)","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]]]}]},"B2":{"nm":"\u80a9\u00b7\u817f \u8fd0\u52a8\u4e13\u9879\uff08\u5468\u4e94\uff09\u00b7\u4e13\u9879\u7206\u53d1\u65e5","sn":"\u4e0b\u80a2\u4e13\u9879","wt":"lower","role":"specialty","cs":[{"n":"\u5168\u8eab\u7206\u53d1","css":"shoulder","mc":"\u80a9","ex":[["\u58f6\u94c3\u9ad8\u7ffb","\u81c0\u5927\u808c","\u8158\u7ef3\u808c\u3001\u659c\u65b9\u808c",0,null,null,{"W10":"4\u00d73@65%","W11":"4\u00d73@70%","W12":"4\u00d72@75%"},"2min","\u58f6\u94c3\u7248\u672c\uff0c\u6280\u672f\u95e8\u69db\u4f4e | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u58f6\u94c3\u6446\u8361(\u91cd)","\u81c0\u5927\u808c","\u8158\u7ef3\u808c"]]],["\u529b\u91cf\u7ef4\u6301\uff1a\u6760\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c",0,null,null,{"W10":"3\u00d73@80%","W11":"3\u00d73@80%","W12":"3\u00d73@80%"},"2min","\u7ef4\u6301\u8fc7\u9876\u529b\u91cf | \u76ee\u6807RPE 8",0,0,null,[["\u5750\u59ff\u54d1\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c"]]]]},{"n":"\u817f\u540e\u94fe\u7206\u53d1","css":"post","mc":"\u817f","ex":[["\u58f6\u94c3\u6446\u8361\uff08\u6700\u5927\u7206\u53d1\uff09","\u81c0\u5927\u808c","\u8158\u7ef3\u808c",0,null,null,{"W10":"5\u00d75(\u6700\u5927)","W11":"5\u00d75(\u6700\u5927)","W12":"5\u00d75(\u6700\u5927)"},"2min","\u9acb\u94f0\u94fe\u6781\u9650\u7206\u53d1\u529b | \u76ee\u6807RPE 9\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u7f57\u9a6c\u5c3c\u4e9a\u786c\u62c9(\u7206\u53d1)","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"]]],["\u8df3\u7bb1","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c",0,null,null,{"W10":"4\u00d73","W11":"4\u00d73","W12":"4\u00d73"},"90s","\u843d\u5730\u7f13\u51b2\u7ec3\u4e60 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u8df3\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u5c0f\u817f\u7206\u53d1","css":"calves","mc":"\u5c0f\u817f","ex":[["\u7206\u53d1\u5f0f\u63d0\u8e35","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c",0,null,"\u8dd1\u6b65",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"45s","\u5411\u5fc3\u7206\u53d1 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u8df3\u7ef3\u53cc\u6447","\u8153\u80a0\u808c","\u6bd4\u76ee\u9c7c\u808c"]]]]}]},"CORE":{"nm":"\u6838\u5fc3\u65e5\uff08\u5468\u516d\uff09\u2014 \u65cb\u8f6c\u7206\u53d1\u578b","sn":"\u6838\u5fc3","wt":"general","role":"core","cs":[{"n":"\u6297\u4f38\u5c55","css":"core","mc":"\u6838\u5fc3","ex":[["\u836f\u7403\u4e0b\u7838","\u8179\u76f4\u808c","\u80cc\u9614\u808c\u3001\u9acb\u90e8",0,null,"\u7f51\u7403",{"W10":"4\u00d76","W11":"4\u00d76","W12":"4\u00d76"},"90s","\u9ad8\u4e3e\u2192\u5168\u529b\u7838\u5730 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u5065\u8179\u8f6e","\u8179\u76f4\u808c","\u8179\u6a2a\u808c"]]]]},{"n":"\u6297\u4fa7\u5c48","css":"core","mc":"\u6838\u5fc3","ex":[["\u54e5\u672c\u54c8\u6839\u4fa7\u6865","\u8179\u659c\u808c","\u5185\u6536\u808c",0,null,null,{"W10":"3\u00d720s","W11":"3\u00d725s","W12":"3\u00d725s"},"45s","\u5927\u817f\u5185\u4fa7+\u4fa7\u8179 | \u76ee\u6807RPE 8",0,0,null,[["\u4fa7\u5e73\u677f(\u62ac\u817f)","\u8179\u659c\u808c","\u81c0\u4e2d\u808c"]]]]},{"n":"\u6297\u65cb\u8f6c","css":"core","mc":"\u6838\u5fc3","ex":[["\u836f\u7403\u65cb\u8f6c\u4fa7\u629b(\u5bf9\u5899)","\u8179\u659c\u808c","\u81c0\u5927\u808c\u3001\u80cc\u9614\u808c",0,null,"\u7f51\u7403",{"W10":"4\u00d76","W11":"4\u00d76","W12":"4\u00d76"},"90s","\u540e\u817f\u8e6c\u8f6c\u2192\u9acb\u2192\u80f8\u2192\u81c2\u2192\u7403 | \u76ee\u6807RPE 8\uff0c\u8bb0\u5f55\u901f\u5ea6\u8bc4\u5206",0,0,null,[["\u7ef3\u7d22\u4f10\u6728\u5f0f(\u53cc\u5411)","\u8179\u659c\u808c","\u81c0\u5927\u808c"]]]]},{"n":"\u7a33\u5b9a\u6027","css":"core","mc":"\u6838\u5fc3","ex":[["\u60ac\u5782\u98ce\u6321\u96e8\u5237","\u8179\u659c\u808c","\u8179\u76f4\u808c\u3001\u9acb\u5c48\u808c",0,null,"\u7f51\u7403",{"W10":"3\u00d76","W11":"3\u00d76","W12":"3\u00d75"},"90s","\u65cb\u8f6c\u6838\u5fc3\u529b\u91cf | \u76ee\u6807RPE 8.5",0,0,null,[["\u4fc4\u7f57\u65af\u8f6c\u4f53(\u8d1f\u91cd)","\u8179\u659c\u808c","\u8179\u76f4\u808c"]]]]},{"n":"\u989d\u5916","css":"core","mc":"\u6838\u5fc3","ex":[["\u5f39\u529b\u5e26\u6297\u65cb\u8f6c\u63a8\u538b","\u8179\u659c\u808c","\u8179\u6a2a\u808c",0,null,"\u6e38\u6cf3\u00b7\u767b\u5c71",{"W10":"3\u00d78","W11":"3\u00d78","W12":"3\u00d78"},"60s","\u6838\u5fc3\u7a33\u5b9a | \u76ee\u6807RPE 7.5",0,0,null,[["Pallof\u65cb\u8f6c\u6297\u63a8","\u8179\u659c\u808c","\u8179\u6a2a\u808c"]]]]}]}}},{"id":"block4","title":"\u7b2c13\u5468\uff1a\u5378\u8f7d\u5468+\u6d4b\u8bd5","badge":"badge-deload","label":"Week 13","isDeload":true,"target":"\u6d88\u9664\u7d2f\u79ef\u75b2\u52b3\uff0c\u6d4b\u8bd512\u5468\u8fdb\u6b65\u6210\u679c\u3002\u91cd\u91cf50~60%\uff0c\u7ec4\u6570\u51cf\u534a\u3002","vars":"50~60%\u5f3a\u5ea6 | \u7ec4\u6570\u51cf\u534a | \u76ee\u6807RPE 5~6","sport":"\u4ec5\u505a\u8f7b\u677e\u6280\u672f\u8bad\u7ec3\u3002","prog":"\u5468\u4e00\u5367\u63a81RM\u2192\u5468\u4e8c\u6062\u590d\u2192\u5468\u4e09\u786c\u62c93RM\u2192\u5468\u56db\u4f11\u606f\u2192\u5468\u4e94\u6df1\u8e721RM+\u63a8\u4e3e3RM\u2192\u5468\u516d\u6838\u5fc3\u8f7b\u677e\u3002\u9010\u7ec4\u52a0\u91cd\u9700\u5145\u5206\u70ed\u8eab\u3002","sessions":{"A1":{"nm":"\u5468\u4e00 \u2014 \u6d4b\u8bd5\u00b7\u80f8\u80cc\u63a8","sn":"\u6d4b\u8bd5\u63a8","wt":"upper","role":"test","cs":[{"n":"\u6d4b\u8bd5\u63a8","css":"chest","mc":"\u80f8","ex":[["\u6760\u94c3\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c\u3001\u4e09\u89d2\u808c\u524d\u675f",1,"\u5367\u63a8",null,{"W13":"\u9010\u7ec4\u52a0\u91cd\u2192\u6d4b1RM"},"-","\u5145\u5206\u70ed\u8eab\uff0c\u6bcf\u7ec41rep\uff0c\u6709\u4fdd\u62a4\u8005",0,0,null,[["\u54d1\u94c3\u5367\u63a8","\u80f8\u5927\u808c(\u6574\u4f53)","\u80b1\u4e09\u5934\u808c"]]],["\u6760\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c",0,null,null,{"W13":"\u6d4b3RM"},"-","\u4e0d\u6d4b1RM\uff0c\u6280\u672f\u4f18\u5148",0,0,null,[["\u5750\u59ff\u54d1\u94c3\u63a8\u4e3e","\u4e09\u89d2\u808c","\u80b1\u4e09\u5934\u808c"]]],["\u5f15\u4f53\u5411\u4e0a","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"W13":"1\u00d7AMRAP"},"-","\u81ea\u91cd\uff0c\u8bb0\u5f55\u603b\u6b21\u6570",0,0,null,[["\u9ad8\u4f4d\u4e0b\u62c9","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u9762\u62c9","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c",0,null,null,{"W13":"2\u00d715"},"60s","\u8f7b\u91cd\u91cf\uff0c\u80a9\u8896\u6062\u590d",0,0,null,[["\u8774\u8776\u673a\u53cd\u5411\u98de\u9e1f","\u4e09\u89d2\u808c\u540e\u675f","\u83f1\u5f62\u808c"]]]]}]},"B1":{"nm":"\u5468\u4e8c \u2014 \u79ef\u6781\u6062\u590d","sn":"\u6062\u590d","wt":"general","role":"recovery","cs":[{"n":"\u6062\u590d","css":"core","mc":"\u6062\u590d","ex":[["\u6ce1\u6cab\u8f74\u5168\u8eab\u6eda\u52a8","\u5168\u8eab","",0,null,null,{"W13":"15min"},"-","\u80f8\u2192\u80cc\u2192\u817f\u2192\u81c0\uff0c\u6bcf\u90e8\u4f4d2min",0,0,null,[["\u7b4b\u819c\u7403\u8db3\u5e95","\u8db3\u5e95",""]]],["\u52a8\u6001\u62c9\u4f38\u6d41\u52a8","\u5168\u8eab","",0,null,null,{"W13":"10min"},"-","\u6700\u4f1f\u5927\u4f38\u5c55\u2192\u732b\u725b\u5f0f\u2192\u4e0b\u72ac\u5f0f",0,0,null,[["\u8f7b\u91cf\u745c\u4f3d","\u5168\u8eab",""]]],["Zone 2 \u8f7b\u677e\u6709\u6c27","\u5fc3\u80ba","",0,null,null,{"W13":"20min"},"-","\u5fc3\u7387120-130bpm\uff0c\u6b65\u884c/\u692d\u5706\u673a",0,0,null,[["\u8f7b\u677e\u6e38\u6cf3","\u5168\u8eab",""]]]]}]},"A2":{"nm":"\u5468\u4e09 \u2014 \u6d4b\u8bd5\u00b7\u786c\u62c9","sn":"\u6d4b\u8bd5\u62c9","wt":"lower","role":"test","cs":[{"n":"\u6d4b\u8bd5\u62c9","css":"post","mc":"\u817f","ex":[["\u4f20\u7edf\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c\u3001\u7ad6\u810a\u808c",1,"\u786c\u62c9",null,{"W13":"\u9010\u7ec4\u52a0\u91cd\u2192\u6d4b3RM"},"-","\u6280\u672f\u4f18\u5148\uff0c\u4e0d\u5c48\u80cc\uff0c\u63e1\u529b\u4e0d\u8db3\u53ef\u7528\u52a9\u529b\u5e26",0,0,null,[["\u7f57\u9a6c\u5c3c\u4e9a\u786c\u62c9","\u8158\u7ef3\u808c","\u81c0\u5927\u808c"]]],["\u6760\u94c3\u5212\u8239\uff08\u8f7b\u91cf\uff09","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c",0,null,null,{"W13":"2\u00d78@50%"},"-","\u8f7b\u91cf\u6062\u590d\uff0c\u4e0d\u8ffd\u6c42\u529b\u7aed",0,0,null,[["\u5750\u59ff\u5212\u8239(\u8f7b)","\u80cc\u9614\u808c","\u80b1\u4e8c\u5934\u808c"]]],["\u5c71\u7f8a\u633a\u8eab","\u7ad6\u810a\u808c","\u81c0\u5927\u808c",0,null,null,{"W13":"2\u00d712"},"30s","\u81ea\u91cd\uff0c\u4e0b\u80cc\u6062\u590d",0,0,null,[["\u9e1f\u72d7\u5f0f","\u7ad6\u810a\u808c","\u8179\u6a2a\u808c"]]]]}]},"B2":{"nm":"\u5468\u4e94 \u2014 \u6d4b\u8bd5\u00b7\u6df1\u8e72+\u8f85\u52a9","sn":"\u6d4b\u8bd5\u8e72","wt":"lower","role":"test","cs":[{"n":"\u6d4b\u8bd5\u8e72","css":"ant","mc":"\u817f","ex":[["\u6760\u94c3\u6df1\u8e72","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c\u3001\u6838\u5fc3",1,"\u6df1\u8e72",null,{"W13":"\u9010\u7ec4\u52a0\u91cd\u2192\u6d4b1RM"},"-","\u5145\u5206\u70ed\u8eab\uff0c\u6709\u4fdd\u62a4\u8005\uff0c\u6df1\u5ea6\u8fbe\u6807",0,0,null,[["\u524d\u8e72","\u80a1\u56db\u5934\u808c","\u6838\u5fc3"]]],["\u9ad8\u811a\u676f\u6df1\u8e72\uff08\u8f7b\u91cf\uff09","\u80a1\u56db\u5934\u808c","\u6838\u5fc3",0,null,null,{"W13":"2\u00d710@50%"},"-","\u52a8\u4f5c\u8d28\u91cf\u6062\u590d",0,0,null,[["\u54d1\u94c3\u7bad\u6b65\u8e72(\u8f7b)","\u80a1\u56db\u5934\u808c","\u81c0\u5927\u808c"]]],["\u54d1\u94c3\u63a8\u4e3e\uff08\u8f7b\u91cf\uff09","\u4e09\u89d2\u808c\u524d\u4e2d\u675f","\u80b1\u4e09\u5934\u808c",0,null,null,{"W13":"2\u00d710@50%"},"-","\u80a9\u90e8\u6062\u590d",0,0,null,[["\u4fa7\u5e73\u4e3e(\u8f7b)","\u4e09\u89d2\u808c\u4e2d\u675f",""]]]]}]},"CORE":{"nm":"\u5468\u516d \u2014 \u6838\u5fc3\u8f7b\u677e","sn":"\u8f7b\u677e\u6838\u5fc3","wt":"general","role":"recovery","cs":[{"n":"\u8f7b\u677e","css":"core","mc":"\u6838\u5fc3","ex":[["\u6b7b\u866b\u5f0f","\u8179\u6a2a\u808c","\u8179\u76f4\u808c",0,null,null,{"W13":"2\u00d710"},"30s","\u81ea\u91cd",0,0,null,[["\u5e73\u677f\u652f\u6491","\u8179\u6a2a\u808c","\u8179\u76f4\u808c"]]],["\u5e73\u677f\u652f\u6491","\u8179\u6a2a\u808c","\u8179\u76f4\u808c",0,null,null,{"W13":"2\u00d760s"},"30s","\u8bb0\u5f55\u5bf9\u6bd4W1",0,0,null,[["\u4fa7\u5e73\u677f","\u8179\u659c\u808c","\u81c0\u4e2d\u808c"]]],["\u5c71\u7f8a\u633a\u8eab","\u7ad6\u810a\u808c","\u81c0\u5927\u808c",0,null,null,{"W13":"2\u00d712"},"30s","\u81ea\u91cd",0,0,null,[["\u9e1f\u72d7\u5f0f","\u7ad6\u810a\u808c","\u8179\u6a2a\u808c"]]],["\u745c\u4f3d\u6d41\u52a8","\u5168\u8eab","",0,null,null,{"W13":"10min"},"-","\u732b\u725b\u5f0f\u2192\u4e0b\u72ac\u5f0f\u2192\u9e3d\u5b50\u5f0f",0,0,null,[["\u5a74\u513f\u5f0f\u653e\u677e","\u5168\u8eab",""]]]]}]}}}];
+
+// ==================== PARSE FUNCTIONS ====================
+function parseEx(a){
+  var ex = {
+    name:a[0],primary:a[1],secondary:a[2]||'',isMain:!!a[3],mainCat:a[4]||null,sport:a[5]||null,
+    data:a[6]||{},rest:a[7]||'-',notes:a[8]||'',superA:!!a[9],superB:!!a[10],num:a[11]||null,
+    alternatives:(a[12]||[]).map(function(b){return{name:b[0],primary:b[1]||'',secondary:b[2]||''}})
+  };
+  // Extract targetRPE from notes
+  var rpeMatch = ex.notes.match(/目标RPE\s*([\d.]+(?:\s*[-~]\s*[\d.]+)?)/);
+  ex.targetRPE = rpeMatch ? rpeMatch[1] : null;
+  // Extract speed rating requirement
+  ex.hasSpeed = ex.notes.indexOf('速度评分') >= 0;
+  return ex;
+}
+function parseCl(c){return{name:c.n,css:c.css,mc:c.mc,ex:c.ex.map(parseEx)};}
+function parseSess(s){
+  var sess = {name:s.nm,shortName:s.sn,warmupType:s.wt,clusters:(s.cs||[]).map(parseCl),role:s.role||''};
+  if(s.multiTrack){
+    sess.multiTrack = true;
+    sess.tracks = {};
+    for(var tk in s.tracks){
+      var t=s.tracks[tk];
+      sess.tracks[tk]={name:t.name,n:t.name,css:t.css,mc:t.mc,ex:t.ex.map(parseEx)};
+    }
+    sess.baseline = s.baseline ? s.baseline.map(parseCl) : [];
+  }
+  return sess;
+}
+
+// Parse all blocks
+for(var bi=0;bi<BLOCKS.length;bi++){
+  var b=BLOCKS[bi];
+  for(var sk in b.sessions){
+    b.sessions[sk]=parseSess(b.sessions[sk]);
+  }
+}
+
+// ==================== STORAGE ====================
+var SK='tp_v13';
+function loadLogs(){try{return JSON.parse(localStorage.getItem(SK))||[]}catch(e){return[]}}
+function saveLogs(L){localStorage.setItem(SK,JSON.stringify(L))}
+function addLog(w,s,e,wt,rp,st,rpe,speed,note,ds){
+  var L=loadLogs();
+  L.push({date:ds||new Date().toISOString().slice(0,10),ts:Date.now(),week:w,session:s,exercise:e,weight:wt,reps:rp,sets:st,rpe:rpe,speed:speed,notes:note||''});
+  saveLogs(L);
+  toast('已保存');
+}
+function lastRecord(en){var h=loadLogs().filter(function(l){return l.exercise===en}).sort(function(a,b){return b.ts-a.ts});return h.length?h[0]:null}
+function toast(m,t){
+  var c=document.getElementById('toasts'),d=document.createElement('div');
+  d.className='toast '+(t==='err'?'toast-err':t==='info'?'toast-info':'toast-ok');
+  d.textContent=m;
+  c.appendChild(d);
+  setTimeout(function(){d.remove()},2500);
+}
+function exportData(){
+  var L=loadLogs(),b=new Blob([JSON.stringify(L)],{type:'application/json'}),
+  a=document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='训练记录_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+}
+function importData(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    try{
+      var d=JSON.parse(ev.target.result);
+      if(!Array.isArray(d))throw Error();
+      saveLogs(loadLogs().concat(d));
+      toast('导入'+d.length+'条记录');
+      renderTrain();
+    }catch(x){toast('格式错误','err');}
+  };
+  r.readAsText(f);
+  e.target.value='';
+}
+
+// 1RM Storage
+function saveORM(){
+  var orm={
+    bench:parseFloat(document.getElementById('ormBench').value)||0,
+    squat:parseFloat(document.getElementById('ormSquat').value)||0,
+    deadlift:parseFloat(document.getElementById('ormDeadlift').value)||0,
+    press:parseFloat(document.getElementById('ormPress').value)||0,
+    row:parseFloat(document.getElementById('ormRow').value)||0
+  };
+  localStorage.setItem('tp_orm_v13',JSON.stringify(orm));
+  toast('1RM已保存');
+}
+function loadORM(){
+  try{return JSON.parse(localStorage.getItem('tp_orm_v13'))||{}}catch(e){return{}}
+}
+
+// Track selector storage
+function setTrack(t){
+  curTrack=t;
+  localStorage.setItem('tp_track_v13',t);
+  document.querySelectorAll('#trackPicker button').forEach(function(b){
+    b.classList.toggle('active',b.dataset.track===t);
+  });
+  renderTrain();
+}
+function loadTrack(){return localStorage.getItem('tp_track_v13')||'tennis'}
+
+// ==================== STATE ====================
+var curRound=1,curWeek=1,curSess='A1',curTrack='tennis';
+var tracked=[];  // Will be auto-populated from isMain exercises
+var mfilt='all';
+function saveTr(){localStorage.setItem('tp_tracked_v13',JSON.stringify(tracked))}
+function loadTr(){try{var t=JSON.parse(localStorage.getItem('tp_tracked_v13'));if(t&&t.length)return t}catch(e){}return[]}
+
+// ==================== WEEK HELPERS (13-week) ====================
+function getWK(w){
+  if(w<=4)return'W'+w;
+  if(w<=8)return'W'+w;
+  if(w===9)return'T9';
+  if(w<=12)return'W'+w;
+  return'W13';
+}
+function getBlk(w){
+  if(w<=4)return BLOCKS[0];    // Block 1: Hypertrophy W1-4
+  if(w<=8)return BLOCKS[1];    // Block 2: Strength W5-8
+  if(w===9)return BLOCKS[2];   // Transition T9
+  if(w<=12)return BLOCKS[3];   // Block 3: Power W10-12
+  return BLOCKS[4];            // Block 4: Deload W13
+}
+function getWeekLabel(w){
+  if(w<=4)return {ph:'肌肥大积累期',em:'🏗️',bn:'badge-hyper',tip:'专注控制离心，感受肌肉发力。Zone 2慢跑为主。'};
+  if(w<=8)return {ph:'最大力量强化期',em:'💪',bn:'badge-strength',tip:'大重量低次数，充分休息。力量日不安排高强度运动。'};
+  if(w===9)return {ph:'速度-力量过渡期',em:'🔄',bn:'badge-transition',tip:'60-65%速度训练，关注向心速度，学习爆发动作技术。'};
+  if(w<=12)return {ph:'爆发力冲刺期',em:'⚡',bn:'badge-power',tip:'追求速度！速度评分>=4分且RPE达标才允许加重。记录每组速度和RPE！'};
+  return {ph:'卸载测试周',em:'🔋',bn:'badge-deload',tip:'放松恢复。测试日之间至少48-72小时间隔。'};
+}
+function isPowerBlock(){return curWeek>=10&&curWeek<=12;}
+function isStrengthBlock(){return curWeek>=5&&curWeek<=8;}
+
+// ==================== AUTO-TRACKED (Decision 10: isMain) ====================
+function initTracked(){
+  var saved=loadTr();
+  if(saved.length>0){tracked=saved;return}
+  // Auto-populate from isMain exercises
+  var auto=new Set();
+  BLOCKS.forEach(function(b){
+    Object.values(b.sessions).forEach(function(sn){
+      sn.clusters.forEach(function(cl){
+        cl.ex.forEach(function(ex){
+          if(ex.isMain)auto.add(ex.name);
+        });
+      });
+    });
+  });
+  tracked=Array.from(auto);
+  saveTr();
+}
+
+// ==================== TABS ====================
+document.getElementById('tabNav').addEventListener('click',function(e){
+  var btn=e.target.closest('button');if(!btn||!btn.dataset.tab)return;
+  var name=btn.dataset.tab;
+  var bs=document.querySelectorAll('.tab-nav button');
+  for(var i=0;i<bs.length;i++)bs[i].classList.toggle('active',bs[i].dataset.tab===name);
+  var ps=document.querySelectorAll('.tab-panel');
+  for(var j=0;j<ps.length;j++)ps[j].classList.toggle('active',ps[j].id===name);
+  if(name==='tabHist')renderHist();
+  if(name==='tabProg'){renderCfg();setTimeout(drawChart,200)}
+  if(name==='tabPlan')renderPlan();
+  if(name==='tabR2')renderR2Placeholder();
+});
+
+// ==================== WEEK/SESS PICKERS ====================
+function renderWP(){
+  var wp=document.getElementById('weekPicker');wp.innerHTML='';
+  for(var w=1;w<=13;w++){(function(wk){
+    var b=document.createElement('button');b.textContent=wk;
+    if(wk===curWeek)b.className='active';
+    b.onclick=function(){curWeek=wk;renderWP();renderSP();renderGoal();renderTrain()};
+    wp.appendChild(b);
+  })(w)}
+}
+function renderSP(){
+  var sp=document.getElementById('sessPicker'),blk=getBlk(curWeek);sp.innerHTML='';
+  ['A1','B1','A2','B2','CORE'].forEach(function(sk){
+    var sn=blk.sessions[sk];if(!sn)return;
+    var b=document.createElement('button');b.className='btn-round';
+    if(sk===curSess)b.classList.add('active');
+    b.textContent=sk+' · '+sn.shortName;
+    b.onclick=function(){curSess=sk;renderSP();renderTrain()};
+    sp.appendChild(b);
+  });
+}
+function goRound(r){
+  curRound=r;
+  document.getElementById('btnR1').classList.toggle('active',r===1);
+  document.getElementById('btnR2').classList.toggle('active',r===2);
+  renderWP();renderSP();renderGoal();renderTrain();
+}
+
+// ==================== WEEK GOAL ====================
+function renderGoal(){
+  var el=document.getElementById('weekGoal'),blk=getBlk(curWeek);
+  if(!el||!blk)return;
+  var info=getWeekLabel(curWeek);
+  el.innerHTML='<div class="week-goal"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1.4rem;">'+info.em+'</span><strong>第 '+curWeek+' 周</strong> · <span class="badge '+info.bn+'">'+info.ph+'</span></div><div style="margin-top:6px;font-size:.8rem;color:var(--muted);">📌 '+blk.target+'</div><div style="margin-top:3px;font-size:.78rem;color:var(--muted);">💡 '+info.tip+' &nbsp;🛌 训练日>=7h睡眠</div></div>';
+}
+
+// ==================== ROLE BAR ====================
+function renderRoleBar(){
+  var bar=document.getElementById('roleBar'),blk=getBlk(curWeek),sn=blk.sessions[curSess];
+  if(!bar||!sn)return;
+  var role=sn.role||'';
+  var labels={compound:'复合主项日 — 以多关节杠铃动作为主，追求神经高强度适应',
+    variation:'变体补充日 — 以哑铃/绳索变体为主，覆盖更大ROM和代谢压力',
+    specialty:'专项爆发日 — 根据运动项目选择专项动作',
+    transition:'过渡适应日 — 速度训练，为下一阶段预适应',
+    recovery:'积极恢复 — 泡沫轴+拉伸+低强度有氧',
+    test:'测试日 — 极限/次极限强度，充分热身',
+    core:'核心专项日 — 抗伸展/抗侧屈/抗旋转训练'};
+  if(!role){bar.style.display='none';return}
+  bar.style.display='block';
+  bar.className='role-bar '+role;
+  var roleText=labels[role]||role;
+  // Add session name context
+  if(role==='compound'&&curSess==='A1')roleText+=' | 替换非复合动作时会提示"更适合变体日"';
+  if(role==='variation'&&curSess==='A2')roleText+=' | 替换纯杠铃复合动作时会提示"更适合复合日"';
+  bar.textContent=roleText;
+}
+
+// ==================== WARMUP/STRETCH ====================
+var WU={
+  upper:['弹力带肩胛拉开 2×15','弹力带扩胸 2×12','肩关节绕环 每方向×10','俯卧撑式肩胛活动 2×8','轻重量面拉 2×15','空杆卧推热身 1×10'],
+  lower:['髋关节绕环 每方向×10','腿摆动(前后+侧向)各×12','自重深蹲 2×10','弓步旋转 每侧×6','踝关节绕环 每侧×10','弹力带臀桥激活 2×12'],
+  general:['跳绳/原地踏步 3min','猫牛式 2×10','最伟大伸展 每侧×5','肩髋联合绕环 ×10','自重深蹲+过顶伸展 2×8'],
+  transition:['跳绳/原地踏步 2min','动态髋关节活动 ×10','最伟大伸展 每侧×3','空杆/轻量动作预热 2×5','目标动作空手模拟 ×5']
+};
+var ST={
+  upper:['胸肌拉伸(门框式)每侧30s','背阔肌拉伸(悬挂式)30s','肱三头肌过头拉伸 每侧30s','肱二头肌靠墙拉伸 每侧30s','肩后束交叉臂拉伸 每侧30s','上斜方肌颈侧屈拉伸 每侧30s'],
+  lower:['股四头肌站姿拉伸 每侧30s','腘绳肌坐姿前屈 30s×2','髋屈肌弓步拉伸 每侧30s','臀肌鸽子式 每侧30s','小腿腓肠肌推墙拉伸 每侧30s','内收肌蝴蝶拉伸 30s'],
+  general:['下犬式 30s','猫牛式流动 ×8','婴儿式 30s','仰卧脊柱扭转 每侧30s','深度腹式呼吸 2min'],
+  transition:['泡沫轴全身 10min','静态拉伸 10min','深呼吸放松 2min']
+};
+
+// ==================== OVERLOAD LOGIC (Enhanced with RPE + Speed) ====================
+function parseT(t){
+  if(!t||t.indexOf('测')>=0||t.indexOf('AMRAP')>=0||t.indexOf('min')>=0)return null;
+  var c=t.replace(/\s*@\d+%/g,'');
+  var m=c.match(/(\d+)\s*[×x]\s*(\d+)/);
+  if(!m)return null;
+  var r=parseInt(m[2]);
+  return{sets:parseInt(m[1]),reps:r,max:r,min:Math.max(r-2,1)}
+}
+
+// Calculate suggested weight based on 1RM percentage or RPE
+function getSug(en,tgt,hasSpeedReq){
+  var lr=lastRecord(en),t=parseT(tgt);
+  var orm=loadORM();
+
+  // Check for 1RM percentage in target (Block 2 style)
+  var pctMatch = tgt.match(/@(\d+)%/);
+  if(pctMatch && orm){
+    var pct=parseInt(pctMatch[1]);
+    var ex1rm=getEx1RM(en,orm);
+    if(ex1rm){
+      var sugW=Math.round(ex1rm*pct/100/2.5)*2.5;
+      return{t:'1RM轨道: '+sugW+'kg @'+pct+'%',a:'info',w:sugW,pct:pct}
+    }
+  }
+
+  // RPE-calibrated track
+  if(!t)return lr?{t:'上次: '+lr.weight+'kg '+lr.sets+'×'+lr.reps,a:'info'}:null;
+  if(!lr)return{t:'首次训练，选适中重量',a:'info'};
+  var pr=parseInt(lr.reps),ps=parseInt(lr.sets);
+  if(isNaN(pr)||isNaN(ps))return{t:'上次: '+lr.weight+'kg',a:'info'};
+
+  // Speed-based progression for power block
+  if(hasSpeedReq && lr.speed){
+    var spd=parseInt(lr.speed);
+    if(spd>=4 && lr.rpe && parseFloat(lr.rpe)<=8){
+      var s=lr.weight+2.5;
+      return{t:'速度达标! 建议 '+s+'kg (+2.5%)',a:'up',w:s}
+    }else if(spd<4){
+      return{t:'速度不足('+spd+') 保持 '+lr.weight+'kg',a:'keep',w:lr.weight}
+    }
+  }
+
+  // Standard RPE-based progression
+  if(pr>=t.max&&ps>=t.sets){
+    var inc=(lr.rpe&&parseFloat(lr.rpe)<=8)?5:2.5;
+    var s=lr.weight+inc;
+    return{t:'建议 '+s+'kg (+'+inc+')',a:'up',w:s}
+  }
+  if(pr>=t.min&&pr<t.max)return{t:'保持 '+lr.weight+'kg 冲 '+t.max+'reps',a:'keep',w:lr.weight};
+  if(pr<t.min)return{t:'降重至 '+Math.max(lr.weight-5,0)+'kg',a:'down',w:Math.max(lr.weight-5,0)};
+  return{t:'上次: '+lr.weight+'kg '+ps+'×'+pr,a:'info'}
+}
+
+function getEx1RM(exName,orm){
+  if(!orm)return null;
+  var map={'杠铃平板卧推':orm.bench,'杠铃卧推':orm.bench,'速度卧推':orm.bench,'暂停卧推':orm.bench,'爆发式卧推':orm.bench,
+    '杠铃深蹲':orm.squat,'速度深蹲':orm.squat,'跳蹲':orm.squat,
+    '传统硬拉':orm.deadlift,'罗马尼亚硬拉':orm.deadlift,'六角杠硬拉':orm.deadlift,
+    '站姿杠铃推举':orm.press,'坐姿哑铃推举':orm.press,'借力推举':orm.press,'速度推举':orm.press,
+    '杠铃划船':orm.row,'速度划船':orm.row,'爆发式杠铃划船':orm.row,'Pendlay划船':orm.row};
+  return map[exName]||null;
+}
+
+// ==================== RENDER TRAINING ====================
+function renderTrain(){
+  var blk=getBlk(curWeek),wk=getWK(curWeek),sn=blk.sessions[curSess];
+  if(!sn)return;
+
+  // Show/hide 1RM section for Block 2
+  var ormSec=document.getElementById('ormSection');
+  ormSec.style.display=isStrengthBlock()?'block':'none';
+  if(isStrengthBlock()){
+    var ormData=loadORM();
+    if(ormData.bench)document.getElementById('ormBench').value=ormData.bench;
+    if(ormData.squat)document.getElementById('ormSquat').value=ormData.squat;
+    if(ormData.deadlift)document.getElementById('ormDeadlift').value=ormData.deadlift;
+    if(ormData.press)document.getElementById('ormPress').value=ormData.press;
+    if(ormData.row)document.getElementById('ormRow').value=ormData.row;
+  }
+
+  // Show/hide track picker for Block 3 A2
+  var tp=document.getElementById('trackPicker');
+  if(isPowerBlock()&&curSess==='A2'&&sn.multiTrack){
+    tp.style.display='flex';
+    curTrack=loadTrack();
+    document.querySelectorAll('#trackPicker button').forEach(function(b){
+      b.classList.toggle('active',b.dataset.track===curTrack);
+    });
+  }else{
+    tp.style.display='none';
+  }
+
+  // Role bar
+  renderRoleBar();
+
+  // Warmup
+  var wt=sn.warmupType||(curSess.indexOf('A')>=0?'upper':curSess.indexOf('B')>=0?'lower':'general');
+  if(curWeek===9)wt='transition';
+  var wl=WU[wt]||WU.general;
+  document.getElementById('wuSection').innerHTML='<div class="warmup-box"><h4>🔥 热身 ('+(wt==='upper'?'上肢':wt==='lower'?'下肢':wt==='transition'?'过渡':'全身')+')</h4><ul class="wu-list">'+wl.map(function(s){return'<li>'+s+'</li>'}).join('')+'</ul></div>';
+
+  // Exercises
+  var el=document.getElementById('exList'),html='';
+  var clusters=sn.clusters||[];
+
+  // For Block 3 A2 multi-track: show track-specific clusters + baseline
+  if(isPowerBlock()&&curSess==='A2'&&sn.multiTrack){
+    var track=sn.tracks[curTrack];
+    if(track){
+      html+='<div class="cluster-label '+track.css+'">🎯 '+track.name+'</div>';
+      clusters=[track].concat(sn.baseline||[]);
+    }
+  }
+
+  clusters.forEach(function(cl,i){
+    html+='<div class="cluster-label '+cl.css+'">'+cl.name+'</div>';
+    cl.ex.forEach(function(ex,j){
+      var tgt=ex.data[wk]||ex.data[Object.keys(ex.data)[0]]||'-',
+          lr=lastRecord(ex.name),sug=getSug(ex.name,tgt,ex.hasSpeed);
+      var isSA=!!ex.superA,isSB=!!ex.superB,num=ex.num||(j+1);
+      var cc='ex-card';if(ex.isMain)cc+=' main-lift';if(isSA)cc+=' super-a';if(isSB)cc+=' super-b';
+      html+='<div class="'+cc+'"><div class="ex-num">'+(isSA?num+'a':isSB?num+'b':num)+'</div><div class="ex-info"><div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;"><span class="ex-name">'+ex.name+'</span>';
+      if(ex.isMain)html+='<span class="badge badge-main">主项</span>';
+      if(ex.sport)html+='<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:.68rem;background:var(--tag-bg);color:var(--muted);margin-left:3px;">'+ex.sport+'</span>';
+      html+='<button class="alt-btn" onclick="toggleAlt(this)">⇄ 替换</button></div>';
+      html+='<div class="ex-meta">目标: '+tgt+' | 间歇: '+ex.rest+'</div>';
+      // Target RPE badge
+      if(ex.targetRPE)html+='<div class="ex-meta">目标RPE: <span class="rpe-target">'+ex.targetRPE+'</span></div>';
+      html+='<div class="ex-meta">'+ex.notes+'</div>';
+      html+='<div class="ex-muscles"><span style="color:var(--muscle-pri);">● '+ex.primary+'</span> &nbsp;<span style="color:var(--muscle-sec);">○ '+ex.secondary+'</span></div></div>';
+      html+='<div class="ex-last">'+(lr?lr.date+'<br>'+lr.weight+'kg '+lr.sets+'×'+lr.reps:'暂无记录')+'</div>';
+      html+='<div class="ex-sug" style="color:'+(sug&&sug.a==='up'?'var(--hypertrophy)':sug&&sug.a==='down'?'var(--power)':'var(--muted)')+'">'+(sug?sug.t:'')+'</div>';
+      html+='<div class="ex-inp"><label>kg</label><input type="number" id="wt_'+i+'_'+j+'" placeholder="'+(sug&&sug.w?sug.w:'')+'" step="2.5" min="0"><label>次</label><input type="number" id="rp_'+i+'_'+j+'" placeholder="reps" min="1"><label>组</label><input type="number" id="st_'+i+'_'+j+'" placeholder="sets" min="1" value="'+((tgt.match(/(\d+)×/)||['',''])[1]||'')+'"></div>';
+      // RPE input
+      html+='<div class="rpe-wrap"><label>RPE</label><span class="rpe-target">'+((ex.targetRPE)?'目标:'+ex.targetRPE:'')+'</span><input type="range" id="rpe_'+i+'_'+j+'" min="1" max="10" step="0.5" value="8" oninput="this.nextElementSibling.textContent=this.value"><span class="rpe-val" id="rpeval_'+i+'_'+j+'">8</span></div>';
+      // Speed rating for power block
+      if(isPowerBlock()&&ex.hasSpeed){
+        html+='<div class="speed-wrap"><label>速度</label><div class="speed-stars" id="spd_'+i+'_'+j+'">';
+        for(var s=1;s<=5;s++){
+          html+='<span class="speed-star" data-s="'+s+'" onclick="setSpeed('+i+','+j+','+s+')">'+s+'</span>';
+        }
+        html+='</div></div>';
+      }
+      // Alternative menu
+      html+='<div class="alt-menu" id="am_'+i+'_'+j+'">'+renderAltMenu(ex,sn.role)+'</div></div>';
+    });
+  });
+  el.innerHTML=html;
+
+  // Stretch
+  var sl=ST[wt]||ST.general;
+  document.getElementById('stSection').innerHTML='<div class="stretch-box"><h4>🧘 练后拉伸 ('+(wt==='upper'?'上肢':wt==='lower'?'下肢':wt==='transition'?'过渡':'全身')+')</h4><ul class="wu-list">'+sl.map(function(s){return'<li>'+s+'</li>'}).join('')+'</ul></div>';
+
+  // Actions
+  document.getElementById('actions').innerHTML='<label style="font-size:.78rem;color:var(--muted);margin-right:6px;">时长(分钟)</label><input type="number" id="trainDur" placeholder="例:65" min="1" max="180" style="width:55px;padding:5px;border-radius:6px;border:1px solid var(--border);background:var(--tag-bg);color:var(--text);font-size:.78rem;text-align:center;margin-right:10px;"><button class="btn" onclick="saveTrain()">结束训练 · 保存</button> <button class="btn btn-sm btn-ghost" onclick="quickSave()">快速标记</button>';
+  document.getElementById('trainDate').value=new Date().toISOString().slice(0,10);
+}
+
+// Alternative menu with role-based hints (Decision 8)
+function renderAltMenu(ex,sessRole){
+  if(!ex.alternatives||!ex.alternatives.length)return'<div>无替代动作</div>';
+  return ex.alternatives.map(function(a){
+    var isCompound = ['杠铃','哑铃'].some(function(p){return a.name.indexOf(p)>=0});
+    var isIsolation = ['绳索','器械','蝴蝶机'].some(function(p){return a.name.indexOf(p)>=0});
+    var isMismatch = (sessRole==='compound'&&isIsolation)||(sessRole==='variation'&&isCompound&&!isIsolation);
+    var cls=isMismatch?'mismatch':'';
+    var hint=isMismatch?(sessRole==='compound'?' [更适合变体日]':' [更适合复合日]'):'';
+    return '<div class="'+cls+'" onclick="'+(isMismatch?'':'swapEx(this)')+'" data-n="'+a.name+'" data-p="'+(a.primary||'')+'" data-s="'+(a.secondary||'')+'">'+a.name+' <span style="font-size:.68rem;color:var(--muted);">'+(a.primary||'')+'</span>'+hint+'</div>';
+  }).join('');
+}
+
+function setSpeed(ci,ej,val){
+  var container=document.getElementById('spd_'+ci+'_'+ej);
+  if(!container)return;
+  var stars=container.querySelectorAll('.speed-star');
+  stars.forEach(function(s,idx){
+    s.classList.toggle('filled',idx<val);
+    s.classList.toggle('active',idx===val-1);
+  });
+  container.dataset.value=val;
+}
+
+function toggleAlt(btn){var m=btn.closest('.ex-card').querySelector('.alt-menu');var all=document.querySelectorAll('.alt-menu.show');for(var i=0;i<all.length;i++)if(all[i]!==m)all[i].classList.remove('show');m.classList.toggle('show')}
+document.addEventListener('click',function(e){if(!e.target.closest('.alt-btn')){var all=document.querySelectorAll('.alt-menu.show');for(var i=0;i<all.length;i++)all[i].classList.remove('show')}});
+function swapEx(el){var c=el.closest('.ex-card');c.querySelector('.ex-name').textContent=el.dataset.n;c.querySelector('.ex-muscles').innerHTML='<span style="color:var(--muscle-pri);">● '+el.dataset.p+'</span> &nbsp;<span style="color:var(--muscle-sec);">○ '+el.dataset.s+'</span>';var lr=lastRecord(el.dataset.n),le=c.querySelector('.ex-last');le.innerHTML=lr?lr.date+'<br>'+lr.weight+'kg '+lr.sets+'×'+lr.reps:'暂无记录';c.querySelector('.alt-menu').classList.remove('show');c.dataset.sn=el.dataset.n}
+
+function saveTrain(){
+  var blk=getBlk(curWeek),sn=blk.sessions[curSess],ds=document.getElementById('trainDate').value,dur=document.getElementById('trainDur').value;
+  if(!sn)return;
+  var sv=0;
+  var clusters=sn.clusters||[];
+  if(isPowerBlock()&&curSess==='A2'&&sn.multiTrack){
+    var track=sn.tracks[curTrack];
+    if(track)clusters=[track].concat(sn.baseline||[]);
+  }
+  clusters.forEach(function(cl,i){
+    cl.ex.forEach(function(ex,j){
+      var we=document.getElementById('wt_'+i+'_'+j),re=document.getElementById('rp_'+i+'_'+j),se=document.getElementById('st_'+i+'_'+j);
+      if(!we||!re)return;
+      var wt=parseFloat(we.value),rp=parseInt(re.value),st=parseInt(se?se.value:0);
+      if(isNaN(wt)||isNaN(rp))return;
+      var c=we.closest('.ex-card'),sw=c?c.dataset.sn:null;
+      // Get RPE
+      var rpeInput=c.querySelector('.rpe-wrap input[type=range]');
+      var rpe=rpeInput?parseFloat(rpeInput.value):null;
+      // Get Speed
+      var spdContainer=c.querySelector('.speed-wrap .speed-stars');
+      var speed=spdContainer?parseInt(spdContainer.dataset.value||'0'):null;
+      addLog(curWeek,curSess,sw||ex.name,wt,rp,st||1,rpe,speed,(dur?'时长'+dur+'min':''),ds);
+      sv++;
+    });
+  });
+  if(sv>0){toast('已保存 '+sv+' 个动作'+(dur?' · '+dur+'min':''));renderTrain()}
+  else toast('请填写重量和次数','err');
+}
+function quickSave(){
+  var blk=getBlk(curWeek),sn=blk.sessions[curSess],ds=document.getElementById('trainDate').value;
+  if(!sn)return;
+  var clusters=sn.clusters||[];
+  if(isPowerBlock()&&curSess==='A2'&&sn.multiTrack){
+    var track=sn.tracks[curTrack];
+    if(track)clusters=[track].concat(sn.baseline||[]);
+  }
+  clusters.forEach(function(cl){cl.ex.forEach(function(ex){addLog(curWeek,curSess,ex.name,0,0,0,null,null,'仅标记',ds)})});
+  toast('已标记');renderTrain();
+}
+
+// ==================== HISTORY ====================
+function renderHist(){
+  var L=loadLogs(),c=document.getElementById('histContent');
+  if(!L.length){c.innerHTML='<p style="color:var(--muted);text-align:center;padding:40px;">还没有训练记录，完成第一次训练后这里会出现数据。</p>';return}
+  var g={};
+  L.forEach(function(l){if(!g[l.exercise])g[l.exercise]=[];g[l.exercise].push(l)});
+  var h='';
+  Object.keys(g).sort().forEach(function(ex){
+    var es=g[ex];es.sort(function(a,b){return b.ts-a.ts});
+    h+='<h4 style="margin-top:14px;">'+ex+' <span style="font-size:.74rem;color:var(--muted);">('+es.length+'次)</span></h4><table style="font-size:.74rem;"><tr><th>日期</th><th>周</th><th>重量</th><th>组×次</th><th>RPE</th><th>速度</th><th>备注</th></tr>';
+    es.slice(0,15).forEach(function(e){
+      h+='<tr><td>'+e.date+'</td><td>W'+e.week+'</td><td>'+(e.weight||'-')+'kg</td><td>'+(e.sets||0)+'×'+(e.reps||0)+'</td><td>'+(e.rpe||'-')+'</td><td>'+(e.speed||'-')+'</td><td>'+(e.notes||'')+'</td></tr>';
+    });
+    h+='</table>';
+  });
+  c.innerHTML=h;
+}
+
+// ==================== CHART + TRACKING ====================
+function getAllExs(){
+  var s=new Set();
+  BLOCKS.forEach(function(b){
+    Object.values(b.sessions).forEach(function(sn){
+      // Regular clusters
+      if(sn.clusters)sn.clusters.forEach(function(cl){
+        cl.ex.forEach(function(ex){s.add(ex.name);ex.alternatives.forEach(function(a){s.add(a.name)})});
+      });
+      // Multi-track clusters
+      if(sn.tracks){
+        Object.values(sn.tracks).forEach(function(t){
+          t.ex.forEach(function(ex){s.add(ex.name);if(ex.alternatives)ex.alternatives.forEach(function(a){s.add(a.name)})});
+        });
+      }
+      if(sn.baseline)sn.baseline.forEach(function(cl){
+        cl.ex.forEach(function(ex){s.add(ex.name);if(ex.alternatives)ex.alternatives.forEach(function(a){s.add(a.name)})});
+      });
+    });
+  });
+  return Array.from(s).sort();
+}
+function getMGs(){
+  var g={};
+  BLOCKS.forEach(function(b){
+    Object.values(b.sessions).forEach(function(sn){
+      var processCluster=function(cl){
+        cl.ex.forEach(function(ex){
+          var cat=cl.mc||'其他';
+          if(!g[cat])g[cat]=new Set();
+          g[cat].add(ex.name);
+          if(ex.alternatives)ex.alternatives.forEach(function(a){g[cat].add(a.name)});
+        });
+      };
+      if(sn.clusters)sn.clusters.forEach(processCluster);
+      if(sn.tracks)Object.values(sn.tracks).forEach(processCluster);
+      if(sn.baseline)sn.baseline.forEach(processCluster);
+    });
+  });
+  return g;
+}
+function renderCfg(filter){
+  mfilt=filter||'all';
+  var gs=getMGs(),mf=document.getElementById('mFilter');
+  var fh='<button class="'+(mfilt==='all'?'active':'')+'" onclick="renderCfg(&quot;all&quot;)">全部</button>';
+  Object.keys(gs).sort().forEach(function(g){fh+='<button class="'+(mfilt===g?'active':'')+'" onclick="renderCfg(&quot;'+g+'&quot;)">'+g+'</button>'});
+  mf.innerHTML=fh;
+  var cl=document.getElementById('cfgList'),all=getAllExs(),sorted=[];
+  if(mfilt==='all')sorted=all;else if(gs[mfilt])gs[mfilt].forEach(function(e){sorted.push(e)});
+  var h='';
+  sorted.forEach(function(e){
+    var ck=tracked.indexOf(e)>=0;
+    h+='<label style="display:flex;align-items:center;gap:5px;padding:4px 0;font-size:.8rem;cursor:pointer;border-bottom:1px solid var(--border);"><input type="checkbox" '+(ck?'checked':'')+' onchange="togTrk(this)" data-n="'+e.replace(/"/g,'&quot;')+'">'+e+(ck?' <span style="font-size:.68rem;color:var(--hypertrophy);">●</span>':'')+'</label>'
+  });
+  cl.innerHTML=h||'<p style="color:var(--muted);">该分类无动作</p>';
+}
+function togTrk(cb){var n=cb.dataset.n;if(cb.checked&&tracked.indexOf(n)<0)tracked.push(n);if(!cb.checked)tracked=tracked.filter(function(x){return x!==n});saveTr();renderCfg(mfilt)}
+function applyTrack(){saveTr();renderCfg();drawChart();toast('追踪设置已应用')}
+
+function est1RM(w,rp){if(!w||!rp||rp<=0)return w;if(rp===1)return w;return Math.round(w*(1+rp/30)*10)/10}
+function drawChart(){
+  var cv=document.getElementById('chartCanvas');if(!cv)return;var ctx=cv.getContext('2d'),rc=cv.parentElement.getBoundingClientRect();if(rc.width<50)return;
+  cv.width=rc.width*2;cv.height=760;ctx.scale(2,2);var W=rc.width,H=380,p={t:35,r:50,b:55,l:55},cw=W-p.l-p.r,ch=H-p.t-p.b;
+  ctx.clearRect(0,0,W*2,H*2);ctx.fillStyle='#1a1d27';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#2a2d3a';ctx.lineWidth=.8;
+  for(var i=0;i<=5;i++){var y=p.t+ch*i/5;ctx.beginPath();ctx.moveTo(p.l,y);ctx.lineTo(W-p.r,y);ctx.stroke()}
+  var all=loadLogs(),cols=['#5b9bd5','#e0556a','#4caf91','#f0a050','#a78bfa','#ff6b6b','#48dbfb','#ffd93d'];
+  var met=document.getElementById('chartM')?document.getElementById('chartM').value:'e1rm';
+  var ds=[];
+  tracked.forEach(function(en){
+    var rec=all.filter(function(l){return l.exercise===en}).sort(function(a,b){return a.ts-b.ts});
+    if(!rec.length)return;
+    var hy=[],st=[],hc=0,sc=0;
+    rec.forEach(function(r){
+      var rp=parseInt(r.reps);if(isNaN(rp)||rp<=0)return;
+      var w=parseFloat(r.weight);if(isNaN(w)||w<=0)return;
+      var v;if(met==='e1rm')v=est1RM(w,rp);else v=w;
+      if(rp>=7){hy.push({x:hc++,y:v,d:r.date,rp:rp})}
+      else{st.push({x:sc++,y:v,d:r.date,rp:rp})}
+    });
+    if(hy.length||st.length)ds.push({n:en,hy:hy,st:st,c:cols[ds.length%cols.length]})
+  });
+  if(!ds.length){ctx.fillStyle='#8b8fa3';ctx.font='14px sans-serif';ctx.textAlign='center';ctx.fillText('暂无追踪数据。请先勾选动作并保存训练记录',W/2,H/2);return}
+  var aH=[],aS=[],mxX=1;
+  ds.forEach(function(d){
+    d.hy.filter(function(p){return p.y!==null}).forEach(function(p){aH.push(p.y);mxX=Math.max(mxX,p.x)});
+    d.st.filter(function(p){return p.y!==null}).forEach(function(p){aS.push(p.y);mxX=Math.max(mxX,p.x)});
+  });
+  var mnH=aH.length?Math.min.apply(null,aH)*0.9:0,mxH=aH.length?Math.max.apply(null,aH)*1.15:1,mnS=aS.length?Math.min.apply(null,aS)*0.9:0,mxS=aS.length?Math.max.apply(null,aS)*1.15:1;
+  ctx.textAlign='right';
+  for(var i=0;i<=5;i++){
+    var y=p.t+ch*i/5;
+    if(aH.length){ctx.fillStyle='#4caf91';ctx.fillText(Math.round(mnH+(mxH-mnH)*i/5),p.l-8,y+4)}
+    if(aS.length){ctx.fillStyle='#f0a050';ctx.fillText(Math.round(mnS+(mxS-mnS)*i/5),W-p.r+8,y+4)}
+  }
+  ctx.save();ctx.fillStyle='#4caf91';ctx.font='11px sans-serif';ctx.translate(14,H/2-40);ctx.rotate(-Math.PI/2);ctx.fillText('肌肥大 kg (>=7reps)',0,0);ctx.restore();
+  ctx.save();ctx.fillStyle='#f0a050';ctx.font='11px sans-serif';ctx.translate(W-16,H/2+40);ctx.rotate(Math.PI/2);ctx.fillText('力量 kg (<=6reps)',0,0);ctx.restore();
+  ctx.textAlign='center';
+  var xs=mxX>8?Math.ceil(mxX/8):1;
+  for(var i=0;i<=mxX;i+=xs){
+    var x=p.l+cw*i/(mxX||1);ctx.fillStyle='#8b8fa3';ctx.fillText(i+1,x,H-p.b+20);
+  }
+  ctx.fillText('训练次数',W/2,H-6);
+  // Draw lines
+  ds.forEach(function(d){
+    var pt=d.hy.filter(function(p){return p.y!==null});
+    if(pt.length){
+      ctx.strokeStyle=d.c;ctx.lineWidth=2.5;ctx.setLineDash([]);ctx.beginPath();
+      pt.forEach(function(p,i){var x=p.l+cw*p.x/mxX,y=p.t+ch-ch*(p.y-mnH)/(mxH-mnH);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+      ctx.stroke();
+      pt.forEach(function(p){var x=p.l+cw*p.x/mxX,y=p.t+ch-ch*(p.y-mnH)/(mxH-mnH);ctx.fillStyle=d.c;ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill()});
+      var lp=pt[pt.length-1],lx=p.l+cw*lp.x/mxX,ly=p.t+ch-ch*(lp.y-mnH)/(mxH-mnH);ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.fillText(lp.y.toFixed(0)+'kg·'+lp.d.slice(5),lx+6,ly-8);
+    }
+    var pt2=d.st.filter(function(p){return p.y!==null});
+    if(pt2.length){
+      ctx.strokeStyle=d.c;ctx.lineWidth=2.5;ctx.setLineDash([6,3]);ctx.beginPath();
+      pt2.forEach(function(p,i){var x=p.l+cw*p.x/mxX,y=p.t+ch-ch*(p.y-mnS)/(mxS-mnS);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+      ctx.stroke();ctx.setLineDash([]);
+      pt2.forEach(function(p){var x=p.l+cw*p.x/mxX,y=p.t+ch-ch*(p.y-mnS)/(mxS-mnS);ctx.fillStyle=d.c;ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.stroke()});
+      var lp=pt2[pt2.length-1],lx=p.l+cw*lp.x/mxX,ly=p.t+ch-ch*(lp.y-mnS)/(mxS-mnS);ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.fillText(lp.y.toFixed(0)+'kg·'+lp.d.slice(5),lx+6,ly-8);
+    }
+  });
+  var ly=p.t+5;ctx.textAlign='right';
+  ds.slice().reverse().forEach(function(d){
+    ctx.fillStyle=d.c;ctx.fillRect(W-p.r-140,ly,14,14);ctx.fillStyle='#fff';ctx.font='10px sans-serif';ctx.fillText(d.n,W-p.r-148,ly+12);ly+=16;
+  });
+}
+window.addEventListener('resize',function(){if(document.getElementById('tabProg').classList.contains('active'))drawChart()});
+
+// ==================== PLAN REFERENCE ====================
+function renderPlan(){
+  var c=document.getElementById('planRef'),h='<h2>完整训练计划 (Round '+curRound+')</h2>';
+  h+='<div class="card"><table><tr><th>星期</th><th>训练日</th><th>侧重</th><th>时长</th></tr>';
+  h+='<tr><td>周一</td><td><strong>A1</strong></td><td>上肢复合主项（胸·背·手臂）</td><td>60~75 min</td></tr>';
+  h+='<tr><td>周二</td><td><strong>B1</strong></td><td>下肢复合主项（肩·腿前链·臀）</td><td>60~75 min</td></tr>';
+  h+='<tr><td>周三</td><td>-</td><td>休息</td><td>-</td></tr>';
+  h+='<tr><td>周四</td><td><strong>A2</strong></td><td>上肢变体补充 / 专项训练</td><td>55~70 min</td></tr>';
+  h+='<tr><td>周五</td><td><strong>B2</strong></td><td>下肢变体补充 / 专项训练</td><td>55~70 min</td></tr>';
+  h+='<tr><td>周六</td><td><strong>CORE</strong></td><td>核心专项</td><td>40~50 min</td></tr>';
+  h+='<tr><td>周日</td><td>-</td><td>完全休息</td><td>-</td></tr>';
+  h+='</table></div>';
+  h+='<div class="card" style="background:linear-gradient(135deg,#1a2a1d,#1e2230);border:1px solid var(--hypertrophy);margin:12px 0;">';
+  h+='<h4 style="color:var(--hypertrophy);margin:0 0 6px;">13周周期结构</h4>';
+  h+='<p style="font-size:.82rem;color:var(--muted);">Block 1 (W1-4) 肌肥大积累 → Block 2 (W5-8) 最大力量 → T9 速度-力量过渡 → Block 3 (W10-12) 爆发力 → W13 卸载测试</p>';
+  h+='</div>';
+
+  BLOCKS.forEach(function(b,bi){
+    h+='<h2><span class="badge '+b.badge+'">'+b.label+'</span> '+b.title+'</h2>';
+    h+='<div class="card"><p><strong>目标：</strong>'+b.target+'<br><strong>变量：</strong>'+b.vars+'<br><strong>运动：</strong>'+(b.sport||'')+'</p></div>';
+    h+='<div class="card" style="background:#1e2230;border-left:3px solid var(--accent);">'+b.prog+'</div>';
+
+    var wl;
+    if(b.isDeload)wl=['W13'];
+    else if(bi===0)wl=['W1','W2','W3','W4'];
+    else if(bi===1)wl=['W5','W6','W7','W8'];
+    else if(bi===2)wl=['T9'];
+    else if(bi===3)wl=['W10','W11','W12'];
+    else wl=['W13'];
+
+    ['A1','B1','A2','B2','CORE'].forEach(function(sk){
+      var sn=b.sessions[sk];if(!sn)return;
+      var roleLabel='';
+      if(sn.role==='compound')roleLabel=' <span class="badge badge-main">复合日</span>';
+      if(sn.role==='variation')roleLabel=' <span class="badge badge-hyper">变体日</span>';
+      if(sn.role==='specialty')roleLabel=' <span class="badge badge-power">专项日</span>';
+      if(sn.role==='test')roleLabel=' <span class="badge badge-strength">测试日</span>';
+      if(sn.role==='recovery')roleLabel=' <span class="badge badge-deload">恢复日</span>';
+      if(sn.role==='transition')roleLabel=' <span class="badge badge-transition">过渡日</span>';
+
+      h+='<h3>'+sk+' - '+sn.name+roleLabel+'</h3>';
+      h+='<div class="card"><table><tr><th>#</th><th>动作</th><th>主肌群</th><th>次肌群</th>';
+      wl.forEach(function(w){h+='<th>'+w+'</th>'});
+      h+='<th>间歇</th><th>备注</th></tr>';
+
+      var ec=0;
+      var renderExRow=function(ex){
+        var nl;
+        if(ex.superA){nl=(ec+1)+'a'}else if(ex.superB){nl=(ec+1)+'b';ec++}else{ec++;nl=ec.toString()}
+        h+='<tr><td>'+nl+'</td><td style="font-weight:600;color:#fff;">'+ex.name+(ex.isMain?' <span class="badge badge-main">主</span>':'')+'</td>';
+        h+='<td style="font-size:.74rem;">'+ex.primary+'</td><td style="font-size:.72rem;color:var(--muted);">'+ex.secondary+'</td>';
+        wl.forEach(function(w){h+='<td style="font-family:monospace;color:var(--accent);white-space:nowrap;">'+(ex.data[w]||'-')+'</td>'});
+        h+='<td style="font-size:.72rem;color:var(--muted);">'+ex.rest+'</td><td style="font-size:.72rem;color:var(--muted);">'+ex.notes+'</td></tr>';
+      };
+
+      sn.clusters.forEach(function(cl){
+        cl.ex.forEach(renderExRow);
+      });
+
+      // Multi-track display for Block 3 A2
+      if(sn.multiTrack&&sn.tracks){
+        h+='<tr><td colspan="'+(wl.length+5)+'" style="background:var(--tag-bg);font-size:.72rem;color:var(--power);padding:4px 8px;">▼ 以下为专项轨道动作（选择一个轨道执行 + 力量维持底线）</td></tr>';
+        Object.keys(sn.tracks).forEach(function(tk){
+          var t=sn.tracks[tk];
+          h+='<tr><td colspan="'+(wl.length+5)+'" style="background:var(--tag-bg);font-size:.72rem;color:var(--muted);padding:2px 8px;">🎯 '+t.name+'</td></tr>';
+          t.ex.forEach(renderExRow);
+        });
+        if(sn.baseline){
+          h+='<tr><td colspan="'+(wl.length+5)+'" style="background:var(--tag-bg);font-size:.72rem;color:var(--main-gold);padding:2px 8px;">— 力量维持底线（所有轨道共享）</td></tr>';
+          sn.baseline.forEach(function(bcl){bcl.ex.forEach(renderExRow)});
+        }
+      }
+
+      h+='</table></div>';
+    });
+    h+='<hr style="border:0;border-top:1px solid var(--border);margin:20px 0;">';
+  });
+  c.innerHTML=h;
+}
+
+// ==================== ROUND 2 ANALYSIS (Decision 10) ====================
+function renderR2Placeholder(){
+  var c=document.getElementById('r2Analysis');
+  if(!c.innerHTML){
+    c.innerHTML='<p style="color:var(--muted);text-align:center;padding:20px;">点击"运行分析"查看基于Round 1数据的个性化建议</p>';
+  }
+}
+
+function analyzeRound1(){
+  var L=loadLogs();
+  if(!L.length){toast('暂无训练数据，请先完成Round 1','err');return}
+
+  // Group by exercise
+  var g={},first={},last={};
+  L.forEach(function(l){
+    var en=l.exercise;
+    if(!g[en])g[en]={records:[],e1rms:[]};
+    g[en].records.push(l);
+    var w=parseFloat(l.weight),rp=parseInt(l.reps);
+    if(w>0&&rp>0)g[en].e1rms.push({ts:l.ts,e1rm:est1RM(w,rp),date:l.date});
+  });
+
+  // Calculate progress for each exercise
+  var results=[];
+  Object.keys(g).forEach(function(en){
+    var data=g[en];
+    if(data.e1rms.length<2)return;
+    data.e1rms.sort(function(a,b){return a.ts-b.ts});
+    var firstE=data.e1rms[0].e1rm,lastE=data.e1rms[data.e1rms.length-1].e1rm;
+    var pct=((lastE-firstE)/firstE*100);
+    results.push({name:en,first:firstE,last:lastE,pct:pct,count:data.records.length,mainCat:getMainCat(en)});
+  });
+
+  results.sort(function(a,b){return a.pct-b.pct});
+
+  // Categorize
+  var swap=[],keep=[],volUp=[],weakSide=null;
+  var upperTotal=0,lowerTotal=0,upperCount=0,lowerCount=0;
+
+  results.forEach(function(r){
+    if(r.pct<5){swap.push(r)}
+    else if(r.pct>=10&&r.mainCat){volUp.push(r)}
+    else{keep.push(r)}
+
+    if(r.mainCat){
+      if(['胸','背','肩','臂'].indexOf(r.mainCat)>=0){upperTotal+=r.pct;upperCount++}
+      if(['腿','臀','小腿'].indexOf(r.mainCat)>=0){lowerTotal+=r.pct;lowerCount++}
+    }
+  });
+
+  // Check imbalance
+  if(upperCount>0&&lowerCount>0){
+    var uAvg=upperTotal/upperCount,lAvg=lowerTotal/lowerCount;
+    if(Math.abs(uAvg-lAvg)>5){
+      weakSide=uAvg>lAvg?'下肢':'上肢';
+    }
+  }
+
+  // Render results
+  var h='<div style="margin-top:10px;">';
+
+  h+='<h4 style="color:var(--power);margin:8px 0;">📋 建议替换的动作 (进步<5%)</h4>';
+  if(swap.length){
+    h+='<div class="r2-rec">';
+    swap.forEach(function(r){h+='<span class="rec-swap">'+r.name+': '+r.pct.toFixed(1)+'% ('+r.first.toFixed(0)+'→'+r.last.toFixed(0)+'kg)</span>'});
+    h+='</div>';
+  }else{h+='<p style="font-size:.76rem;color:var(--muted);">无需要替换的动作，整体进步良好！</p>'}
+
+  h+='<h4 style="color:var(--hypertrophy);margin:8px 0;">✅ 建议保留的动作 (进步5~10%)</h4>';
+  if(keep.length){
+    h+='<div class="r2-rec">';
+    keep.forEach(function(r){h+='<span class="rec-keep">'+r.name+': '+r.pct.toFixed(1)+'%</span>'});
+    h+='</div>';
+  }else{h+='<p style="font-size:.76rem;color:var(--muted);">无此区间动作</p>'}
+
+  h+='<h4 style="color:var(--strength);margin:8px 0;">📈 建议增容的动作 (进步≥10%)</h4>';
+  if(volUp.length){
+    h+='<div class="r2-rec">';
+    volUp.forEach(function(r){h+='<span class="rec-vol">'+r.name+': '+r.pct.toFixed(1)+'% → +1~2组</span>'});
+    h+='</div>';
+  }else{h+='<p style="font-size:.76rem;color:var(--muted);">无需要增容的动作</p>'}
+
+  if(weakSide){
+    h+='<h4 style="color:var(--accent);margin:8px 0;">⚠️ 发现失衡</h4>';
+    h+='<p style="font-size:.78rem;color:var(--muted);">'+weakSide+'进步明显滞后于对侧，建议Round 2增加'+weakSide+'训练频率或容量。</p>';
+  }
+
+  h+='<h4 style="color:var(--main-gold);margin:8px 0;">🎯 Round 2 执行建议</h4>';
+  h+='<p style="font-size:.78rem;color:var(--muted);">1. 替换 '+swap.length+' 个动作为同集群变体<br>2. 对 '+volUp.length+' 个主项增加 1~2 组<br>3. '+(weakSide?'强化'+weakSide+'训练':'保持上下肢平衡')+'<br>4. 所有动作起始重量使用Round 1结束时的85%作为新周期起点</p>';
+
+  h+='</div>';
+  document.getElementById('r2Analysis').innerHTML=h;
+}
+
+function getMainCat(exName){
+  var catMap={'杠铃平板卧推':'胸','杠铃划船':'背','站姿杠铃推举':'肩','杠铃深蹲':'腿','传统硬拉':'腿','罗马尼亚硬拉':'腿',
+    '哑铃平板卧推':'胸','坐姿哑铃推举':'肩','保加利亚分腿蹲':'腿','杠铃臀推':'臀'};
+  return catMap[exName]||null;
+}
+
+// ==================== INIT ====================
+function init(){
+  initTracked();
+  curTrack=loadTrack();
+  renderWP();renderSP();renderGoal();renderTrain();
+}
+init();
+</script>
+</body>
+</html>
