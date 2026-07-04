@@ -75,3 +75,24 @@ export function metricValue(log,metric){
   if(metric==='rpe')return Number(log.rpe)||0;
   return Number(log.e1rm)||estimate1RM(log.weight,log.reps)||0;
 }
+
+export function exerciseVisible(exercise,phaseId){return !exercise.hiddenPhases?.includes(phaseId)}
+export function exerciseRequired(exercise,phaseId,week,readiness='good'){
+  const fallback=exercise.fatigueFallback||{};
+  if(readiness==='tired'&&(fallback.optional||fallback.optionalWeeks?.includes(Number(week))))return false;
+  return exercise.requiredPhases?exercise.requiredPhases.includes(phaseId):true;
+}
+export function resolvePrescription(exercise,{phaseId,week,rule,readiness='good'}){
+  const phaseRx=exercise.prescriptionsByPhase?.[phaseId],phaseOverride=phaseRx?.weekOverrides?.[week],weekOverride=exercise.weekOverrides?.[week];
+  let p=phaseRx?{...phaseRx,...phaseOverride,...weekOverride}:{sets:exercise.main?rule.mainSets:rule.accessorySets,reps:exercise.main?rule.mainReps:rule.accessoryReps,rpe:rule.rpe};
+  if(exercise.id==='b2-deadlift'&&rule.deadliftSets)p={...p,sets:rule.deadliftSets,reps:rule.deadliftReps,rpe:rule.rpe};
+  if(readiness==='tired'&&exercise.fatigueFallback?.reduceSets)p={...p,sets:Math.max(1,Number(p.sets)-Number(exercise.fatigueFallback.reduceSets)),rpe:String(Math.min(7,Number.parseFloat(p.rpe)||7))};
+  return p;
+}
+
+export function mergeCompletionLogs(allLogs,completionId,currentExerciseIds,replacementLogs,legacyRevision='3.0'){
+  const currentIds=new Set(currentExerciseIds);
+  const outside=allLogs.filter(log=>log.completionId!==completionId);
+  const removedHistorical=allLogs.filter(log=>log.completionId===completionId&&log.type==='main'&&!currentIds.has(log.exerciseId)).map(log=>({...log,legacyFromRevision:log.planRevision||legacyRevision}));
+  return[...outside,...removedHistorical,...replacementLogs];
+}
