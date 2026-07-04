@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10213d">
+  <meta name="description" content="马小的 13 周力量与网球运动表现训练计划">
+  <title>马小的训练计划 V2 · Preview</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="preview-ribbon">PREVIEW · 不影响正式训练记录</div>
+  <header class="hero" id="top">
+    <nav class="nav shell">
+      <a class="brand" href="#top"><span class="brand-bolt">M</span><span>MA XIAO<br><small>TRAINING CLUB</small></span></a>
+      <div class="nav-links"><a href="#mission">今日任务</a><a href="#roadmap">13 周地图</a><a href="#progress">战绩</a><a href="#review">计划评价</a></div>
+      <button class="icon-btn" id="dataButton" aria-label="数据管理">↗</button>
+    </nav>
+    <div class="hero-grid shell">
+      <section>
+        <div class="eyebrow"><i></i> STRENGTH × TENNIS × CONSISTENCY</div>
+        <h1>马小的<br><em>训练计划</em></h1>
+        <p class="hero-copy" id="welcomeText">马小你回来了。今天不需要证明什么，只要完成下一次高质量训练。</p>
+        <div class="hero-actions"><a class="button primary" href="#mission">进入今日任务 <span>→</span></a><a class="button outline" href="#roadmap">查看路线图</a></div>
+        <div class="hero-stats">
+          <div><strong id="heroXp">0</strong><span>XP</span></div>
+          <div><strong id="heroLevel">热身玩家</strong><span>当前等级</span></div>
+          <div><strong id="heroStreak">0</strong><span>连胜周</span></div>
+        </div>
+      </section>
+      <aside class="player-card">
+        <div class="player-top"><span>PLAYER 01</span><span class="status-dot">ONLINE</span></div>
+        <div class="avatar">马<small>小</small></div>
+        <h2>力量重新上线</h2>
+        <div class="level-track"><i id="levelTrack"></i></div>
+        <div class="player-meta"><span>主线 <b>力量基础</b></span><span>专项 <b>网球</b></span><span>周期 <b>13 周</b></span></div>
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      </aside>
+    </div>
+    <div class="ticker"><div>动作质量优先&nbsp; ✦ &nbsp;核心是彩蛋，不是债务&nbsp; ✦ &nbsp;RPE 上限 8&nbsp; ✦ &nbsp;不做 1RM&nbsp; ✦ &nbsp;动作质量优先&nbsp; ✦ &nbsp;核心是彩蛋，不是债务&nbsp; ✦ &nbsp;RPE 上限 8&nbsp; ✦ &nbsp;不做 1RM</div></div>
+  </header>
+
+  <main>
+    <section class="shell section" id="mission">
+      <div class="section-head"><div><p class="kicker">TODAY'S MISSION</p><h2>马小，今天练什么？</h2></div><p>完成主训练和必做腹肌即可通关；核心彩蛋只加分，不扣分。</p></div>
+      <div class="selector-card">
+        <div class="week-control"><label for="weekSelect">训练周</label><select id="weekSelect"></select><span id="phaseBadge"></span></div>
+        <div class="session-tabs" id="sessionTabs"></div>
+      </div>
+      <div class="readiness-card">
+        <div><p class="mini-label">READINESS CHECK</p><h3>开练前，先诚实 3 秒</h3></div>
+        <div class="readiness-options">
+          <button class="ready-chip active" data-ready="good">状态在线</button>
+          <button class="ready-chip" data-ready="tired">睡眠不足</button>
+          <button class="ready-chip danger" data-ready="pain">有尖锐疼痛</button>
+        </div>
+        <p id="readinessMessage">今天按计划走，所有组都保留余力。</p>
+      </div>
+      <article class="mission-card">
+        <div class="mission-heading">
+          <div><span id="missionCode">A1 · 周一</span><h3 id="missionTitle">上肢复合</h3><p id="missionMood"></p></div>
+          <div class="mission-prescription"><strong id="missionSets">2 × 10–12</strong><span id="missionRpe">RPE 6</span></div>
+        </div>
+        <div class="week-note" id="weekNote"></div>
+        <div class="warmup" id="warmupList"></div>
+        <div class="exercise-list" id="exerciseList"></div>
+        <div class="bonus-zone" id="bonusZone"></div>
+        <div class="mission-footer">
+          <div><strong id="completionStatus">还差主训练和必做腹肌</strong><span>核心彩蛋不影响通关</span></div>
+          <button class="button primary" id="completeButton">完成今日任务 +100 XP</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="roadmap-section" id="roadmap">
+      <div class="shell section">
+        <div class="section-head inverse"><div><p class="kicker">13-WEEK CAMPAIGN</p><h2>五关，不硬闯</h2></div><p>先恢复规律，再追求力量和速度。每一阶段都为下一阶段服务。</p></div>
+        <div class="phase-grid" id="phaseGrid"></div>
+        <div class="week-strip" id="weekStrip"></div>
+      </div>
+    </section>
+
+    <section class="shell section" id="progress">
+      <div class="section-head"><div><p class="kicker">PLAYER STATS</p><h2>马小的战绩面板</h2></div><p>必做任务决定进度；核心彩蛋单独统计，不制造负罪感。</p></div>
+      <div class="stats-grid">
+        <article class="stat-card lime"><span>训练完成</span><strong id="sessionCount">0 / 52</strong><div class="meter"><i id="sessionMeter"></i></div></article>
+        <article class="stat-card blue"><span>本周进度</span><strong id="weekCount">0 / 4</strong><small>四次必做任务</small></article>
+        <article class="stat-card coral"><span>核心彩蛋</span><strong id="coreCount">0</strong><small>可选完成次数</small></article>
+        <article class="stat-card yellow"><span>累计 XP</span><strong id="xpCount">0</strong><small id="nextLevel">距下一级 500 XP</small></article>
+      </div>
+      <div class="progress-panels">
+        <article class="panel"><div class="panel-title"><h3>13 周通关图</h3><span>每格 = 1 次训练</span></div><div class="heatmap" id="heatmap"></div></article>
+        <article class="panel"><div class="panel-title"><h3>最近训练</h3><button class="text-btn" id="clearPreview">清空预览记录</button></div><div id="historyList" class="history-list"></div></article>
+      </div>
+    </section>
+
+    <section class="achievement-section">
+      <div class="shell section">
+        <div class="section-head"><div><p class="kicker">ACHIEVEMENTS</p><h2>别只盯重量，习惯也算战绩</h2></div></div>
+        <div class="badge-grid" id="achievementGrid"></div>
+      </div>
+    </section>
+
+    <section class="shell section" id="review">
+      <div class="section-head"><div><p class="kicker">WHY V2</p><h2>这个计划为什么重做？</h2></div><p>原版有完整的数据与周期意识，但对重新训练者而言，复杂度和恢复成本偏高。</p></div>
+      <div class="review-grid">
+        <article><span>01</span><h3>保留好东西</h3><p>保留四日结构、动作替代、RPE、历史记录和阶段化思路。</p></article>
+        <article><span>02</span><h3>砍掉噪音</h3><p>删除直接手臂孤立、独立核心日、1RM 和四专项并行。</p></article>
+        <article><span>03</span><h3>重新匹配马小</h3><p>用 RPE 6–8、微型卸载和次极限复测适配重新开始训练。</p></article>
+        <article><span>04</span><h3>核心不绑架进度</h3><p>必做腹肌保证覆盖；可选核心单独加 XP，不影响完成率。</p></article>
+      </div>
+      <div class="safety-card"><div class="safety-icon">!</div><div><h3>马小的安全边界</h3><ul id="safetyList"></ul></div></div>
+    </section>
+  </main>
+
+  <div class="modal" id="dataModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <section class="modal-card"><button class="modal-close" data-close="true">×</button><p class="kicker">DATA LOCKER</p><h2>预览数据管理</h2><p>预览版使用独立空间，不会改动正式 `/plan/` 的记录。</p><div class="modal-actions"><button class="button dark" id="exportButton">导出 V2 备份</button><label class="button outline-dark">导入 V2 备份<input type="file" id="importInput" accept="application/json" hidden></label><button class="button outline-dark" id="legacyButton">复制旧版记录到预览</button></div><small>旧版数据只会被复制，不会删除或覆盖。</small></section>
+  </div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <footer><div class="shell"><div class="brand"><span class="brand-bolt">M</span><span>马小训练俱乐部</span></div><p>稳定上线，比完美计划更重要。</p><a href="#top">回到顶部 ↑</a></div></footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
