@@ -1,88 +1,94 @@
 {
-  "schemaVersion": 2,
-  "title": "马小的 13 周力量与运动表现计划",
-  "subtitle": "重新适应 → 基础力量 → 动作质量 → 网球力量与速度 → 次极限复测",
+  "schemaVersion": 3,
+  "title": "马小的13周力量与运动表现计划",
+  "subtitle": "肌肥大基础 → 硬拉力量 → 质量重置 → 通用运动表现 → 次极限复测",
   "schedule": ["周一 A1", "周二 B1", "周四 A2", "周五 B2"],
+  "families": [
+    {"id":"deadlift","name":"硬拉","defaultVariant":"conventional-deadlift"},
+    {"id":"bench","name":"卧推","defaultVariant":"barbell-bench"},
+    {"id":"squat","name":"深蹲","defaultVariant":"high-bar-squat"},
+    {"id":"row","name":"划船","defaultVariant":"chest-supported-row"},
+    {"id":"vertical-pull","name":"垂直拉","defaultVariant":"assisted-pullup"}
+  ],
   "phases": [
-    {"id":"restart","name":"重新上线","weeks":[1,2,3,4],"emoji":"🌱","color":"lime","goal":"找回动作、节奏和训练习惯，不追求力竭。"},
-    {"id":"strength","name":"基础力量","weeks":[5,6,7,8],"emoji":"⚡","color":"blue","goal":"在稳定技术下提高力量，RPE 不超过 8。"},
-    {"id":"reset","name":"质量重置","weeks":[9],"emoji":"🫧","color":"yellow","goal":"主动卸载，修复动作质量，为速度训练做准备。"},
-    {"id":"tennis","name":"网球力量与速度","weeks":[10,11,12],"emoji":"🎾","color":"coral","goal":"用低量爆发训练提高旋转、侧向移动和力量传递。"},
-    {"id":"checkpoint","name":"毕业检查点","weeks":[13],"emoji":"🏁","color":"violet","goal":"用 3–5RM 或保留两次余力的重复次数测试验证进步。"}
+    {"id":"hypertrophy","name":"肌肥大基础","weeks":[1,2,3,4],"emoji":"🌱","color":"lime","goal":"建立动作容量与规律，W4主动减量。","priority":"均衡发展"},
+    {"id":"deadlift-strength","name":"硬拉力量","weeks":[5,6,7,8],"emoji":"⚡","color":"blue","goal":"传统杠铃硬拉是阶段主项，其他主项维持。","priority":"传统杠铃硬拉"},
+    {"id":"reset","name":"质量重置","weeks":[9],"emoji":"🫧","color":"yellow","goal":"降低疲劳，重置动作质量。","priority":"恢复与技术"},
+    {"id":"performance","name":"运动表现","weeks":[10,11,12],"emoji":"🚀","color":"coral","goal":"发展投掷、跳跃与快速力量输出。","priority":"力量速度"},
+    {"id":"checkpoint","name":"复测检查点","weeks":[13],"emoji":"🏁","color":"violet","goal":"复测硬拉、立定跳远和药球投掷，不做1RM。","priority":"技术合格的次极限表现"}
   ],
   "weeks": [
-    {"week":1,"label":"重新适应 01","mainSets":2,"mainReps":"10–12","accessorySets":2,"accessoryReps":"10–15","coreSets":2,"rpe":"6","note":"动作优先，结束时应感觉还能再做 4 次。"},
-    {"week":2,"label":"重新适应 02","mainSets":3,"mainReps":"8–12","accessorySets":2,"accessoryReps":"10–15","coreSets":2,"rpe":"6–7","note":"保持同样动作质量，小幅增加训练量。"},
-    {"week":3,"label":"重新适应 03","mainSets":3,"mainReps":"8–10","accessorySets":3,"accessoryReps":"10–12","coreSets":3,"rpe":"7","note":"只在动作稳定时小幅加重。"},
-    {"week":4,"label":"微型卸载","mainSets":2,"mainReps":"8","accessorySets":2,"accessoryReps":"10","coreSets":2,"rpe":"6","note":"组数减少约三分之一，给恢复让路。"},
-    {"week":5,"label":"基础力量 01","mainSets":3,"mainReps":"6–8","accessorySets":2,"accessoryReps":"8–12","coreSets":3,"rpe":"7","note":"主项进入力量区间，不做到力竭。"},
-    {"week":6,"label":"基础力量 02","mainSets":3,"mainReps":"6","accessorySets":3,"accessoryReps":"8–12","coreSets":3,"rpe":"7–7.5","note":"能稳定完成上限次数才加最小重量。"},
-    {"week":7,"label":"基础力量 03","mainSets":4,"mainReps":"5–6","accessorySets":3,"accessoryReps":"8–10","coreSets":3,"rpe":"7.5–8","note":"最重的一周，但禁止磨次数和动作变形。"},
-    {"week":8,"label":"技术基准","mainSets":3,"mainReps":"5 + 技术组","accessorySets":2,"accessoryReps":"8–10","coreSets":3,"rpe":"8 上限","note":"末组保留约 2 次余力，记录干净重复次数，不测极限。"},
-    {"week":9,"label":"质量重置","mainSets":2,"mainReps":"8","accessorySets":2,"accessoryReps":"10","coreSets":2,"rpe":"5–6","note":"轻重量、完整幅度、稳定节奏。"},
-    {"week":10,"label":"网球速度 01","mainSets":3,"mainReps":"5","accessorySets":2,"accessoryReps":"8–10","coreSets":2,"rpe":"7","note":"爆发动作放在最前，速度下降就停止。","power":true,"powerSets":3,"powerReps":"4/侧"},
-    {"week":11,"label":"网球速度 02","mainSets":3,"mainReps":"5","accessorySets":3,"accessoryReps":"8","coreSets":3,"rpe":"7–7.5","note":"保持轻快，不用疲劳换数量。","power":true,"powerSets":3,"powerReps":"4/侧"},
-    {"week":12,"label":"网球速度 03","mainSets":3,"mainReps":"4–5","accessorySets":2,"accessoryReps":"8","coreSets":2,"rpe":"7–8","note":"质量高于数量；落地或转体失控立即结束。","power":true,"powerSets":3,"powerReps":"3–4/侧"},
-    {"week":13,"label":"毕业检查点","mainSets":3,"mainReps":"3–5RM 或 RIR2","accessorySets":2,"accessoryReps":"8","coreSets":2,"rpe":"8 上限","note":"只记录技术合格成绩，不做 1RM，不做失败次数。","test":true}
+    {"week":1,"label":"肌肥大 01","mainSets":3,"mainReps":"8–10","accessorySets":2,"accessoryReps":"10–15","coreSets":2,"primerSets":2,"primerReps":"3","rpe":"6","note":"动作优先，传统硬拉单独使用3×5。"},
+    {"week":2,"label":"肌肥大 02","mainSets":3,"mainReps":"8–10","accessorySets":3,"accessoryReps":"10–15","coreSets":2,"primerSets":2,"primerReps":"3","rpe":"6–7","note":"保持余力，只在动作稳定时加最小重量。"},
+    {"week":3,"label":"肌肥大 03","mainSets":3,"mainReps":"8–12","accessorySets":3,"accessoryReps":"10–15","coreSets":3,"primerSets":3,"primerReps":"3","rpe":"7","note":"容量最高周，不做到力竭。"},
+    {"week":4,"label":"肌肥大卸载","mainSets":2,"mainReps":"8","accessorySets":2,"accessoryReps":"10","coreSets":2,"primerSets":2,"primerReps":"3","rpe":"6","note":"总组数减少约三分之一。"},
+    {"week":5,"label":"硬拉力量 01","mainSets":3,"mainReps":"5–6","accessorySets":2,"accessoryReps":"8–12","coreSets":3,"primerSets":3,"primerReps":"3","rpe":"7","deadliftSets":4,"deadliftReps":"5","note":"阶段主项：传统杠铃硬拉4×5。"},
+    {"week":6,"label":"硬拉力量 02","mainSets":3,"mainReps":"4–6","accessorySets":3,"accessoryReps":"8–12","coreSets":3,"primerSets":3,"primerReps":"3","rpe":"7–7.5","deadliftSets":4,"deadliftReps":"4","note":"硬拉4×4，每次重新建立起始姿势。"},
+    {"week":7,"label":"硬拉力量 03","mainSets":3,"mainReps":"4–5","accessorySets":3,"accessoryReps":"8–10","coreSets":3,"primerSets":3,"primerReps":"3","rpe":"7.5–8","deadliftSets":5,"deadliftReps":"3","note":"硬拉5×3，禁止磨地和失败次数。"},
+    {"week":8,"label":"硬拉技术顶组","mainSets":3,"mainReps":"3–5","accessorySets":2,"accessoryReps":"8–10","coreSets":3,"primerSets":3,"primerReps":"3","rpe":"8","deadliftSets":3,"deadliftReps":"3","note":"硬拉技术顶组3次，再做2×3减重组。"},
+    {"week":9,"label":"质量重置","mainSets":2,"mainReps":"4–6","accessorySets":2,"accessoryReps":"10","coreSets":2,"primerSets":2,"primerReps":"3","rpe":"5–6","deadliftSets":2,"deadliftReps":"4","note":"重量退一步，动作质量进两步。"},
+    {"week":10,"label":"运动表现 01","mainSets":3,"mainReps":"3–5","accessorySets":2,"accessoryReps":"8–10","coreSets":2,"primerSets":3,"primerReps":"3","rpe":"7","deadliftSets":5,"deadliftReps":"2","note":"快速硬拉使用约50%–60%估算1RM，不记录虚假速度。"},
+    {"week":11,"label":"运动表现 02","mainSets":3,"mainReps":"3–5","accessorySets":2,"accessoryReps":"8","coreSets":3,"primerSets":4,"primerReps":"3","rpe":"7","deadliftSets":6,"deadliftReps":"2","note":"投掷和跳跃保持低次数、高质量。"},
+    {"week":12,"label":"运动表现 03","mainSets":3,"mainReps":"3–5","accessorySets":2,"accessoryReps":"8","coreSets":2,"primerSets":3,"primerReps":"3","rpe":"7–8","deadliftSets":5,"deadliftReps":"2","note":"速度下降或落地失控立即停止。"},
+    {"week":13,"label":"次极限复测","mainSets":3,"mainReps":"3–5RM / RIR2","accessorySets":2,"accessoryReps":"8","coreSets":2,"primerSets":2,"primerReps":"测试热身","rpe":"8上限","deadliftSets":3,"deadliftReps":"3–5RM / RIR2","note":"复测技术合格成绩，不做1RM和失败次数。"}
   ],
   "sessions": [
     {
-      "id":"A1","day":"周一","short":"上肢复合","mood":"今天把推和拉重新接上线。","warmup":["划船机或快走 3 分钟","弹力带肩胛拉开 2×12","肩胛俯卧撑 2×8","主项空杆或轻重量 2 组"],
+      "id":"A1","day":"周一","short":"上肢复合","mood":"马小，先把球投快，再把卧推做稳。","warmup":["划船机或快走3分钟","肩胛俯卧撑2×8","弹力带肩胛拉开2×12","主项递增热身2–3组"],
+      "primer":{"id":"a1-primer","name":"跪姿药球胸前投掷","canonicalExerciseId":"medicine-ball-throw","variantId":"kneeling-chest-pass","phaseRole":"primer","area":"上肢爆发","alternatives":["爆发俯卧撑","弹力带快速推胸"],"cue":"每次都像第一投一样快，速度下降就停止。","metric":"throwDistance","details":{"setup":"双膝跪地，胸前持球，躯干稳定。","cues":["用力快速推出","手臂自然跟随","每次重新准备"],"errors":["用腰甩球","连续赶次数"],"tolerance":"投掷距离有小幅波动可以接受。","stop":"肩部疼痛或球速连续两次下降。"},"demoUrl":"https://exrx.net/Plyometrics/MBChestPass"},
       "exercises":[
-        {"id":"a1-bench","name":"杠铃平板卧推","area":"胸·推","main":true,"alternatives":["哑铃平板卧推","器械推胸"],"cue":"脚掌踩稳、肩胛后收，保留余力。"},
-        {"id":"a1-row","name":"胸托划船","area":"背·拉","main":true,"alternatives":["坐姿绳索划船","单臂哑铃划船"],"cue":"胸口贴稳，肘向后而不是耸肩。"},
-        {"id":"a1-incline","name":"上斜哑铃卧推","area":"上胸","alternatives":["上斜器械推胸","上斜俯卧撑"],"cue":"凳角 30° 左右，动作全程可控。","replaceInPower":true},
-        {"id":"a1-pulldown","name":"对握高位下拉","area":"背阔肌","alternatives":["辅助引体向上","单臂高位下拉"],"cue":"先沉肩，再把肘拉向身体两侧。"},
-        {"id":"a1-facepull","name":"绳索面拉","area":"后束·肩袖","alternatives":["反向蝴蝶机","弹力带面拉"],"cue":"轻重量，拉向眉眼高度。"}
+        {"id":"a1-bench","name":"杠铃平板卧推","canonicalExerciseId":"bench","variantId":"barbell-bench","phaseRole":"main","area":"胸·推","main":true,"alternatives":[{"name":"哑铃平板卧推","variantId":"db-bench"},{"name":"器械推胸","variantId":"machine-chest-press"}],"cue":"脚掌踩稳、肩胛后收，保留余力。","details":{"setup":"眼睛位于杠铃正下方，双脚稳定踩地。","cues":["肩胛后收下沉","前臂底部接近垂直","推起时保持胸廓稳定"],"errors":["肩膀前顶","臀部离凳"],"tolerance":"杠铃轨迹可轻微向肩部回移。","stop":"肩前侧尖锐疼痛或无法保持肩胛。"},"demoUrl":"https://exrx.net/WeightExercises/PectoralSternal/BBBenchPress"},
+        {"id":"a1-row","name":"胸托划船","canonicalExerciseId":"row","variantId":"chest-supported-row","phaseRole":"main","area":"背·拉","main":true,"alternatives":[{"name":"坐姿绳索划船","variantId":"seated-cable-row"},{"name":"单臂哑铃划船","variantId":"one-arm-db-row"}],"cue":"胸口贴稳，肘向后，不耸肩。","details":{"setup":"胸垫高度让手臂自然下垂。","cues":["胸口保持贴垫","肘向髋后方移动","顶端停顿"],"errors":["耸肩","借腰后仰"],"tolerance":"左右轻微力量差异可以接受。","stop":"肩前侧疼痛或必须摆动完成。"},"demoUrl":"https://exrx.net/WeightExercises/BackGeneral/LVChestSupportedRow"},
+        {"id":"a1-incline","name":"上斜哑铃卧推","canonicalExerciseId":"bench","variantId":"incline-db-bench","phaseRole":"accessory","area":"上胸","alternatives":[{"name":"上斜器械推胸","variantId":"incline-machine-press"},{"name":"上斜俯卧撑","variantId":"incline-pushup"}],"cue":"凳角约30°，动作全程可控。","details":{"setup":"凳角调至约30°，双脚踩稳。","cues":["肩胛贴凳","哑铃落向上胸两侧","两侧同步"],"errors":["凳角过高","底部失控"],"tolerance":"活动幅度按肩部舒适度调整。","stop":"肩前侧夹痛。"},"demoUrl":"https://exrx.net/WeightExercises/PectoralClavicular/DBInclineBenchPress"},
+        {"id":"a1-pulldown","name":"对握高位下拉","canonicalExerciseId":"vertical-pull","variantId":"neutral-pulldown","phaseRole":"accessory","area":"背阔肌","alternatives":[{"name":"辅助引体向上","variantId":"assisted-pullup"},{"name":"单臂高位下拉","variantId":"one-arm-pulldown"}],"cue":"先沉肩，再把肘拉向身体两侧。","details":{"setup":"大腿固定，握距让肩部舒适。","cues":["先沉肩","肘向下拉","控制回程"],"errors":["身体大幅后仰","拉到颈后"],"tolerance":"可略微后倾但躯干角度保持。","stop":"肩部夹痛或手臂麻木。"},"demoUrl":"https://exrx.net/WeightExercises/LatissimusDorsi/CBFrontPulldown"}
       ],
-      "power":{"id":"a1-power","name":"药球胸前推掷","area":"上肢速度","alternatives":["斜板爆发俯卧撑","弹力带快速推胸"],"cue":"每次都要快；速度明显下降就收工。"},
       "abs":{"label":"必做腹肌","equipment":{"name":"绳索卷腹","cue":"骨盆稳定，用腹部卷起躯干。"},"bodyweight":{"name":"反向卷腹","cue":"卷起骨盆，不靠甩腿。"},"reps":"10–15"},
       "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"健腹轮","cue":"只做到腰背保持中立的位置。"},"bodyweight":{"name":"死虫式","cue":"腰贴地，对侧手脚缓慢伸展。"},"reps":"6–10"}
     },
     {
-      "id":"B1","day":"周二","short":"下肢蹲推","mood":"腿和肩一起稳住，今天不抢重量。","warmup":["单车或快走 3 分钟","髋关节绕环每侧 10 次","自重深蹲 2×8","主项轻重量 2 组"],
+      "id":"B1","day":"周二","short":"下肢蹲＋肩","mood":"腿练稳，中后束用超级组收尾。","warmup":["单车或快走3分钟","踝髋动态活动各8次","自重深蹲2×8","主项递增热身2–3组"],
+      "primer":{"id":"b1-primer","name":"原地纵跳稳定落地","canonicalExerciseId":"jump","variantId":"countermovement-jump-stick","phaseRole":"primer","area":"下肢爆发","alternatives":["低箱跳","徒手蹲起提踵"],"cue":"跳得快，落得安静；每次完全站稳再开始。","metric":"landingQuality","details":{"setup":"双脚与髋同宽，周围留出安全空间。","cues":["快速下沉起跳","自然摆臂","屈髋屈膝安静落地"],"errors":["连续弹跳","膝盖向内塌"],"tolerance":"跳高不是首要，稳定优先。","stop":"落地失控、膝踝疼痛。"},"demoUrl":"https://exrx.net/Plyometrics/JumpToBox"},
       "exercises":[
-        {"id":"b1-squat","name":"高杠深蹲","area":"腿前链","main":true,"alternatives":["高脚杯深蹲","哈克深蹲"],"cue":"深度服从稳定，不在底部反弹。"},
-        {"id":"b1-hip","name":"杠铃臀推","area":"臀","main":true,"alternatives":["器械臀推","单腿臀桥"],"cue":"顶端收臀，不用腰椎过伸。"},
-        {"id":"b1-split","name":"保加利亚分腿蹲","area":"单腿力量","alternatives":["反向箭步蹲","登阶"],"cue":"躯干稳定，前脚全程踩实。"},
-        {"id":"b1-press","name":"坐姿哑铃推举","area":"肩","alternatives":["器械肩推","地雷管推举"],"cue":"背贴凳，不用腰部代偿。"},
-        {"id":"b1-calf","name":"站姿提踵","area":"小腿","alternatives":["坐姿提踵","台阶自重提踵"],"cue":"底部拉长、顶端停顿。","replaceInPower":true}
+        {"id":"b1-squat","name":"高杠深蹲","canonicalExerciseId":"squat","variantId":"high-bar-squat","phaseRole":"main","area":"腿前链","main":true,"alternatives":[{"name":"高脚杯深蹲","variantId":"goblet-squat"},{"name":"哈克深蹲","variantId":"hack-squat"}],"cue":"深度服从稳定，不在底部反弹。","details":{"setup":"杠铃放在斜方肌上部，双脚稳定。","cues":["吸气撑紧躯干","膝盖跟随脚尖","脚掌三点受力"],"errors":["脚跟抬起","腰背失去中立"],"tolerance":"深度按髋踝活动度调整。","stop":"膝、髋或腰部尖锐疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/Quadriceps/BBSquat"},
+        {"id":"b1-hip","name":"杠铃臀推","canonicalExerciseId":"hip-thrust","variantId":"barbell-hip-thrust","phaseRole":"main","area":"臀","main":true,"alternatives":[{"name":"器械臀推","variantId":"machine-hip-thrust"},{"name":"单腿臀桥","variantId":"single-leg-glute-bridge"}],"cue":"顶端收臀，不用腰椎过伸。","details":{"setup":"肩胛下缘靠凳，杠铃垫放在髋部。","cues":["下巴微收","肋骨收住","顶端臀部夹紧"],"errors":["腰椎过伸","脚离身体过远"],"tolerance":"顶端不必追求过高。","stop":"腰部疼痛或髋前侧夹痛。"},"demoUrl":"https://exrx.net/WeightExercises/GluteusMaximus/BBHipThrust"},
+        {"id":"b1-split","name":"保加利亚分腿蹲","canonicalExerciseId":"single-leg","variantId":"bulgarian-split-squat","phaseRole":"accessory","area":"单腿力量","alternatives":[{"name":"反向箭步蹲","variantId":"reverse-lunge"},{"name":"登阶","variantId":"step-up"}],"cue":"躯干稳定，前脚全程踩实。","details":{"setup":"后脚轻放凳面，前脚留出稳定距离。","cues":["前脚踩稳","膝盖跟随脚尖","躯干角度保持"],"errors":["后腿过度发力","左右晃动"],"tolerance":"可缩小动作幅度。","stop":"膝部尖锐疼痛或失去平衡。"},"demoUrl":"https://exrx.net/WeightExercises/Quadriceps/DBSingleLegSplitSquat"},
+        {"id":"b1-lateral","name":"哑铃侧平举","canonicalExerciseId":"lateral-raise","variantId":"db-lateral-raise","phaseRole":"shoulder-superset","area":"肩中束","alternatives":[{"name":"器械侧平举","variantId":"machine-lateral-raise"},{"name":"绳索侧平举","variantId":"cable-lateral-raise"}],"cue":"轻重量，手肘带动，不耸肩。","details":{"setup":"站稳，哑铃位于身体两侧。","cues":["肘部微屈","抬至肩高附近","控制下放"],"errors":["耸肩","借身体甩动"],"tolerance":"肩高以下也可获得刺激。","stop":"肩部夹痛。"},"demoUrl":"https://exrx.net/WeightExercises/DeltoidLateral/DBLateralRaise"},
+        {"id":"b1-rear","name":"反向蝴蝶机","canonicalExerciseId":"rear-delt","variantId":"reverse-pec-deck","phaseRole":"shoulder-superset","area":"肩后束","alternatives":[{"name":"绳索反向飞鸟","variantId":"cable-rear-fly"},{"name":"俯身哑铃飞鸟","variantId":"bent-over-rear-fly"}],"cue":"肩膀远离耳朵，后束带动手臂打开。","details":{"setup":"胸口贴垫，手柄与肩同高。","cues":["肩膀下沉","手臂向两侧打开","顶端短暂停顿"],"errors":["耸肩","用腰后仰"],"tolerance":"小重量和较短幅度可接受。","stop":"肩后侧疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/DeltoidPosterior/LVRearLateralRaise"}
       ],
-      "power":{"id":"b1-power","name":"低箱跳 + 稳定落地","area":"下肢速度","alternatives":["徒手蹲起提踵","低台阶快速登阶"],"cue":"落地安静且稳定；做不到就换低冲击版本。"},
       "abs":{"label":"必做腹肌","equipment":{"name":"罗马椅提膝","cue":"骨盆后倾，避免只是抬大腿。"},"bodyweight":{"name":"仰卧屈膝举腿","cue":"腰背贴地，慢慢放下。"},"reps":"8–12"},
-      "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"单侧农夫行走","cue":"身体不侧倾，像端着一杯水前进。"},"bodyweight":{"name":"侧平板支撑","cue":"头、躯干和腿保持一条线。"},"reps":"20–30m / 20–30s"}
+      "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"单侧农夫行走","cue":"身体不侧倾。"},"bodyweight":{"name":"侧平板支撑","cue":"头、躯干和腿保持一条线。"},"reps":"20–30m / 20–30s"}
     },
     {
-      "id":"A2","day":"周四","short":"上肢变体·网球","mood":"马小，今天把力量送进球拍。","warmup":["划船机 3 分钟","弹力带外旋 2×12","胸椎旋转每侧 8 次","主项轻重量 2 组"],
+      "id":"A2","day":"周四","short":"上肢变式","mood":"今天用变式巩固力量，再把球砸快。","warmup":["划船机3分钟","弹力带外旋2×12","胸椎旋转每侧8次","主项递增热身2–3组"],
+      "primer":{"id":"a2-primer","name":"药球砸地","canonicalExerciseId":"medicine-ball-throw","variantId":"medicine-ball-slam","phaseRole":"primer","area":"全身爆发","alternatives":["头后向前药球投掷","弹力带快速下拉"],"cue":"全身快速发力，球速下降就停止。","metric":"quality","details":{"setup":"双脚稳定，药球举至头顶。","cues":["肋骨收住","髋与躯干同时发力","每次重新站稳"],"errors":["只用手臂","连续赶次数"],"tolerance":"球反弹高度变化可以接受。","stop":"腰肩疼痛或动作明显减速。"},"demoUrl":"https://exrx.net/Plyometrics/MBOverheadThrow"},
       "exercises":[
-        {"id":"a2-dbbench","name":"哑铃平板卧推","area":"胸·稳定","main":true,"alternatives":["器械推胸","俯卧撑"],"cue":"两侧同步，底部不失控。"},
-        {"id":"a2-cablerow","name":"坐姿绳索划船","area":"背·稳定","main":true,"alternatives":["胸托划船","单臂哑铃划船"],"cue":"顶端停顿一拍，不向后仰。"},
-        {"id":"a2-landmine","name":"半跪地雷管推","area":"肩·躯干传力","alternatives":["单臂绳索推","跪姿哑铃推举"],"cue":"臀腹收紧，推向前上方。"},
-        {"id":"a2-pullup","name":"辅助引体向上","area":"背阔肌","alternatives":["对握高位下拉","弹力带引体"],"cue":"全程控制，不借摆动。"},
-        {"id":"a2-rearfly","name":"反向蝴蝶机","area":"后束·肩胛","alternatives":["俯身哑铃飞鸟","弹力带反向飞鸟"],"cue":"肩膀远离耳朵，轻重量完成。","replaceInPower":true}
+        {"id":"a2-bench","name":"哑铃平板卧推","canonicalExerciseId":"bench","variantId":"db-bench","phaseRole":"main","area":"胸·稳定","main":true,"phaseVariants":{"deadlift-strength":{"name":"暂停卧推","variantId":"paused-bench","cue":"胸口停顿一秒，保持全身张力。"},"performance":{"name":"杠铃平板卧推","variantId":"barbell-bench","cue":"使用可控重量，向心快速但不抛杠。"}},"alternatives":[{"name":"器械推胸","variantId":"machine-chest-press"},{"name":"俯卧撑","variantId":"pushup"}],"cue":"两侧同步，底部不失控。","details":{"setup":"双脚踩稳，肩胛贴凳。","cues":["两侧同步","手腕保持中立","控制底部"],"errors":["哑铃碰撞","肩膀前顶"],"tolerance":"左右轻微轨迹差异可以接受。","stop":"肩前侧疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/PectoralSternal/DBBenchPress"},
+        {"id":"a2-cablerow","name":"坐姿绳索划船","canonicalExerciseId":"row","variantId":"seated-cable-row","phaseRole":"main","area":"背·稳定","main":true,"alternatives":[{"name":"胸托划船","variantId":"chest-supported-row"},{"name":"单臂哑铃划船","variantId":"one-arm-db-row"}],"cue":"顶端停顿一拍，不向后仰。","details":{"setup":"双脚踩稳，脊柱保持中立。","cues":["先稳定肩胛","肘向后拉","控制回程"],"errors":["借腰摆动","耸肩"],"tolerance":"躯干可有很小自然移动。","stop":"腰肩疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/BackGeneral/CBSeatedRow"},
+        {"id":"a2-pullup","name":"辅助引体向上","canonicalExerciseId":"vertical-pull","variantId":"assisted-pullup","phaseRole":"accessory","area":"背阔肌","alternatives":[{"name":"对握高位下拉","variantId":"neutral-pulldown"},{"name":"弹力带引体","variantId":"band-assisted-pullup"}],"cue":"全程控制，不借摆动。","details":{"setup":"选择允许完整动作的辅助重量。","cues":["先沉肩","胸口向上","控制下降"],"errors":["蹬腿摆动","只做半程"],"tolerance":"可增加辅助重量保证幅度。","stop":"肩肘疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/LatissimusDorsi/AsPullupOpen"},
+        {"id":"a2-pushup","name":"俯卧撑","canonicalExerciseId":"bench","variantId":"pushup","phaseRole":"accessory","area":"胸·躯干","alternatives":[{"name":"器械推胸","variantId":"machine-chest-press"},{"name":"上斜俯卧撑","variantId":"incline-pushup"}],"cue":"身体保持一条线，胸口主动靠近地面。","details":{"setup":"双手略宽于肩，脚尖踩地。","cues":["臀腹收紧","肘部约45°","胸口和髋同时移动"],"errors":["塌腰","头部前伸"],"tolerance":"可抬高手位降低难度。","stop":"肩腕疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/PectoralSternal/BWPushup"}
       ],
-      "power":{"id":"a2-power","name":"药球旋转侧抛","area":"网球旋转速度","alternatives":["弹力带快速转体推","徒手分腿站姿快速转体"],"cue":"从脚到髋再到躯干，球速下降立即停止。"},
-      "abs":{"label":"必做腹肌","equipment":{"name":"健身球卷腹","cue":"让脊柱贴合球面，再用腹部卷起。"},"bodyweight":{"name":"自行车卷腹","cue":"慢速转体，不拉扯颈部。"},"reps":"10–15"},
-      "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"Pallof 抗旋转推","cue":"身体正对前方，不被绳索拉转。"},"bodyweight":{"name":"鸟狗式","cue":"骨盆不旋转，对侧手脚伸长。"},"reps":"8–12/侧"}
+      "abs":{"label":"必做腹肌","equipment":{"name":"健身球卷腹","cue":"贴合球面，用腹部卷起。"},"bodyweight":{"name":"自行车卷腹","cue":"慢速转体，不拉扯颈部。"},"reps":"10–15"},
+      "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"Pallof抗旋转推","cue":"身体正对前方。"},"bodyweight":{"name":"鸟狗式","cue":"骨盆不旋转。"},"reps":"8–12/侧"}
     },
     {
-      "id":"B2","day":"周五","short":"下肢髋铰链","mood":"一周最后一关：髋发力，腰别代班。","warmup":["单车或椭圆机 3 分钟","臀桥 2×10","髋铰链空手练习 2×8","主项轻重量 2 组"],
+      "id":"B2","day":"周五","short":"硬拉主项＋肩","mood":"阶段主角登场：每次起杠都重新建立姿势。","warmup":["单车或椭圆机3分钟","臀桥2×10","髋铰链空手练习2×8","硬拉递增热身3–4组"],
+      "primer":{"id":"b2-primer","name":"立定跳远稳定落地","canonicalExerciseId":"jump","variantId":"standing-broad-jump","phaseRole":"primer","area":"水平爆发","alternatives":["低台阶快速登阶","原地纵跳稳定落地"],"cue":"向前跳，更要稳稳刹住；每次完全复位。","metric":"broadJump","details":{"setup":"脚尖位于测量线后，前方地面无障碍。","cues":["髋膝快速伸展","双臂协同摆动","双脚同时稳定落地"],"errors":["连续跳","落地向前扑"],"tolerance":"距离波动可以接受，取三次最佳。","stop":"落地失控、膝踝疼痛。"},"demoUrl":"https://exrx.net/Plyometrics/StandingLongJump"},
       "exercises":[
-        {"id":"b2-deadlift","name":"六角杠硬拉","area":"髋铰链","main":true,"alternatives":["罗马尼亚硬拉","哑铃罗马尼亚硬拉"],"cue":"脚推地、背部中立，停止任何磨地次数。"},
-        {"id":"b2-curl","name":"坐姿腿弯举","area":"腘绳肌","main":true,"alternatives":["俯卧腿弯举","弹力带腿弯举"],"cue":"离心放慢，不借身体摆动。"},
-        {"id":"b2-step","name":"登阶","area":"单腿力量","alternatives":["侧向箭步蹲","反向箭步蹲"],"cue":"由台上腿发力，不用后腿蹬地。"},
-        {"id":"b2-lateral","name":"绳索侧平举","area":"肩中束","alternatives":["哑铃侧平举","器械侧平举"],"cue":"轻重量，肩膀不耸起。","replaceInPower":true},
-        {"id":"b2-tibialis","name":"胫骨前肌提拉","area":"脚踝·小腿","alternatives":["弹力带踝背屈","坐姿提踵"],"cue":"控制全程，动作幅度优先。"}
+        {"id":"b2-deadlift","name":"传统杠铃硬拉","canonicalExerciseId":"deadlift","variantId":"conventional-deadlift","phaseRole":"main","area":"髋铰链","main":true,"phaseVariants":{"performance":{"name":"固定负荷快速硬拉","variantId":"conventional-deadlift-speed","cue":"约50%–60%估算1RM，每次重新起杠，保持快速发力意图。"}},"alternatives":[{"name":"六角杠硬拉","variantId":"trap-bar-deadlift"},{"name":"罗马尼亚硬拉","variantId":"romanian-deadlift"}],"cue":"杠贴近身体、脚推地，禁止磨地次数。","details":{"setup":"杠铃位于中脚上方，肩略在杠前。","cues":["收紧背阔肌","脚推地面","髋膝同步伸展","每次重新建立姿势"],"errors":["杠铃离腿","起杠时弓腰","顶端过度后仰"],"tolerance":"髋位因身材比例不同可有差异。","stop":"腰背尖锐疼痛、动作明显变形或失败次数。"},"demoUrl":"https://exrx.net/WeightExercises/ErectorSpinae/BBDeadlift"},
+        {"id":"b2-curl","name":"坐姿腿弯举","canonicalExerciseId":"leg-curl","variantId":"seated-leg-curl","phaseRole":"main","area":"腘绳肌","main":true,"alternatives":[{"name":"俯卧腿弯举","variantId":"lying-leg-curl"},{"name":"弹力带腿弯举","variantId":"band-leg-curl"}],"cue":"离心放慢，不借身体摆动。","details":{"setup":"膝轴对准器械转轴，固定大腿。","cues":["完整屈膝","顶端收缩","控制回程"],"errors":["臀部离座","快速弹回"],"tolerance":"幅度按膝部舒适度调整。","stop":"膝后侧疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/Hamstrings/LVSeatedLegCurl"},
+        {"id":"b2-step","name":"登阶","canonicalExerciseId":"single-leg","variantId":"step-up","phaseRole":"accessory","area":"单腿力量","alternatives":[{"name":"侧向箭步蹲","variantId":"lateral-lunge"},{"name":"反向箭步蹲","variantId":"reverse-lunge"}],"cue":"由台上腿发力，不用后腿蹬地。","details":{"setup":"台阶高度允许台上脚全脚掌踩稳。","cues":["台上腿主动发力","骨盆保持水平","控制下台"],"errors":["后腿蹬地","膝盖内扣"],"tolerance":"可降低台阶高度。","stop":"膝部疼痛或失去平衡。"},"demoUrl":"https://exrx.net/WeightExercises/Quadriceps/DBStepUp"},
+        {"id":"b2-lateral","name":"绳索侧平举","canonicalExerciseId":"lateral-raise","variantId":"cable-lateral-raise","phaseRole":"shoulder-superset","area":"肩中束","alternatives":[{"name":"哑铃侧平举","variantId":"db-lateral-raise"},{"name":"器械侧平举","variantId":"machine-lateral-raise"}],"cue":"轻重量，肩膀不耸起。","details":{"setup":"绳索位于身体另一侧下方。","cues":["肘部带动","肩膀下沉","控制回程"],"errors":["躯干大幅侧倾","耸肩"],"tolerance":"抬至肩高以下即可。","stop":"肩部夹痛。"},"demoUrl":"https://exrx.net/WeightExercises/DeltoidLateral/CBOneArmLateralRaise"},
+        {"id":"b2-rear","name":"绳索反向飞鸟","canonicalExerciseId":"rear-delt","variantId":"cable-rear-fly","phaseRole":"shoulder-superset","area":"肩后束","alternatives":[{"name":"反向蝴蝶机","variantId":"reverse-pec-deck"},{"name":"俯身哑铃飞鸟","variantId":"bent-over-rear-fly"}],"cue":"轻重量打开手臂，不用斜方肌抢工作。","details":{"setup":"双手交叉握住对侧绳索，站在中间。","cues":["肩膀下沉","手臂向外打开","顶端停顿"],"errors":["耸肩","身体后仰"],"tolerance":"可使用单侧版本。","stop":"肩后侧疼痛。"},"demoUrl":"https://exrx.net/WeightExercises/DeltoidPosterior/CBRearLateralRaise"}
       ],
-      "power":{"id":"b2-power","name":"侧向跨步急停","area":"网球侧向稳定","alternatives":["侧向登阶提膝","小幅度侧向滑步"],"cue":"先学会稳稳刹住，再追求速度。"},
-      "abs":{"label":"必做腹肌","equipment":{"name":"器械卷腹","cue":"调整座椅后用腹部收缩，不靠手臂拉。"},"bodyweight":{"name":"屈膝卷腹","cue":"肋骨向骨盆靠近，颈部放松。"},"reps":"10–15"},
-      "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"半跪绳索上提","cue":"髋和胸口协同转动，不甩手。"},"bodyweight":{"name":"平板触肩","cue":"双脚稍宽，骨盆尽量不晃。"},"reps":"8–12/侧"}
+      "abs":{"label":"必做腹肌","equipment":{"name":"器械卷腹","cue":"用腹部收缩，不靠手臂拉。"},"bodyweight":{"name":"屈膝卷腹","cue":"肋骨向骨盆靠近。"},"reps":"10–15"},
+      "core":{"label":"核心彩蛋 · 可选","equipment":{"name":"半跪绳索上提","cue":"髋和胸口协同转动。"},"bodyweight":{"name":"平板触肩","cue":"骨盆尽量不晃。"},"reps":"8–12/侧"}
     }
   ],
-  "safety": [
+  "optionalFinishers":["站姿提踵2×12–15","胫骨前肌提拉2×15–20"],
+  "safety":[
     "尖锐、持续或不断加重的疼痛：停止相关动作，不用意志硬顶。",
-    "睡眠明显不足或全身疲劳：每个动作减少 1 组，RPE 上限降到 7。",
-    "速度动作出现明显减速、落地失控或动作变形：本轮立即结束。",
-    "本计划不安排 1RM；W13 只记录技术合格的次极限成绩。"
+    "睡眠明显不足或全身疲劳：每个动作减少1组，RPE上限降到7。",
+    "爆发动作连续两次减速或落地失控：结束该动作，不影响训练通关。",
+    "新纪录只认技术合格组；本计划不安排1RM和失败次数。"
   ]
 }

@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10213d">
-  <meta name="description" content="马小的 13 周力量与网球运动表现训练计划">
-  <title>马小的训练计划 V2 · Preview</title>
+  <meta name="description" content="马小的13周力量、硬拉主项与通用运动表现训练计划">
+  <title>马小的训练计划 V3 · Preview</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div class="preview-ribbon">PREVIEW · 不影响正式训练记录</div>
+  <div class="preview-ribbon">PREVIEW V3 · 不影响正式记录</div>
   <header class="hero" id="top">
     <nav class="nav shell">
       <a class="brand" href="#top"><span class="brand-bolt">M</span><span>MA XIAO<br><small>TRAINING CLUB</small></span></a>
@@ -18,7 +18,7 @@
     </nav>
     <div class="hero-grid shell">
       <section>
-        <div class="eyebrow"><i></i> STRENGTH × TENNIS × CONSISTENCY</div>
+        <div class="eyebrow"><i></i> STRENGTH × POWER × CONSISTENCY</div>
         <h1>马小的<br><em>训练计划</em></h1>
         <p class="hero-copy" id="welcomeText">马小你回来了。今天不需要证明什么，只要完成下一次高质量训练。</p>
         <div class="hero-actions"><a class="button primary" href="#mission">进入今日任务 <span>→</span></a><a class="button outline" href="#roadmap">查看路线图</a></div>
@@ -31,9 +31,9 @@
       <aside class="player-card">
         <div class="player-top"><span>PLAYER 01</span><span class="status-dot">ONLINE</span></div>
         <div class="avatar">马<small>小</small></div>
-        <h2>力量重新上线</h2>
+        <h2>力量与表现升级</h2>
         <div class="level-track"><i id="levelTrack"></i></div>
-        <div class="player-meta"><span>主线 <b>力量基础</b></span><span>专项 <b>网球</b></span><span>周期 <b>13 周</b></span></div>
+        <div class="player-meta"><span>阶段主项 <b>硬拉</b></span><span>表现 <b>跳跃·投掷</b></span><span>周期 <b>13 周</b></span></div>
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
       </aside>
     </div>
@@ -58,11 +58,12 @@
       </div>
       <article class="mission-card">
         <div class="mission-heading">
-          <div><span id="missionCode">A1 · 周一</span><h3 id="missionTitle">上肢复合</h3><p id="missionMood"></p></div>
+          <div><span id="missionCode">A1 · 周一</span><h3 id="missionTitle">上肢复合</h3><p id="missionMood"></p><b class="priority-pill" id="priorityBadge"></b></div>
           <div class="mission-prescription"><strong id="missionSets">2 × 10–12</strong><span id="missionRpe">RPE 6</span></div>
         </div>
         <div class="week-note" id="weekNote"></div>
         <div class="warmup" id="warmupList"></div>
+        <div id="primerZone"></div>
         <div class="exercise-list" id="exerciseList"></div>
         <div class="bonus-zone" id="bonusZone"></div>
         <div class="mission-footer">
@@ -92,6 +93,18 @@
         <article class="panel"><div class="panel-title"><h3>13 周通关图</h3><span>每格 = 1 次训练</span></div><div class="heatmap" id="heatmap"></div></article>
         <article class="panel"><div class="panel-title"><h3>最近训练</h3><button class="text-btn" id="clearPreview">清空预览记录</button></div><div id="historyList" class="history-list"></div></article>
       </div>
+      <article class="records-panel">
+        <div class="panel-title"><div><p class="kicker">STRENGTH RECORDS</p><h3>按动作查询力量战绩</h3></div><span>默认展示估算1RM趋势</span></div>
+        <div class="record-toolbar">
+          <label>动作<select id="recordFamily"></select></label>
+          <label>变式<select id="recordVariant"></select></label>
+          <label>时间<select id="recordRange"><option value="28">最近4周</option><option value="56">最近8周</option><option value="91">最近13周</option><option value="all" selected>全部</option></select></label>
+        </div>
+        <div class="metric-tabs" id="metricTabs"><button data-metric="e1rm" class="active">估算1RM</button><button data-metric="weight">最重重量</button><button data-metric="volume">训练量</button><button data-metric="rpe">RPE</button></div>
+        <div class="record-summary" id="recordSummary"></div>
+        <div class="chart-wrap" id="recordChart"></div>
+        <div class="record-list" id="recordList"></div>
+      </article>
     </section>
 
     <section class="achievement-section">
@@ -106,7 +119,7 @@
       <div class="review-grid">
         <article><span>01</span><h3>保留好东西</h3><p>保留四日结构、动作替代、RPE、历史记录和阶段化思路。</p></article>
         <article><span>02</span><h3>砍掉噪音</h3><p>删除直接手臂孤立、独立核心日、1RM 和四专项并行。</p></article>
-        <article><span>03</span><h3>重新匹配马小</h3><p>用 RPE 6–8、微型卸载和次极限复测适配重新开始训练。</p></article>
+        <article><span>03</span><h3>阶段主项更明确</h3><p>W5–8主攻传统硬拉，其他动作维持；W10–12转向通用运动表现。</p></article>
         <article><span>04</span><h3>核心不绑架进度</h3><p>必做腹肌保证覆盖；可选核心单独加 XP，不影响完成率。</p></article>
       </div>
       <div class="safety-card"><div class="safety-icon">!</div><div><h3>马小的安全边界</h3><ul id="safetyList"></ul></div></div>
@@ -115,10 +128,13 @@
 
   <div class="modal" id="dataModal" aria-hidden="true">
     <div class="modal-backdrop" data-close="true"></div>
-    <section class="modal-card"><button class="modal-close" data-close="true">×</button><p class="kicker">DATA LOCKER</p><h2>预览数据管理</h2><p>预览版使用独立空间，不会改动正式 `/plan/` 的记录。</p><div class="modal-actions"><button class="button dark" id="exportButton">导出 V2 备份</button><label class="button outline-dark">导入 V2 备份<input type="file" id="importInput" accept="application/json" hidden></label><button class="button outline-dark" id="legacyButton">复制旧版记录到预览</button></div><small>旧版数据只会被复制，不会删除或覆盖。</small></section>
+    <section class="modal-card"><button class="modal-close" data-close="true">×</button><p class="kicker">DATA LOCKER</p><h2>预览数据管理</h2><p>V3使用独立空间并自动迁移V2记录，不会改动正式 /plan/。</p><div class="modal-actions"><button class="button dark" id="exportButton">导出 V3 备份</button><label class="button outline-dark">导入 V2 / V3 备份<input type="file" id="importInput" accept="application/json" hidden></label><button class="button outline-dark" id="legacyButton">复制旧版记录到预览</button></div><small>导入不会重复发放纪录XP；旧版数据只复制，不删除。</small></section>
   </div>
+  <div class="drawer" id="exerciseDrawer" aria-hidden="true"><div class="drawer-backdrop" data-drawer-close="true"></div><section class="drawer-card"><button class="modal-close" data-drawer-close="true">×</button><div id="exerciseDetail"></div></section></div>
+  <div class="modal" id="recordModal" aria-hidden="true"><div class="modal-backdrop" data-record-close="true"></div><section class="modal-card"><button class="modal-close" data-record-close="true">×</button><p class="kicker">EDIT RECORD</p><h2>编辑训练记录</h2><form id="recordForm"><input type="hidden" id="editLogId"><div class="edit-grid"><label>重量 kg<input id="editWeight" type="number" min="0" step="0.5"></label><label>组数<input id="editSets" type="number" min="1"></label><label>次数<input id="editReps" type="number" min="1"></label><label>RPE<input id="editRpe" type="number" min="1" max="10" step="0.5"></label></div><label class="quality-edit"><input id="editQuality" type="checkbox"> 动作技术合格</label><button class="button dark" type="submit">保存修改</button></form></section></div>
+  <div class="celebration" id="celebration" aria-live="assertive"><div class="confetti"></div><strong id="celebrationTitle"></strong><span id="celebrationText"></span></div>
   <div id="toast" class="toast" aria-live="polite"></div>
   <footer><div class="shell"><div class="brand"><span class="brand-bolt">M</span><span>马小训练俱乐部</span></div><p>稳定上线，比完美计划更重要。</p><a href="#top">回到顶部 ↑</a></div></footer>
-  <script src="assets/app.js" defer></script>
+  <script type="module" src="assets/app.js"></script>
 </body>
 </html>
