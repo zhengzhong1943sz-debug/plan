@@ -4,13 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10213d">
-  <meta name="description" content="马小的13周力量与运动表现计划V3.1：蹲主导与髋铰链主导">
-  <title>马小的训练计划 V3.1 · Preview</title>
+  <meta name="description" content="马小的13周多轮力量与运动表现计划V3.3">
+  <title>马小的训练计划 V3.3</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div class="preview-ribbon">PREVIEW V3.1 · 不影响正式记录</div>
   <header class="hero" id="top">
     <nav class="nav shell">
       <a class="brand" href="#top"><span class="brand-bolt">M</span><span>MA XIAO<br><small>TRAINING CLUB</small></span></a>
@@ -30,11 +29,11 @@
         </div>
       </section>
       <aside class="player-card">
-        <div class="player-top"><span>PLAYER 01</span><span class="status-dot">ONLINE</span></div>
+        <div class="player-top"><span id="playerRound">ROUND 01</span><span class="status-dot">ONLINE</span></div>
         <div class="avatar">马<small>小</small></div>
         <h2>力量与表现升级</h2>
         <div class="level-track"><i id="levelTrack"></i></div>
-        <div class="player-meta"><span>下肢结构 <b>双蹲双铰链</b></span><span>阶段主项 <b>硬拉</b></span><span>周期 <b>13 周</b></span></div>
+        <div class="player-meta"><span>下肢结构 <b>双蹲双铰链</b></span><span>阶段主项 <b>硬拉</b></span><span>模式 <b>多轮 13 周</b></span></div>
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
       </aside>
     </div>
@@ -45,7 +44,7 @@
     <section class="shell section" id="mission">
       <div class="section-head"><div><p class="kicker">TODAY'S MISSION</p><h2>马小，今天练什么？</h2></div><p>完成主训练和必做腹肌即可通关；核心彩蛋只加分，不扣分。</p></div>
       <div class="selector-card">
-        <div class="week-control"><label for="weekSelect">训练周</label><select id="weekSelect"></select><span id="phaseBadge"></span></div>
+        <div class="week-control"><label>当前轮次</label><strong id="activeRoundLabel">Round 1</strong><label for="weekSelect">训练周</label><select id="weekSelect"></select><span id="phaseBadge"></span></div>
         <div class="session-tabs" id="sessionTabs"></div>
       </div>
       <div class="readiness-card">
@@ -67,9 +66,10 @@
         <div id="primerZone"></div>
         <div class="exercise-list" id="exerciseList"></div>
         <div class="bonus-zone" id="bonusZone"></div>
+        <div id="finisherZone"></div>
         <div class="mission-footer">
           <div><strong id="completionStatus">还差主训练和必做腹肌</strong><span>核心彩蛋不影响通关</span></div>
-          <button class="button primary" id="completeButton">完成今日任务 +100 XP</button>
+          <div class="mission-buttons"><button class="button outline-dark" id="roundButton" hidden>结束本轮，开启新 Round</button><button class="button primary" id="completeButton">完成今日任务 +100 XP</button></div>
         </div>
       </article>
     </section>
@@ -85,20 +85,21 @@
     <section class="shell section" id="progress">
       <div class="section-head"><div><p class="kicker">PLAYER STATS</p><h2>马小的战绩面板</h2></div><p>必做任务决定进度；核心彩蛋单独统计，不制造负罪感。</p></div>
       <div class="stats-grid">
-        <article class="stat-card lime"><span>训练完成</span><strong id="sessionCount">0 / 52</strong><div class="meter"><i id="sessionMeter"></i></div></article>
+        <article class="stat-card lime"><span>当前 Round</span><strong id="sessionCount">0 / 52</strong><div class="meter"><i id="sessionMeter"></i></div><small id="totalSessionCount">累计 0 次</small></article>
         <article class="stat-card blue"><span>本周进度</span><strong id="weekCount">0 / 4</strong><small>四次必做任务</small></article>
-        <article class="stat-card coral"><span>核心彩蛋</span><strong id="coreCount">0</strong><small>可选完成次数</small></article>
+        <article class="stat-card coral"><span>连续训练周</span><strong id="coreCount">0</strong><small id="bestStreak">历史最高 0 周</small></article>
         <article class="stat-card yellow"><span>累计 XP</span><strong id="xpCount">0</strong><small id="nextLevel">距下一级 500 XP</small></article>
       </div>
       <div class="progress-panels">
-        <article class="panel"><div class="panel-title"><h3>13 周通关图</h3><span>每格 = 1 次训练</span></div><div class="heatmap" id="heatmap"></div></article>
-        <article class="panel"><div class="panel-title"><h3>最近训练</h3><button class="text-btn" id="clearPreview">清空预览记录</button></div><div id="historyList" class="history-list"></div></article>
+        <article class="panel"><div class="panel-title"><h3>13 周通关图</h3><select id="historyRound"></select></div><div class="heatmap" id="heatmap"></div></article>
+        <article class="panel"><div class="panel-title"><h3>最近训练</h3><button class="text-btn" id="clearData">清空全部数据</button></div><div id="historyList" class="history-list"></div></article>
       </div>
       <article class="records-panel">
         <div class="panel-title"><div><p class="kicker">STRENGTH RECORDS</p><h3>按动作查询力量战绩</h3></div><span>默认展示估算1RM趋势</span></div>
         <div class="record-toolbar">
           <label>动作<select id="recordFamily"></select></label>
           <label>变式<select id="recordVariant"></select></label>
+          <label>Round<select id="recordRound"><option value="all">全部 Round</option></select></label>
           <label>时间<select id="recordRange"><option value="28">最近4周</option><option value="56">最近8周</option><option value="91">最近13周</option><option value="all" selected>全部</option></select></label>
         </div>
         <div class="metric-tabs" id="metricTabs"><button data-metric="e1rm" class="active">估算1RM</button><button data-metric="weight">最重重量</button><button data-metric="volume">训练量</button><button data-metric="rpe">RPE</button></div>
@@ -116,12 +117,12 @@
     </section>
 
     <section class="shell section" id="review">
-      <div class="section-head"><div><p class="kicker">WHY V2</p><h2>这个计划为什么重做？</h2></div><p>原版有完整的数据与周期意识，但对重新训练者而言，复杂度和恢复成本偏高。</p></div>
+      <div class="section-head"><div><p class="kicker">WHY V3.3</p><h2>这个计划为什么重做？</h2></div><p>把13周变成可以反复运行的训练系统，历史不会因新一轮开始而清零。</p></div>
       <div class="review-grid">
         <article><span>01</span><h3>保留好东西</h3><p>保留四日结构、动作替代、RPE、历史记录和阶段化思路。</p></article>
         <article><span>02</span><h3>砍掉噪音</h3><p>删除直接手臂孤立、独立核心日、1RM 和四专项并行。</p></article>
         <article><span>03</span><h3>阶段主项更明确</h3><p>W5–8主攻传统硬拉，其他动作维持；W10–12转向通用运动表现。</p></article>
-        <article><span>04</span><h3>核心不绑架进度</h3><p>必做腹肌保证覆盖；可选核心单独加 XP，不影响完成率。</p></article>
+        <article><span>04</span><h3>每轮都留下战绩</h3><p>新 Round 重置周进度，但保留XP、纪录、趋势和连续训练周。</p></article>
       </div>
       <div class="safety-card"><div class="safety-icon">!</div><div><h3>马小的安全边界</h3><ul id="safetyList"></ul></div></div>
     </section>
@@ -129,7 +130,7 @@
 
   <div class="modal" id="dataModal" aria-hidden="true">
     <div class="modal-backdrop" data-close="true"></div>
-    <section class="modal-card"><button class="modal-close" data-close="true">×</button><p class="kicker">DATA LOCKER</p><h2>预览数据管理</h2><p>V3使用独立空间并自动迁移V2记录，不会改动正式 /plan/。</p><div class="modal-actions"><button class="button dark" id="exportButton">导出 V3 备份</button><label class="button outline-dark">导入 V2 / V3 备份<input type="file" id="importInput" accept="application/json" hidden></label><button class="button outline-dark" id="legacyButton">复制旧版记录到预览</button></div><small>导入不会重复发放纪录XP；旧版数据只复制，不删除。</small></section>
+    <section class="modal-card"><button class="modal-close" data-close="true">×</button><p class="kicker">DATA LOCKER</p><h2>训练数据管理</h2><p>V3.3使用全新正式数据空间，不读取旧正式版或预览版记录。</p><div class="modal-actions"><button class="button dark" id="exportButton">导出 V3.3 完整备份</button><label class="button outline-dark">导入 V3.3 备份<input type="file" id="importInput" accept="application/json" hidden></label></div><small>备份包含所有Round；重复导入不会重复发放纪录XP。</small></section>
   </div>
   <div class="drawer" id="exerciseDrawer" aria-hidden="true"><div class="drawer-backdrop" data-drawer-close="true"></div><section class="drawer-card"><button class="modal-close" data-drawer-close="true">×</button><div id="exerciseDetail"></div></section></div>
   <div class="modal" id="recordModal" aria-hidden="true"><div class="modal-backdrop" data-record-close="true"></div><section class="modal-card"><button class="modal-close" data-record-close="true">×</button><p class="kicker">EDIT RECORD</p><h2>编辑训练记录</h2><form id="recordForm"><input type="hidden" id="editLogId"><div class="edit-grid"><label>重量 kg<input id="editWeight" type="number" min="0" step="0.5"></label><label>组数<input id="editSets" type="number" min="1"></label><label>次数<input id="editReps" type="number" min="1"></label><label>RPE<input id="editRpe" type="number" min="1" max="10" step="0.5"></label></div><label class="quality-edit"><input id="editQuality" type="checkbox"> 动作技术合格</label><button class="button dark" type="submit">保存修改</button></form></section></div>
